@@ -1,31 +1,36 @@
 @import url(font-awesome.css);
 
-
-.jumbotron-fluid-alturajumbotron
-	 		{
-	 			padding-right:0;padding-left:0;border-radius:0; text-align: center;
-			}
-
-
+.responsive {
+  width: 100px;
+  height: auto;
+}
+.titulo
+{
+  background-color: #ffffff; 
+}
 .cuerpo
 {
 	background-color: #681a5d; 
 }
 
 .login-block{
-    background: #681a5d;  /* fallback for old browsers */
+    background: #681a5d;  
 	float:left;
 	width:100%;
 	padding: 6.5% 0;
 }
 
 .formulario{
-    background: #681a5d;  /* fallback for old browsers */
+    background: #681a5d;  
 	float:left;
 	width:100%;
 	padding: 0.5% 0;
 }
 
+.creditos{
+    background: #681a5d; 
+	padding: -0.2% 0;
+}
 .adelanteatras
 {
 	width:100%;
@@ -53,7 +58,6 @@
 .banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
 .banner-text p{color:#fff;}
 
-@media screen and (max-width:360px, max-height: 640px)
-{
-	 
-}
+
+
+
