@@ -7,7 +7,6 @@
 
     <!--Carga de bootstrap, jquery y popper-->
     <link href="../css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -17,13 +16,24 @@
 
     <!--CSS de tablas para ajustar los botones-->
     <link href="../css/tablas.css" rel="stylesheet">
+
+    <!--CSS del menú-->
+    <link href="../css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="../css/general.css" rel="stylesheet">
     
     <title>Solicitudes realizadas</title>
 </head>
 <body>
 
+    <header class="titulo pt-3 pb-3">
+        <h2 class="text-center">
+            <img align="float-left" src="../img/utplogo.png" alt="Logo" class="responsive" width="50" height="50">
+            <span> Sistema de Solicitud de Apoyo Económico Estudiantil UTP</span>
+            </h2>
+    </header>
+
     <!--Barra de navegación de usuario cliente-->
-    <nav class="navbar navbar-expand-sm bg-menuUTP navbar-dark sticky-top">
+    <nav class="navbar navbar-expand-sm bg-menuUTP navbar-dark sticky-top ">
 
         <!-- Logo/Nombre de la página -->
         <a class="navbar-brand" href="#">Sistema de Apoyo Económico Estudiantil</a>
@@ -37,7 +47,7 @@
                 <a class="nav-link" href="tracking.html">Solicitud Pendiente</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Créditos</a>
+                <a class="nav-link" href="creditos.html">Créditos</a>
             </li>
         </ul>
         <!--  -->
