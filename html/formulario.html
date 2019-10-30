@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Formulario RUTP-FV-4(M)</title>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  	
+  	<!--<link rel="stylesheet" href="../bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link href="../css/estilo.css" rel="stylesheet">
+  	<link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
+  	
+  	<script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  	<script src="../bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+    <div class="titulo">
+          <div>
+                <h2 class="text-center"><img align="float-left" src="../img/utplogo.png" alt="Logo" class="responsive" width="50" height="50"><span> Sistema de Solicitud de Apoyo Económico Estudiantil UTP </h2>
+          </div>
+    </div>
+    
+ 
 </head>
-<body>
-		<div class="jumbotron jumbotron-fluid">
- 			<div class="container">
- 			  <h1 class="display-6">Formulario de registro de solicitud RUTP-FV-4(M)</h1>
- 			  <p class="lead"></p>
- 			</div>
-		</div>
+
+<body class="cuerpo">
+<section class="formulario">
+<br>
 <div class="container">
+<h2 class="text-center"><span>Formulario de registro de solicitud RUTP-FV-4(M)</span></h2><br><br>
 <h3>Información de los estudiantes:</h3>
  <section>
  
@@ -51,19 +61,15 @@
                     <label for="comment">Describa el evento:</label>
                     <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
                 </div>
-                
             </div>
-
  
 </section>
+
+    <div class="adelanteatras">
+     <a href="formulario1.html" class="btn btn-success float-right" style="background-color: #237c2c;">Siguiente</a>
+    </div>
+
 </div>
-
-<br><br><br> 
- <div class="container">                
-  
-  	 <a href="formulario1.html" class="btn btn-adelante float-right">Siguiente</a>
-  
- </div>
-
+</section>
 </body>
 </html>
