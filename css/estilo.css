@@ -53,7 +53,7 @@
 .btn-adelante{background: #237c2c; color:#fff; font-weight:600;}
 .btn-atras{background: #237c2c; color:#fff; font-weight:600;}
 
-.banner-text{width:70%; position:absolute; bottom:40px; padding-left:20px;}
+.banner-text{width:90%; position:absolute; bottom:40px; padding-left:20px;}
 .banner-text h2{color:#fff; font-weight:600;}
 .banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
 .banner-text p{color:#fff;}
