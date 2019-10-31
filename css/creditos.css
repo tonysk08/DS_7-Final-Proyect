@@ -1,6 +1,6 @@
 @import url(font-awesome.css);
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
-@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700');
+@import url('css.css');
+@import url('css2.css');
 
 body{
     font-family: 'Open Sans', sans-serif;
@@ -8,7 +8,25 @@ body{
 
 footer
 {
-  background-color: #ffffff;
+  background-color: #9e9e9e;
+  position: static;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  color: white;
+  text-align: center;
+}
+
+.responsivepie
+{
+    width: 80px;
+    height: auto;
+}
+
+.pie
+{
+  background-color: #9e9e9e; 
+  text-align: center;
 }
 
 *:hover{
