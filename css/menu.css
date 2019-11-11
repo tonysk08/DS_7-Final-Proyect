@@ -1,0 +1,12 @@
+.bg-menuUTP{
+    background-color: #4B2E83 !important
+}
+
+a.bg-menuUTP:focus, a.bg-menuUTP:hover, button.bg-menuUTP:focus, button.bg-menuUTP:hover{
+    background-color: #4B2E83 !important
+}
+
+.ml-auto .dropdown-menu {
+    left: auto !important;
+    right: 0px;
+  }

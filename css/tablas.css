@@ -1,0 +1,22 @@
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+
+footer
+{
+  background-color: #9e9e9e;
+  position: static;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  color: white;
+  text-align: center;
+}
+
+.responsivepie
+{
+    width: 80px;
+    height: auto;
+}
