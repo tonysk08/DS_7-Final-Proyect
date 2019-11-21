@@ -3,7 +3,7 @@
 <head>
     <!--Incluye el head-->
     <?php include_once("../partials/head.php"); ?>
-    
+    <title><?php echo $titulo ?? "SAEE"?></title>    
     <!--CSS de tablas para ajustar los botones-->
     <link href="../css/tablas.css" rel="stylesheet">
 

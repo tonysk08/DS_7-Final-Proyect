@@ -3,7 +3,7 @@
 <head>
     <!--Incluye el head-->
     <?php include_once("../partials/head.php"); ?>
-
+    <title><?php echo $titulo ?? "SAEE"?></title>
     <link href="../css/estilo.css" rel="stylesheet">
 
     <!--CSS del menú-->

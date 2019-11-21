@@ -1,10 +1,15 @@
+<?php
+
+    $titulo="Creditos"
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <!--Incluye el head-->
     <?php include_once("../partials/head.php"); ?>
-
+    <title><?php echo $titulo ?? "SAEE"?></title>
     <!--CSS del menú-->
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/creditos.css" rel="stylesheet">
@@ -13,7 +18,7 @@
     <link href="../css/all.min.css" rel="stylesheet">
     <link href="../css/fontawesome.min.css" rel="stylesheet"> 
 
-    <title>Créditos</title>
+
     
 </head>
 <body>
