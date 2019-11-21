@@ -1,5 +1,25 @@
 <?php
-
+    session_start();
+    require_once('funciones/funciones.php');
+    if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['ficha']) && validarFicha ($_POST['ficha'])){
+    
+      //Validar si la informacion es enviada por un robot
+      if(!empty($_POST['robot'])) {
+        return header('Location: error.php');
+      }
+      
+      $campos = [
+        'cedula-email' => 'Nombre de Usuario o Cedula Electronico',
+        'clave' => 'Contraseña'
+      ];
+      
+      $errores = validarCampos($campos);
+  
+      if(empty($errores)) {
+        $errores = login();
+      }
+    }
+    $titulo="Login";
 ?>
 
 <!DOCTYPE html>
@@ -23,17 +43,20 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4 login-sec">
-
+        
+              
               <h2 class="text-center">Iniciar Sesión</h2>
-
-              <form action="html/formulario.html" method ="POST" class="login-form">
+              <?php	if(!empty($errores)){echo mostrarErrores($errores);}?>
+              <form method ="POST" class="login-form">
+              <input type="hidden" name="ficha" value="<?php echo ficha_csrf()?>">  
+              <input type="hidden" name="robot" value="">  
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="text-uppercase">Cédula del Estudiante</label>
-                  <input type="text" class="form-control" name="cedula" placeholder="Ingrese su cédula">
+                  <input type="text" class="form-control" name="cedula-email"  value="<?php echo $_POST['cedula-email'] ?? '' ?>" placeholder="Ingrese su cedula o su correo">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
-                  <input type="password" class="form-control" name="contraseña" placeholder="Ingrese su contraseña">
+                  <input type="password" class="form-control" name="clave" placeholder="Ingrese su contraseña">
                 </div>
                 <div class="form-check">
                   <label class="form-check-label">
