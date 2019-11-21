@@ -1,6 +1,6 @@
 <?php
 
-    $titulo="Creditos"
+    $titulo="Creditos";
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,6 @@
 <head>
     <!--Incluye el head-->
     <?php include_once("../partials/head.php"); ?>
-    <title><?php echo $titulo ?? "SAEE"?></title>
     <!--CSS del menú-->
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/creditos.css" rel="stylesheet">

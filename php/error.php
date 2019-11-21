@@ -1,30 +1,24 @@
 <?php
-$titulo = "ERROR";
+
+    $titulo="Creditos";
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Créditos</title>
-  <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $titulo ?? "SAEE"?></title>
-    <link href="../css/creditos.css" rel="stylesheet">
-    <link href="../css/general.css" rel="stylesheet">
-    
-    <link href="../css/all.css" rel="stylesheet">
-    <link href="../css/all.min.css" rel="stylesheet">
-    <link href="../css/fontawesome.min.css" rel="stylesheet">
-
+    <!--Incluye el head-->
+    <?php include_once("../partials/head.php"); ?>
     <!--CSS del menú-->
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
-   
-    <link href="../bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    
-    <script src="../bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="../ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="../css/creditos.css" rel="stylesheet">
+    <link href="../css/general.css" rel="stylesheet">
+    <link href="../css/all.css" rel="stylesheet">
+    <link href="../css/all.min.css" rel="stylesheet">
+    <link href="../css/fontawesome.min.css" rel="stylesheet"> 
 
+
+    
 </head>
 <body>
     <!--Incluye el header-->
@@ -35,10 +29,16 @@ $titulo = "ERROR";
     <?php include_once("../partials/navigationpublic.php"); ?>
 
 
-
+<section>
     <div class="container">
-        <h1 class="titulo-pagina">Opps!, hubo algun error desconocido, contactese con servicio al cliente para mas informacion.</h1>
-     </div>     
+      <div class="row">
+          
+          
+        <h1 class="mensaje-error">¡Error 404!</h1>
+        
+      </div>
+    </div>
+    
 </section>
 
 <?php include_once("../partials/footer.php"); ?>

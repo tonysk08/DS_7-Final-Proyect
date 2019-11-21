@@ -1,3 +1,7 @@
+<?php
+
+    $titulo="Solicitudes";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
