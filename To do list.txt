@@ -1,9 +1,0 @@
-2. Añadir un fondo común para esta pantalla y otras
-3. Crear un menú que maneje las distintas pantallas del sistema
-4. Manejar los procesos que realiza el administrador
-5. Averiguar la implementación de gráficos en PHP
-6. Hacer que los href sirvan
-7. Añadir un botón para mostrar el añadir 
-8. Crear la tabla para de revisión de solicitudes (administrativo)
-9. Crear la tabla de revisión de solicitudes pública (todos) **FALTA EL MODAL**
-10. Crear el pop-up de revisión y comentario en la solicitud (para la tabla de revisión de solicitudes)
