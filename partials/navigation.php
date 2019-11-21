@@ -16,6 +16,9 @@
         <a class="nav-link" href="creditos.php">Créditos</a>
     </li>
 </ul>
+<?php 
+    if($titulo=='')
+?>
 <!--  -->
 <ul class="navbar-nav ml-auto">
     <li class="nav-item right">

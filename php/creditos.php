@@ -1,17 +1,21 @@
+<?php
+
+    $titulo="Creditos";
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <!--Incluye el head-->
     <?php include_once("../partials/head.php"); ?>
-
     <!--CSS del menú-->
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
 
     <link href="../css/creditos.css" rel="stylesheet">
     <link href="../css/general.css" rel="stylesheet">
 
-    <title>Créditos</title>
+
     
 </head>
 <body>

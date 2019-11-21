@@ -13,6 +13,7 @@
     <script src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="../bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="../js/jquery-3.3.1.min.js"></script>
+    <title><?php echo $titulo ?? "SAEE"?></title>
     <script src="../js/gijgo.min.js" type="text/javascript"></script>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/raphael-min.js"></script>

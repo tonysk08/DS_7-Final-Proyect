@@ -1,3 +1,7 @@
+<?php
+
+    $titulo="Formulario";
+?>
 <!DOCTYPE html>
 <html>
 
@@ -5,7 +9,7 @@
 	
 	  <!--Incluye el head-->
     <?php include_once("../partials/head.php"); ?>
-  	
+
     <link href="../css/estilo.css" rel="stylesheet">
     
     <!--CSS del menú-->

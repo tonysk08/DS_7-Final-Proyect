@@ -5,7 +5,7 @@
     
       //Validar si la informacion es enviada por un robot
       if(!empty($_POST['robot'])) {
-        return header('Location: error.php');
+        return header('Location: php/error.php');
       }
       
       $campos = [
@@ -28,7 +28,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+    <title><?php echo $titulo ?? "SAEE"?></title>
     <link href="bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="css/estilo.css" rel="stylesheet">
 
@@ -57,7 +57,7 @@
                   <label for="exampleInputEmail1" class="text-uppercase">Cédula del Estudiante</label>
                   <input type="text" class="form-control" name="cedula-email"  value="<?php echo $_POST['cedula-email'] ?? '' ?>" placeholder="Ingrese su cedula o su correo">
                 </div>
-                <div class="form-group">
+                <div class="orm-group">
                   <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
                   <input type="password" class="form-control" name="clave" placeholder="Ingrese su contraseña">
                 </div>

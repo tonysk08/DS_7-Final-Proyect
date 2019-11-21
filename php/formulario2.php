@@ -1,3 +1,7 @@
+<?php
+
+    $titulo="Formulario";
+?>
 <!DOCTYPE html>
 <html>
 <head>

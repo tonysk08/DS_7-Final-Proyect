@@ -183,7 +183,7 @@ function mostrarErrores($errores){
             if(password_verify($clave, $linea['clave'])){
                 $_SESSION['cedula'] = $linea['cedula'];
                 $_SESSION['nombre'] = $linea['nombre'];
-                header('Location: index.php');
+                header('Location: php/formulario.php');
             }
         } else {
             $errores[] = 'El Nombre de Usuario, Cedula o la contraseña no son validos.';       

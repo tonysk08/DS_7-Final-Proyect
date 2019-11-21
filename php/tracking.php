@@ -1,3 +1,7 @@
+<?php
+
+    $titulo="tracking";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
