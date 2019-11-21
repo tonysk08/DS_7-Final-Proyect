@@ -39,7 +39,7 @@
     <!--Incluye el nav-->
     <?php include_once("../partials/navigationpublic.php"); ?>
 
-    <div class="album py-5 bg-light  "><!--hola-->
+    <div class="album py-5 bg-light  "><!--hola-sda -->
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
