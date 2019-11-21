@@ -1,3 +1,6 @@
+<link href="../css/all.min.css" rel="stylesheet">
+<link href="../css/fontawesome.min.css" rel="stylesheet"> 
+
 <footer class="form-row">
         <div class="col-md-4 mt-auto">
                 <img align="float-left" src="../img/logo.png" alt="Logo" class="responsivepie" width="40" height="40">

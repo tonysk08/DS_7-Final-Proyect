@@ -29,8 +29,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <link href="bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="css/estilo.css" rel="stylesheet">
+
+    <link href="css/all.min.css" rel="stylesheet">
+    <link href="css/fontawesome.min.css" rel="stylesheet"> 
 
     <script src="ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="bootstrap/4.3.1/js/bootstrap.min.js"></script>
