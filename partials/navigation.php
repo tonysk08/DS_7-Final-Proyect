@@ -10,10 +10,10 @@
         <a class="nav-link" href="formulario.php">Formulario RUTP-FV-4</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="tracking.html">Solicitud Pendiente</a>
+        <a class="nav-link" href="tracking.php">Solicitud Pendiente</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="../html-clone/creditos.php">Créditos</a>
+        <a class="nav-link" href="creditos.php">Créditos</a>
     </li>
 </ul>
 <!--  -->

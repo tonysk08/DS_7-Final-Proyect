@@ -26,7 +26,7 @@
 
               <h2 class="text-center">Iniciar Sesión</h2>
 
-              <form action="html/formulario.php" method ="POST" class="login-form">
+              <form action="php/formulario.php" method ="POST" class="login-form">
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="text-uppercase">Cédula del Estudiante</label>
                   <input type="text" class="form-control" name="cedula" placeholder="Ingrese su cédula">
@@ -43,7 +43,7 @@
                   <button type="submit" class="btn btn-login float-right">Iniciar Sesión</button><br><br> 
                 </div>
               </form>
-               <div class="copy-text"><a href="html-clone/creditos.php">Creado por <i class="fa fa-bug"></i> MARHA <i class="fa fa-bug"></i></a></div>
+               <div class="copy-text"><a href="php/creditos.php">Creado por <i class="fa fa-bug"></i> MARHA <i class="fa fa-bug"></i></a></div>
           </div>
          
           <div class="col-md-8 banner-sec">
@@ -80,7 +80,7 @@
                     <div class="banner-text">
                       <h2>Créditos</h2>
                       <p align="justify">Este proyecto ha sido creado por estudiantes de la Universidad Tecnológica de Panamá, de la Facultad en Ingeniería en Sistemas Computaciones</p>
-                      <a href="html-clone\creditos.php"><button type="button" class="btn btn-info">Más información</button></a>
+                      <a href="php/creditos.php"><button type="button" class="btn btn-info">Más información</button></a>
                     </div>  
                   </div>
                 </div>

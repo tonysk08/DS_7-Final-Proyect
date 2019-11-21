@@ -7,12 +7,12 @@
 <!-- Enlaces -->
 <ul class="navbar-nav">
     <li class="nav-item">
-        <a class="nav-link" href="../html/dashboard.php">Estadisticas</a>
+        <a class="nav-link" href="../php/dashboard.php">Estadisticas</a>
     </li>
 </ul>
 <ul class="navbar-nav">
     <li class="nav-item">
-        <a class="nav-link" href="../html-clone/creditos.php">Créditos</a>
+        <a class="nav-link" href="creditos.php">Créditos</a>
     </li>
 </ul>
 <!--  -->

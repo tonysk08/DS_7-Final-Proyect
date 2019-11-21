@@ -263,6 +263,7 @@
     </div>
     </div>
 
-    <?php include "include/footer.php"; ?>
+    <!--Incluye el footer-->
+    <?php include_once ("../partials/footer.php"); ?>
 </body>
 </html>

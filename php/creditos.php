@@ -2,25 +2,19 @@
 <html>
 
 <head>
-  <title>Créditos</title>
-  <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link href="../css/creditos.css" rel="stylesheet">
-    <link href="../css/general.css" rel="stylesheet">
-    
-    <link href="../css/all.css" rel="stylesheet">
-    <link href="../css/all.min.css" rel="stylesheet">
-    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <!--Incluye el head-->
+    <?php include_once("../partials/head.php"); ?>
 
     <!--CSS del menú-->
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
-   
-    <link href="../bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    
-    <script src="../bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="../ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="../css/creditos.css" rel="stylesheet">
+    <link href="../css/general.css" rel="stylesheet">
+    <link href="../css/all.css" rel="stylesheet">
+    <link href="../css/all.min.css" rel="stylesheet">
+    <link href="../css/fontawesome.min.css" rel="stylesheet"> 
 
+    <title>Créditos</title>
+    
 </head>
 <body>
     <!--Incluye el header-->

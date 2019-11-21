@@ -1,33 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <!--Carga de bootstrap, jquery y popper-->
-    <link href="../css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="../bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="../js/jquery-3.3.1.min.js"></script>
+    <!--Incluye el head-->
+    <?php include_once("../partials/head.php"); ?>
     
-    <script src="../js/gijgo.min.js" type="text/javascript"></script>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/raphael-min.js"></script>
-    <script src="../js/morris.js"></script>
-    <script src="../js/prettify.min.js"></script>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
-    <link rel="stylesheet" href="../css/morris.css">
-
     <!--CSS de tablas para ajustar los botones-->
     <link href="../css/tablas.css" rel="stylesheet">
 
     <!--CSS del menú-->
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/general.css" rel="stylesheet">
-    
+
+    <!--CSS-->
+    <link rel="stylesheet" href="../css/morris.css">
+
     <title>Transparencia - Solicitudes del 2019</title>
 </head>
 <body class="cuerpo">
@@ -39,7 +25,7 @@
     <!--Incluye el nav-->
     <?php include_once("../partials/navigationpublic.php"); ?>
 
-    <div class="album py-5 bg-light  "><!--hola-sda -->
+    <div class="album py-5 bg-light  ">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -109,8 +95,8 @@
             </div>
         </div>
     </div>      
-    
-    <?php include "include/footer.php"; ?>
+    <!--Incluye el footer-->
+    <?php include_once ("../partials/footer.php"); ?>
 
 <script>
     $(function () {

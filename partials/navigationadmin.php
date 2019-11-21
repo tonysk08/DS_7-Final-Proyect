@@ -10,7 +10,7 @@
         <a class="nav-link" href="revisionSolicitudes.php">Solicitudes Pendientes</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="../html-clone/creditos.php">Créditos</a>
+        <a class="nav-link" href="creditos.php">Créditos</a>
     </li>
 </ul>
 <!--  -->
