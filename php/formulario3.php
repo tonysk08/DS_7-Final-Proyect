@@ -4,7 +4,7 @@
 	<title>Formulario RUTP-FV-4(M)</title>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	
+      <title><?php echo $titulo ?? "SAEE"?></title>
     <link href="../css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="../css/estilo.css" rel="stylesheet">

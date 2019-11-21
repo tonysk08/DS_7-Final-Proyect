@@ -7,7 +7,7 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	
     <link href="../css/estilo.css" rel="stylesheet">
-
+    <title><?php echo $titulo ?? "SAEE"?></title>
     <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
     
     <!--CSS del menú-->
