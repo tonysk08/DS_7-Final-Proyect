@@ -29,8 +29,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?php echo $titulo ?? "SAEE"?></title>
-    <link href="bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="css/estilo.css" rel="stylesheet">
+
+    <link href="css/all.min.css" rel="stylesheet">
+    <link href="css/fontawesome.min.css" rel="stylesheet"> 
 
     <script src="ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -53,7 +56,7 @@
                   <label for="exampleInputEmail1" class="text-uppercase">Cédula del Estudiante</label>
                   <input type="text" class="form-control" name="cedula-email"  value="<?php echo $_POST['cedula-email'] ?? '' ?>" placeholder="Ingrese su cedula o su correo">
                 </div>
-                <div class="form-group">
+                <div class="orm-group">
                   <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
                   <input type="password" class="form-control" name="clave" placeholder="Ingrese su contraseña">
                 </div>

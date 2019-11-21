@@ -5,6 +5,10 @@
     <!--Carga de bootstrap, jquery y popper-->
     <link href="../css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link href="../css/all.min.css" rel="stylesheet">
+    <link href="../css/fontawesome.min.css" rel="stylesheet"> 
+
     <script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="../bootstrap/4.3.1/js/bootstrap.min.js"></script>
