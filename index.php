@@ -66,7 +66,7 @@
                   <button type="submit" class="btn btn-login float-right">Iniciar Sesión</button><br><br> 
                 </div>
               </form>
-               <div class="copy-text"><a href="html-clone/creditos.php">Creado por <i class="fa fa-bug"></i> MARHA <i class="fa fa-bug"></i></a></div>
+               <div class="copy-text"><a href="php/creditos.php">Creado por <i class="fa fa-bug"></i> MARHA <i class="fa fa-bug"></i></a></div>
           </div>
          
           <div class="col-md-8 banner-sec">
@@ -93,7 +93,7 @@
                     <div class="banner-text">
                       <h2>Transparencia</h2>
                       <p align="justify">Contamos con un registro de todas las solicitudes realizadas que cualquier persona puede ver</p>
-                      <a href="html/solicitudesPublicas.php"><button type="button" class="btn btn-info">Más información</button></a>
+                      <a href="php/solicitudesPublicas.php"><button type="button" class="btn btn-info">Más información</button></a>
                     </div>  
                   </div>
                 </div>
@@ -103,7 +103,7 @@
                     <div class="banner-text">
                       <h2>Créditos</h2>
                       <p align="justify">Este proyecto ha sido creado por estudiantes de la Universidad Tecnológica de Panamá, de la Facultad en Ingeniería en Sistemas Computaciones</p>
-                      <a href="html-clone\creditos.php"><button type="button" class="btn btn-info">Más información</button></a>
+                      <a href="php/creditos.php"><button type="button" class="btn btn-info">Más información</button></a>
                     </div>  
                   </div>
                 </div>

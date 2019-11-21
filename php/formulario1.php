@@ -1,26 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Formulario RUTP-FV-4(M)</title>
-	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Incluye el head-->
+    <?php include_once("../partials/head.php"); ?>
     <title><?php echo $titulo ?? "SAEE"?></title>
-    <link href="../css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <!--<link rel="stylesheet" href="../bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
-    <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="../css/estilo.css" rel="stylesheet">
 
-    
     <!--CSS del menú-->
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/general.css" rel="stylesheet">
 
-  	<script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  	<script src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  	<script src="../bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/gijgo.min.js" type="text/javascript"></script>
-
+    <title>Formulario RUTP-FV-4(M)</title>
 </div>
 </head>
 <body class="cuerpo">
@@ -117,7 +107,8 @@
 
 </section>
 
-<?php include "include/footer.php"; ?>
+<!--Incluye el footer-->
+<?php include_once ("../partials/footer.php"); ?>
 
           <script>
                      

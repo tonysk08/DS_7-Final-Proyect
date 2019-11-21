@@ -2,23 +2,17 @@
 <html>
 
 <head>
-	<title>Formulario RUTP-FV-4(M)</title>
-	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	
-    <link href="../css/estilo.css" rel="stylesheet">
+	
+	  <!--Incluye el head-->
+    <?php include_once("../partials/head.php"); ?>
     <title><?php echo $titulo ?? "SAEE"?></title>
-    <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="../css/estilo.css" rel="stylesheet">
     
     <!--CSS del menú-->
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/general.css" rel="stylesheet">
-  	
-  	<script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  	<script src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  	<script src="../bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
- 
+    <title>Formulario RUTP-FV-4(M)</title>
 </head>
 
 <body class="cuerpo">
@@ -77,6 +71,7 @@
           </div>
 </section>
 
-<?php include "include/footer.php"; ?>
+<!--Incluye el footer-->
+<?php include_once ("../partials/footer.php"); ?>
 </body>
 </html>

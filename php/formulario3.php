@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Formulario RUTP-FV-4(M)</title>
-	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-      <title><?php echo $titulo ?? "SAEE"?></title>
-    <link href="../css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
+	
+	<!--Incluye el head-->
+    <?php include_once("../partials/head.php"); ?>
+    
     <link href="../css/estilo.css" rel="stylesheet">
 
     
@@ -14,11 +12,7 @@
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/general.css" rel="stylesheet">
 
-    <script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="../bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/gijgo.min.js" type="text/javascript"></script>
+    <title>Formulario RUTP-FV-4(M)</title>
 </head>
 <body class="cuerpo">
 
@@ -63,6 +57,7 @@
 </div>
  
 </section>
-    <?php include "include/footer.php"; ?>
+    <!--Incluye el footer-->
+    <?php include_once ("../partials/footer.php"); ?>
 </body>
 </html>
