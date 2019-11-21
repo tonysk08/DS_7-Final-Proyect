@@ -2,23 +2,17 @@
 <html>
 
 <head>
-	<title>Formulario RUTP-FV-4(M)</title>
-	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	  <!--Incluye el head-->
+    <?php include_once("../partials/head.php"); ?>
   	
     <link href="../css/estilo.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
     
     <!--CSS del menú-->
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/general.css" rel="stylesheet">
-  	
-  	<script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  	<script src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  	<script src="../bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
- 
+    <title>Formulario RUTP-FV-4(M)</title>
 </head>
 
 <body class="cuerpo">

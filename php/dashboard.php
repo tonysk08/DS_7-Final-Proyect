@@ -11,7 +11,7 @@
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/general.css" rel="stylesheet">
 
-    <!--CSS-->
+    <!--CSS Morris-->
     <link rel="stylesheet" href="../css/morris.css">
 
     <title>Transparencia - Solicitudes del 2019</title>
