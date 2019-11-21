@@ -107,25 +107,13 @@ function mostrarErrores($errores){
                 'patron' => '/^[a-z\s]{2,50}$/i', 
                 'error' => 'NOMBRES solo pueden usar letras y espacios. No puede ser mas largo de 50 caracteres.'
             ],
-            'apellido' => [
-                'patron' => '/^[a-z\s]{2,50}$/i', 
-                'error' => 'APELLIDOS solo pueden usar letras y espacios. No puede ser mas largo de 50 caracteres.'
-            ],
-            'usuario' => [
-                'patron' => '/^[a-z][\w]{2,50}$/i', 
-                'error' => 'NOMBRE DE USUARIO debe tener por lo menos 3 caracteres. Dbe de comenzar con una letra y solo puede usar letras, numeros y guion bajo.'
-            ],
-             'email' => [
-                'patron' => '/^[a-z]+[\w-\.]{2,}@([\w-]{2,}\.)+[\w-]{2,4}$/i', 
-                'error' => 'EL CORREO ELECTRONICO debe ser un formato valido.'
-             ],
              'clave' => [
                 'patron' => '/(?=^[\w\!@#\$%\^&\*\?]{8,30}$)(?=(.*\d){2,})(?=(.*[a-z]){2,})(?=(.*[A-Z]){2,})(?=(.*[\!@#\$%\^&\*\?_]){2,})^-*/', 
                 'error' => 'Por favor entre una contraseña valida. La contraseña debe tener por lo menos 2 letras mayuscula, 2 letras minusculas, 2 numeros y 2 simbolos.'
              ],
-             'usuario-email' => [
+             'cedula-email' => [
                 'patron' => '/(?=^[a-z]+[\w@\.]{2,50}$)/i', 
-                'error' => 'Nombre de Usuario o Correo Electronico invalido'
+                'error' => 'Nombre de Usuario o Cedula Electronico invalido'
             ]
         ];
         return $validacion;
@@ -183,7 +171,8 @@ function mostrarErrores($errores){
             if(password_verify($clave, $linea['clave'])){
                 $_SESSION['cedula'] = $linea['cedula'];
                 $_SESSION['nombre'] = $linea['nombre'];
-                header('Location: php/formulario.php');
+                echo("FUNCIONA");
+                header('Location: formulario.php');
             }
         } else {
             $errores[] = 'El Nombre de Usuario, Cedula o la contraseña no son validos.';       

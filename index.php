@@ -43,8 +43,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4 login-sec">
-        
-              
+ 
               <h2 class="text-center">Iniciar Sesión</h2>
               <?php	if(!empty($errores)){echo mostrarErrores($errores);}?>
               <form method ="POST" class="login-form">

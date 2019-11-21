@@ -1,5 +1,5 @@
 <?php
-
+     session_start();
     $titulo="Formulario";
 ?>
 <!DOCTYPE html>
