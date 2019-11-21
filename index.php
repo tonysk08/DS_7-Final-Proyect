@@ -22,7 +22,7 @@
 
               <h2 class="text-center">Iniciar Sesión</h2>
 
-              <form action="html/formulario.html" method ="POST" class="login-form">
+              <form action="html/formulario.php" method ="POST" class="login-form">
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="text-uppercase">Cédula del Estudiante</label>
                   <input type="text" class="form-control" name="cedula" placeholder="Ingrese su cédula">
@@ -66,7 +66,7 @@
                     <div class="banner-text">
                       <h2>Transparencia</h2>
                       <p align="justify">Contamos con un registro de todas las solicitudes realizadas que cualquier persona puede ver</p>
-                      <a href="html/solicitudesPublicas.html"><button type="button" class="btn btn-info">Más información</button></a>
+                      <a href="html/solicitudesPublicas.php"><button type="button" class="btn btn-info">Más información</button></a>
                     </div>  
                   </div>
                 </div>
