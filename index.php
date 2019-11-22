@@ -60,6 +60,7 @@
                   <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
                   <input type="password" class="form-control" name="clave" placeholder="Ingrese su contraseña">
                 </div>
+                <br>
                 <div class="form-check">
                   <label class="form-check-label">
                     <input type="checkbox" class="form-check-input">

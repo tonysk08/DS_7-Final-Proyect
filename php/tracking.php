@@ -28,7 +28,10 @@
         
     <div class="p-5">
     <h3>Seguimiento de la solicitud</h3>
-    <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">
+
+    <?php include("../funciones/cargaTablaTracking.php")?>
+
+<!--     <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">
         <thead class="thead-dark">
             <tr>
                 <th>Cargo del Encargado</th>
@@ -46,7 +49,9 @@
                 <td id="FechaInicio">21/10/2019</td>
                 <td id="FechaFinalizacion">31/11/2019</td>
                 <td id="Estado" class="alert-success">Aprobado</td> 
-                <!-- Button to Open the Modal -->
+
+                <Button to Open the Modal
+
                 <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal">Detalles</button></td>
             </tr>
             <tr>
@@ -82,7 +87,7 @@
                 <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
 
     <!-- The Modal -->
         <div class="modal" id="myModal">
