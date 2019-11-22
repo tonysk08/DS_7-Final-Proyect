@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Funcion para registrar usuarios 
+ * Funcion para registrar el formulario
  * @param  formularioINFO
  * @return any
  */
@@ -73,7 +73,28 @@ function mostrarErrores($errores){
     $resultado .= '</ul></div>';
     return $resultado;
 }  
-
+  /**
+     * Funcion para generar csrf
+     * @return ficha
+     */
+    function ficha_csrf() {
+        $ficha = bin2hex(random_bytes(32));
+        return $_SESSION['ficha'] = $ficha;
+    }
+    
+    /**
+     * Funcion para validar la ficha csrf
+     *@param ficha
+     *@return any
+     */
+    function validarFicha($ficha) {
+        if(isset($_SESSION['ficha']) && hash_equals($_SESSION['ficha'], $ficha)) {
+            unset($_SESSION['ficha']);
+            return true;
+        } else {
+            return false;
+        }
+    }
  /**
      * Funcion para validar campos 
      *@param campos
@@ -107,7 +128,7 @@ function mostrarErrores($errores){
                 'patron' => '/^[a-z\s]{2,50}$/i', 
                 'error' => 'NOMBRES solo pueden usar letras y espacios. No puede ser mas largo de 50 caracteres.'
             ],
-             'clave' => [
+            'clave' => [
                 'patron' => '/(?=^[\w\!@#\$%\^&\*\?]{8,30}$)(?=(.*\d){2,})(?=(.*[a-z]){2,})(?=(.*[A-Z]){2,})(?=(.*[\!@#\$%\^&\*\?_]){2,})^-*/', 
                 'error' => 'Por favor entre una contraseña valida. La contraseña debe tener por lo menos 2 letras mayuscula, 2 letras minusculas, 2 numeros y 2 simbolos.'
              ],
@@ -119,27 +140,7 @@ function mostrarErrores($errores){
         return $validacion;
     }
 
-    /**
-     * Funcion para generar csrf
-     * @return ficha
-     */
-    function ficha_csrf() {
-        $ficha = bin2hex(random_bytes(32));
-        return $_SESSION['ficha'] = $ficha;
-    }
-    /**
-     * Funcion para validar la ficha csrf
-     *@param ficha
-     *@return any
-     */
-    function validarFicha($ficha) {
-        if(isset($_SESSION['ficha']) && hash_equals($_SESSION['ficha'], $ficha)) {
-            unset($_SESSION['ficha']);
-            return true;
-        } else {
-            return false;
-        }
-    }
+  
      /**
      *Funcion hacer login en el sistema
      *@param con
@@ -150,7 +151,7 @@ function mostrarErrores($errores){
         require_once('bd/conexion.php');
         $errores = []; 
         
-        $usuario =limpiar($_POST['cedula-email']);
+        $usuario = limpiar($_POST['cedula-email']);
         $clave =limpiar($_POST['clave']);
         
         $dec = $con -> prepare("SELECT * FROM usuario WHERE cedula like ? OR correo like ? ");
@@ -166,13 +167,16 @@ function mostrarErrores($errores){
 
         if($cantidad == 1) {
             if(!empty($errores)){
-                return $errores;
+                  return $errores;
             }
-            if(password_verify($clave, $linea['clave'])){
+            if(password_verify($clave, $linea['contra'])){
+
                 $_SESSION['cedula'] = $linea['cedula'];
                 $_SESSION['nombre'] = $linea['nombre'];
-                echo("FUNCIONA");
-                header('Location: formulario.php');
+                $_SESSION['apellido'] = $linea['apellido'];
+                $_SESSION['correo'] = $linea['correo'];
+                $_SESSION['idUser'] = $linea['idUser'];
+                header('Location: php/formulario.php');
             }
         } else {
             $errores[] = 'El Nombre de Usuario, Cedula o la contraseña no son validos.';       

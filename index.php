@@ -10,7 +10,7 @@
       
       $campos = [
         'cedula-email' => 'Nombre de Usuario o Cedula Electronico',
-        'clave' => 'Contraseña'
+        'clave' => 'Clave'
       ];
       
       $errores = validarCampos($campos);
@@ -49,25 +49,24 @@
  
               <h2 class="text-center">Iniciar Sesión</h2>
               <?php	if(!empty($errores)){echo mostrarErrores($errores);}?>
-              <form method ="POST" class="login-form">
-              <input type="hidden" name="ficha" value="<?php echo ficha_csrf()?>">  
-              <input type="hidden" name="robot" value="">  
-                <div class="form-group">
-                  <label for="exampleInputEmail1" class="text-uppercase">Cédula del Estudiante</label>
-                  <input type="text" class="form-control" name="cedula-email"  value="<?php echo $_POST['cedula-email'] ?? '' ?>" placeholder="Ingrese su cedula o su correo">
-                </div>
-                <div class="orm-group">
-                  <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
-                  <input type="password" class="form-control" name="clave" placeholder="Ingrese su contraseña">
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input">
-                    <small>Recordarme</small>
-                  </label>
-                  <button type="submit" class="btn btn-login float-right">Iniciar Sesión</button><br><br> 
-                </div>
+              
+              <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method ="POST" class="login-form">
+                <input type="hidden" name="ficha" value="<?php echo ficha_csrf()?>">  
+                <input type="hidden" name="robot" value="">  
+                  <div class="form-group">
+                    <label for="exampleInputEmail1" class="text-uppercase">Cédula del Estudiante</label>
+                    <input type="text" class="form-control" name="cedula-email"  value="<?php echo $_POST['cedula-email'] ?? '' ?>" placeholder="Ingrese su cedula o su correo">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
+                    <input type="password" class="form-control" name="clave" placeholder="Ingrese su contraseña">
+                  </div>
+                  <div class="form-check">
+                  
+                    <button type="submit" class="btn btn-login float-right">Iniciar Sesión</button><br><br> 
+                  </div>
               </form>
+
                <div class="copy-text"><a href="php/creditos.php">Creado por <i class="fa fa-bug"></i> MARHA <i class="fa fa-bug"></i></a></div>
           </div>
          

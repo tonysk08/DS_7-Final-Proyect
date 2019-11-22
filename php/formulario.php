@@ -1,6 +1,25 @@
 <?php
-     session_start();
+    session_start();
     $titulo="Formulario";
+    require_once('../funciones/funciones.php');
+
+    
+    $campos = [
+      'nombre' => 'Nombre',
+      'apellido' => 'Apellido',
+      'usuario' => 'Nombre de Usuario',
+      'email' => 'Correo electrocnico',
+      'clave' => 'Contraseña',
+      'reclave'=> 'Confirmar contraseña',
+      'terminos' => 'Terminos de uso y condiciones'
+    ];
+    $errores = validarCampos($campos);
+
+    if(isset($_SESSION['idUser'])){
+      if(empty($errores)) {
+        registro($_SESSION['idUser']);
+      }
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,17 +50,17 @@
           <br>
           <div class="container p-4">
           <h2 class="text-center"><span>Formulario de registro de solicitud RUTP-FV-4(M)</span></h2><br><br>
-          <h3>Información de los estudiantes:</h3>
+          <h3>Información del evento :</h3>
            <section>
            
             
             	<div class="form-row">
                   <div class="col-md-4 mb-3">
-                    <label for="nomu">Nombre:</label>
-                    <input type="text" class="form-control" id="nomu" placeholder="Ingrese el Nombre" name="nomus" required>
+                    <label >Nombre del evento:</label>
+                    <input type="text" class="form-control" id="nombreEvento" placeholder="Ingrese el Nombre del evento" name="nombreEvento" required>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <label for="apell">Apellido:</label>
+                    <label>:</label>
                     <input type="text" class="form-control" id="apell" placeholder="Ingrese el Apellido" name="apellu" required>
                   </div>
                   <div class="col-md-4 mb-3">
