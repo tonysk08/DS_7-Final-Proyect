@@ -18,7 +18,7 @@
 <!--  -->
 <ul class="navbar-nav ml-auto">
     <li class="nav-item right">
-        <a class="nav-link" href="../logout.php">Cerrar Sesión</a>
+        <a class="nav-link" href="../php/logout.php">Cerrar Sesión</a>
     </li>
 </ul>
 </nav>
