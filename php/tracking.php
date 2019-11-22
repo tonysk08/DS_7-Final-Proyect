@@ -36,7 +36,8 @@
     <?php
 
     // FETCH_ASSOC
-        $consulta = $con->prepare("SELECT cedulaEncargado, descripcion, proyeccion FROM peticion where cedulaEncargado='20-24-3998'");
+        $consulta = $con->prepare("SELECT cedulaEncargado, descripcion, proyeccion FROM peticion");
+        //AMM.. NO SEAS PENDEJO MAÑANA Y RECUERDA QUE TIENES QUE HACER INNER JOIN TRIPLE PARA RELLENAR BIEN ESTA TABLA
 
     // Especificamos el fetch mode antes de llamar a fetch()
         $consulta->setFetchMode(PDO::FETCH_ASSOC);
@@ -45,27 +46,27 @@
         $consulta->execute();
     ?>
 
-
+    <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">
+        <thead class="thead-dark">
+            <tr>
+                <th>Unidad Encargada</th> <!--Las opciones son Rectoria, Vida Universitaria y la Comisión-->
+                <th>Nombre del Encargado</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha de Finalización</th>
+                <th>Estado</th>
+                <th class="fit">Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
 
     <?php 
     // Mostramos los resultados
         while ($row = $consulta->fetch()){
   ?>  
-    <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">
-        <thead class="thead-dark">
-          <tr>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-          </tr>
-        </thead>
-        <tbody>
           <tr>
             <td><?php echo $row["cedulaEncargado"];?></td>
-              <td><?php echo $row["descripcion"]; ?></td>
-              <td><?php echo $row["proyeccion"];?></td>
-              
-
+            <td><?php echo $row["descripcion"]; ?></td>
+            <td><?php echo $row["proyeccion"];?></td>
           </tr>
           <?php       }  ?>
         </tbody>
