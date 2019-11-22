@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     $titulo="tracking";
 ?>
 
@@ -35,8 +35,24 @@
 
     <?php
 
+    //Asignamos el idUser guardado en la sesión a una variable
+     $idUser = $_SESSION['idUser'];
+
+
+    $sql = "SELECT idPeticion from estudiante where idUser=$idUser";
+
+
+    $consulta2 = $con->query($sql);
+        // output data of each row
+        while($row = $consulta2->fetch_assoc()) {
+            $idPeticion = $row["idPeticion"];
+        }
+    $con->close();
+    
+    //Hacemos una consulta para recibir el ultimo formulario de ese id
+
     // FETCH_ASSOC
-        $consulta = $con->prepare("SELECT cedulaEncargado, descripcion, proyeccion FROM peticion");
+        $consulta = $con->prepare("SELECT unidadEncargada, fechaActivacion, fechaFin, estado FROM administrativo WHERE idUser=9 AND idPeticion=3");
         //AMM.. NO SEAS PENDEJO MAÑANA Y RECUERDA QUE TIENES QUE HACER INNER JOIN TRIPLE PARA RELLENAR BIEN ESTA TABLA
 
     // Especificamos el fetch mode antes de llamar a fetch()
@@ -64,9 +80,11 @@
         while ($row = $consulta->fetch()){
   ?>  
           <tr>
-            <td><?php echo $row["cedulaEncargado"];?></td>
-            <td><?php echo $row["descripcion"]; ?></td>
-            <td><?php echo $row["proyeccion"];?></td>
+            <td><?php echo $row["unidadEncargada"];?></td>
+            <td><?php echo "asdasd"; ?></td>
+            <td><?php echo $row["fechaActivacion"];?></td>
+            <td><?php echo $row["fechaFin"];?></td>
+            <td><?php echo $row["estado"];?></td>
           </tr>
           <?php       }  ?>
         </tbody>
