@@ -2,6 +2,10 @@
 
     $titulo="tracking";
 ?>
+
+<?php
+    include "../bd/conexion_PDO.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,65 +33,44 @@
     <div class="p-5">
     <h3>Seguimiento de la solicitud</h3>
 
-    <?php include("../funciones/cargaTablaTracking.php")?>
+    <?php
 
-<!--     <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">
+    // FETCH_ASSOC
+        $consulta = $con->prepare("SELECT cedulaEncargado, descripcion, proyeccion FROM peticion where cedulaEncargado='20-24-3998'");
+
+    // Especificamos el fetch mode antes de llamar a fetch()
+        $consulta->setFetchMode(PDO::FETCH_ASSOC);
+
+     // Ejecutamos
+        $consulta->execute();
+    ?>
+
+
+
+    <?php 
+    // Mostramos los resultados
+        while ($row = $consulta->fetch()){
+  ?>  
+    <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">
         <thead class="thead-dark">
-            <tr>
-                <th>Cargo del Encargado</th>
-                <th>Nombre del Encargado</th>
-                <th>Fecha de Inicio</th>
-                <th>Fecha de Finalización</th>
-                <th>Estado</th>
-                <th class="fit">Detalles</th>
-            </tr>
+          <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+          </tr>
         </thead>
         <tbody>
-            <tr>
-                <td id="CargoEncargado">Secretario de Vida Universitario</td>
-                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
-                <td id="FechaInicio">21/10/2019</td>
-                <td id="FechaFinalizacion">31/11/2019</td>
-                <td id="Estado" class="alert-success">Aprobado</td> 
+          <tr>
+            <td><?php echo $row["cedulaEncargado"];?></td>
+              <td><?php echo $row["descripcion"]; ?></td>
+              <td><?php echo $row["proyeccion"];?></td>
+              
 
-                <Button to Open the Modal
-
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="CargoEncargado">Secretario de Vida Universitario</td>
-                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
-                <td id="FechaInicio">21/10/2019</td>
-                <td id="FechaFinalizacion">31/11/2019</td>
-                <td id="Estado" class="alert-danger">Denegado</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="CargoEncargado">Secretario de Vida Universitario</td>
-                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
-                <td id="FechaInicio">21/10/2019</td>
-                <td id="FechaFinalizacion">31/11/2019</td>
-                <td id="Estado" class="alert-warning">Pendiente</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="CargoEncargado">Rectoría</td>
-                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
-                <td id="FechaInicio">21/10/2019</td>
-                <td id="FechaFinalizacion">31/11/2019</td>
-                <td id="Estado" class="alert-primary">Recibido</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="CargoEncargado">Secretario de Vida Universitario</td>
-                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
-                <td id="FechaInicio">21/10/2019</td>
-                <td id="FechaFinalizacion">31/11/2019</td>
-                <td id="Estado" class="alert-primary">Recibido</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
+          </tr>
+          <?php       }  ?>
         </tbody>
-    </table> -->
+      </table>
+</div>
 
     <!-- The Modal -->
         <div class="modal" id="myModal">
