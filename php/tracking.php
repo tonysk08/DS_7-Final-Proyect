@@ -54,7 +54,7 @@
     //Hacemos una consulta para recibir el ultimo formulario de ese id
 
     // FETCH_ASSOC
-        $consulta1 = "SELECT unidadEncargada, fechaActivacion, fechaFin, estado FROM administrativo WHERE idPeticion=3";
+        $consulta1 = "SELECT unidadEncargada, DATE_FORMAT(fechaActivacion, '%d/%m/%Y') as fechaActivacion, DATE_FORMAT(fechaFin, '%d/%m/%Y') as fechaFin, estado FROM administrativo WHERE idPeticion=3";
         $consulta = $con->query($consulta1);
     
 
@@ -78,7 +78,7 @@
 
                 if($fila["fechaActivacion"] === NULL)
                 {
-                    $fechaActivacion = "asdasd";
+                    $fechaActivacion = "Fecha no definida";
                 }
                 else{
                     $fechaActivacion = $fila["fechaActivacion"];
@@ -86,20 +86,28 @@
 
                 if($fila["fechaFin"] === NULL)
                 {
-                    $fechaFin = "asdasd";
+                    $fechaFin = "Fecha no definida";
                 }
                 else{
                     $fechaFin = $fila["fechaFin"];
                 }
 
-                if($fila["estado"] === NULL)
+                if(($fila["estado"] === NULL) and $fila["fechaActivacion"] != NULL)
                 {
-                    $fechaFin = "asdasd";
+                    $estado = " id='Estado' class='alert-primary'>Pendiente";
+                }
+                else if($fila["estado"] === "Si"){
+                    $estado = " id='Estado' class='alert-success'>Aprobado";
+                }
+                else if($fila["estado"] === "No")
+                {
+                    $estado = " id='Estado' class='alert-danger'>Aprobado";
                 }
                 else{
-                    $fechaFin = $fila["fechaFin"];
+                    $estado = " id='Estado' class='alert-warning'>Pendiente";
                 }
 
+                $boton = "proximamente";
 
                 echo "
                 <tr>
@@ -107,7 +115,8 @@
                 <td>".$fila["unidadEncargada"]."</td>
                 <td>".$fechaActivacion."</td>
                 <td>".$fechaFin."</td>
-                <td>".$fila["estado"]."</td>
+                <td ".$estado."</td>
+                <td>".$boton."</td>
                 </tr>";
             }
             echo "
