@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $titulo="tracking";
+    $titulo="Seguimiento de la Solicitud";
 ?>
 
 <?php
@@ -54,7 +54,7 @@
     //Hacemos una consulta para recibir el ultimo formulario de ese id
 
     // FETCH_ASSOC
-        $consulta1 = "SELECT unidadEncargada, DATE_FORMAT(fechaActivacion, '%d/%m/%Y') as fechaActivacion, DATE_FORMAT(fechaFin, '%d/%m/%Y') as fechaFin, estado FROM administrativo WHERE idPeticion=3";
+        $consulta1 = "SELECT administrativo.unidadEncargada, CONCAT(usuario.nombre, ' ', usuario.apellido) AS nombreAdministrativo, DATE_FORMAT(administrativo.fechaActivacion, '%d/%m/%Y') as fechaActivacion, DATE_FORMAT(administrativo.fechaFin, '%d/%m/%Y') as fechaFin, administrativo.estado AS estado FROM administrativo INNER JOIN usuario ON administrativo.idUser = usuario.idUser WHERE administrativo.idPeticion = 3";
         $consulta = $con->query($consulta1);
     
 
@@ -112,11 +112,11 @@
                 echo "
                 <tr>
                 <td>".$fila["unidadEncargada"]."</td>
-                <td>".$fila["unidadEncargada"]."</td>
+                <td>".$fila["nombreAdministrativo"]."</td>
                 <td>".$fechaActivacion."</td>
                 <td>".$fechaFin."</td>
                 <td ".$estado."</td>
-                <td>".$boton."</td>
+                <td id='MasDetalles' class='text-center'><button type='button' class='btn btn-info btn-sm'>Detalles</button></td>
                 </tr>";
             }
             echo "
