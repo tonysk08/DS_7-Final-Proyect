@@ -43,7 +43,7 @@
                 <td id="FechaFinalizacion">31/11/2019</td>
                 <td id="Estado" class="alert-success">Aprobado</td> 
                 <!-- Button to Open the Modal -->
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal">Detalles</button></td>
+                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info btn-sm"  data-toggle="modal" data-target="#myModal">Detalles</button></td>
             </tr>
             <tr>
                 <td id="CargoEncargado">Secretario de Vida Universitario</td>
@@ -51,7 +51,7 @@
                 <td id="FechaInicio">21/10/2019</td>
                 <td id="FechaFinalizacion">31/11/2019</td>
                 <td id="Estado" class="alert-danger">Denegado</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
+                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info btn-sm">Detalles</button></td>
             </tr>
             <tr>
                 <td id="CargoEncargado">Secretario de Vida Universitario</td>
@@ -59,7 +59,7 @@
                 <td id="FechaInicio">21/10/2019</td>
                 <td id="FechaFinalizacion">31/11/2019</td>
                 <td id="Estado" class="alert-warning">Pendiente</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
+                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info btn-sm">Detalles</button></td>
             </tr>
             <tr>
                 <td id="CargoEncargado">Rectoría</td>
@@ -67,7 +67,7 @@
                 <td id="FechaInicio">21/10/2019</td>
                 <td id="FechaFinalizacion">31/11/2019</td>
                 <td id="Estado" class="alert-primary">Recibido</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
+                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info btn-sm">Detalles</button></td>
             </tr>
             <tr>
                 <td id="CargoEncargado">Secretario de Vida Universitario</td>
@@ -75,10 +75,11 @@
                 <td id="FechaInicio">21/10/2019</td>
                 <td id="FechaFinalizacion">31/11/2019</td>
                 <td id="Estado" class="alert-primary">Recibido</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
+                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info btn-sm">Detalles</button></td>
             </tr>
         </tbody>
     </table>
+
 
     <!-- The Modal -->
         <div class="modal" id="myModal">
