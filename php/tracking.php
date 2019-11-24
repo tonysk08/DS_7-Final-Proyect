@@ -94,14 +94,14 @@
 
                 if(($fila["estado"] === NULL) and $fila["fechaActivacion"] != NULL)
                 {
-                    $estado = " id='Estado' class='alert-primary'>Pendiente";
+                    $estado = " id='Estado' class='alert-primary'>Recibido";
                 }
                 else if($fila["estado"] === "Si"){
                     $estado = " id='Estado' class='alert-success'>Aprobado";
                 }
                 else if($fila["estado"] === "No")
                 {
-                    $estado = " id='Estado' class='alert-danger'>Aprobado";
+                    $estado = " id='Estado' class='alert-danger'>Denegado";
                 }
                 else{
                     $estado = " id='Estado' class='alert-warning'>Pendiente";
