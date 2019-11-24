@@ -39,13 +39,14 @@
      $idUser = $_SESSION['idUser'];
 
 
-    $sql = "SELECT idPeticion from estudiante where idUser=$idUser";
+    $sql = "SELECT estudiante.idPeticion, peticion.nombreEvento FROM estudiante INNER JOIN peticion ON estudiante.idPeticion = peticion.idPeticion WHERE estudiante.idUser = $idUser";
 
     $result = $con->query($sql);
 
     if ($result->num_rows > 0) {
         $row1 = $result->fetch_assoc();
         $idPeticion = $row1["idPeticion"];
+        $nombreEvento = $row1["nombreEvento"];
     } else {
         echo "No hay ninguna petición creada hasta ahora";
     }
@@ -54,7 +55,7 @@
     //Hacemos una consulta para recibir el ultimo formulario de ese id
 
     // FETCH_ASSOC
-        $consulta1 = "SELECT administrativo.unidadEncargada, CONCAT(usuario.nombre, ' ', usuario.apellido) AS nombreAdministrativo, DATE_FORMAT(administrativo.fechaActivacion, '%d/%m/%Y') as fechaActivacion, DATE_FORMAT(administrativo.fechaFin, '%d/%m/%Y') as fechaFin, administrativo.estado AS estado FROM administrativo INNER JOIN usuario ON administrativo.idUser = usuario.idUser WHERE administrativo.idPeticion = 3";
+        $consulta1 = "SELECT administrativo.idUser, administrativo.unidadEncargada, CONCAT(usuario.nombre, ' ', usuario.apellido) AS nombreAdministrativo, DATE_FORMAT(administrativo.fechaActivacion, '%d/%m/%Y') as fechaActivacion, DATE_FORMAT(administrativo.fechaFin, '%d/%m/%Y') as fechaFin, administrativo.estado AS estado, administrativo.comentario FROM administrativo INNER JOIN usuario ON administrativo.idUser = usuario.idUser WHERE administrativo.idPeticion = 3";
         $consulta = $con->query($consulta1);
     
 
@@ -63,12 +64,12 @@
             <table class='table table-bordered table-hover table-responsive-lg table-sm track_tbl'>
             <thead class='thead-dark''>
                 <tr>
-                    <th>Unidad Encargada</th>
-                    <th>Nombre del Encargado</th>
-                    <th>Fecha de Inicio</th>
-                    <th>Fecha de Finalización</th>
-                    <th>Estado</th>
-                    <th class='fit'>Detalles</th>
+                    <th class='pl-2'>Unidad Encargada</th>
+                    <th class='pl-2'>Nombre del Encargado</th>
+                    <th class='pl-2'>Fecha de Inicio</th>
+                    <th class='pl-2'>Fecha de Finalización</th>
+                    <th class='pl-2'>Estado</th>
+                    <th class='fit pl-2'>Detalles</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,7 +79,7 @@
 
                 if($fila["fechaActivacion"] === NULL)
                 {
-                    $fechaActivacion = "Fecha no definida";
+                    $fechaActivacion = "Aún no recibe el documento";
                 }
                 else{
                     $fechaActivacion = $fila["fechaActivacion"];
@@ -86,7 +87,7 @@
 
                 if($fila["fechaFin"] === NULL)
                 {
-                    $fechaFin = "Fecha no definida";
+                    $fechaFin = "Aún no finaliza su decisión";
                 }
                 else{
                     $fechaFin = $fila["fechaFin"];
@@ -94,30 +95,94 @@
 
                 if(($fila["estado"] === NULL) and $fila["fechaActivacion"] != NULL)
                 {
-                    $estado = " id='Estado' class='alert-primary'>Recibido";
+                    $estado = " id='Estado' class='alert-primary pl-2'>Recibido";
+                    $estadoTexto = "Recibido";
                 }
                 else if($fila["estado"] === "Si"){
-                    $estado = " id='Estado' class='alert-success'>Aprobado";
+                    $estado = " id='Estado' class='alert-success pl-2'>Aprobado";
+                    $estadoTexto = "Aprobado";
                 }
                 else if($fila["estado"] === "No")
                 {
-                    $estado = " id='Estado' class='alert-danger'>Denegado";
+                    $estado = " id='Estado' class='alert-danger pl-2'>Denegado";
+                    $estadoTexto = "Denegado";
                 }
                 else{
-                    $estado = " id='Estado' class='alert-warning'>Pendiente";
+                    $estado = " id='Estado' class='alert-warning pl-2'>Pendiente";
+                    $estadoTexto = "Pendiente";
                 }
 
-                $boton = "proximamente";
+                if($fila["nombreAdministrativo"] === NULL){
+                    $nombreAdministrativo = "- - - - - - - - - - - - - -";
+                }
+                else{
+                    $nombreAdministrativo = $fila["nombreAdministrativo"];
+                }
+
+                if($fila["comentario"] === NULL){
+                    $nombreAdministrativo = "Sin comentarios de momento";
+                }
+                else{
+                    $nombreAdministrativo = $fila["comentario"];
+                }
 
                 echo "
                 <tr>
-                <td>".$fila["unidadEncargada"]."</td>
-                <td>".$fila["nombreAdministrativo"]."</td>
-                <td>".$fechaActivacion."</td>
-                <td>".$fechaFin."</td>
+                <td class='pl-2'>".$fila["unidadEncargada"]."</td>
+                <td class='pl-2'>".$nombreAdministrativo."</td>
+                <td class='pl-2'>".$fechaActivacion."</td>
+                <td class='pl-2'>".$fechaFin."</td>
                 <td ".$estado."</td>
-                <td id='MasDetalles' class='text-center'><button type='button' class='btn btn-info btn-sm'>Detalles</button></td>
+                <td id='MasDetalles' class='text-center'><button type='button' class='btn btn-info btn-sm' data-toggle='modal' data-target='#myModal".$fila["idUser"]."'>Detalles</button></td>
                 </tr>";
+
+                echo "<div class='modal' id='myModal".$fila["idUser"]."'>
+                <div class='modal-dialog modal-dialog-centered modal-xl'>
+                <div class='modal-content'>
+            
+                    <!-- Modal Header -->
+                    <div class='modal-header'>
+                        <h4 class='modal-title'><u>Solicitud de apoyo económico para ".$nombreEvento."    </u></h4>
+                        <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                    </div>
+            
+                    <!-- Modal body -->
+                    <div class='modal-body'>
+                        <div class='container'>
+                            <div class='row'>
+                                <div class='col-sm-4'>
+                                    <h6>Unidad Encagada</h6>
+                                    <p>".$fila["unidadEncargada"]."</p>
+                                </div>
+                                <div class='col-sm-4'>
+                                    <h6>Nombre del encargado</h6>
+                                    <p>".$nombreAdministrativo."</p>
+                                </div>
+                                <div class='col-sm-2'>
+                                    <h6>Fecha de Resolución</h6>
+                                    <p>".$fechaFin."</p>
+                                </div>
+                                <div class='col-sm-2'>
+                                    <h6>Estado</h6>
+                                    <p>".$estadoTexto."</p>
+                                </div>
+                            </div>
+                            <div  class=' form-group shadow-textarea'>
+                                <h6><label for='comment'>Comentario:</label></h6>
+                                <p>".$fila["comentario"]."</p>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Modal footer -->
+                    <div class='modal-footer'>
+                        <button type='button' class='btn btn-danger' data-dismiss='modal'>Cerrar</button>
+                    </div>
+            
+                </div>
+                </div>
+            </div>";
+
             }
             echo "
             </tbody>
@@ -132,52 +197,7 @@
 </div>
 
     <!-- The Modal -->
-        <div class="modal" id="myModal">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-        
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title"><u>Solicitud de apoyo económico para el congreso mundial de Python 2019    </u></h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-        
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <h6>Cargo del encargado</h6>
-                                <p>Secretario de Vida Universitario</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <h6>Nombre del encargado</h6>
-                                <p>Raúl Pérez Cabrera</p>
-                            </div>
-                            <div class="col-sm-2">
-                                <h6>Fecha</h6>
-                                <p>21/10/2019</p>
-                            </div>
-                            <div class="col-sm-2">
-                                <h6>Estado</h6>
-                                <p>Aprobado</p>
-                            </div>
-                        </div>
-                        <div  class=" form-group shadow-textarea">
-                            <h6><label for="comment">Comentario:</label></h6>
-                            <textarea class="form-control z-depth-1" rows="5" id="comment">Considero que el estudiante cumple con todos los requisitos pertinentes. Por tanto, apruebo esta solicitud.</textarea>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                </div>
-        
-            </div>
-            </div>
-        </div>
+
     </div>
     <!--Incluye el footer-->
     <?php include_once ("../partials/footer.php"); ?>
