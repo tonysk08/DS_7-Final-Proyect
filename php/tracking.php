@@ -66,8 +66,8 @@
                 <tr>
                     <th class='pl-2'>Unidad Encargada</th>
                     <th class='pl-2'>Nombre del Encargado</th>
-                    <th class='pl-2'>Fecha de Inicio</th>
-                    <th class='pl-2'>Fecha de Finalización</th>
+                    <th class='pl-2'>Fecha de Recibimiento</th>
+                    <th class='pl-2'>Fecha de Resolución</th>
                     <th class='pl-2'>Estado</th>
                     <th class='fit pl-2'>Detalles</th>
                 </tr>
@@ -120,10 +120,10 @@
                 }
 
                 if($fila["comentario"] === NULL){
-                    $nombreAdministrativo = "Sin comentarios de momento";
+                    $comentario = "Sin comentarios de momento";
                 }
                 else{
-                    $nombreAdministrativo = $fila["comentario"];
+                    $comentario = $fila["comentario"];
                 }
 
                 echo "
@@ -169,7 +169,7 @@
                             </div>
                             <div  class=' form-group shadow-textarea'>
                                 <h6><label for='comment'>Comentario:</label></h6>
-                                <p>".$fila["comentario"]."</p>
+                                <p>".$comentario."</p>
                             </div>
                         </div>
                     </div>
