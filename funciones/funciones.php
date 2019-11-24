@@ -44,11 +44,10 @@ function phpMailer($email, $usuario) {
  * @return any
  */
 function registro($idUser,$email,$usuario){
-    $con = require_once('../bd/conexion.php');
+    require('../bd/conexion.php');
     
     $errores = [];
-    //$errores= duplicacionCorrreo($con);  ESTA LINEA SE DEBE USAR CUANDO SE VA A INSERTAR UN NUEVO CORREO EN ALGUN REGISTRO DE USUARIO, PARA LLAMAR A LA FUNCION DE VALIDAR LO DE CORREO
-
+    
     $nombreEvento =limpiar($_POST['nombreEvento']); 
     $cedulaEncargado =limpiar($_POST['cedulaEncargado']);
     $descripcion =limpiar($_POST['descripcion']);
@@ -67,13 +66,57 @@ function registro($idUser,$email,$usuario){
     $montoApoyoEconomico = limpiar($_POST['montoApoyoEconomico']);
     $justificacionParticipacion = limpiar($_POST['justificacionParticipacion']);
     $ultimaParticipacion = limpiar($_POST['ultimaParticipacion']);
-    $rutaPDF =limpiar($_POST['rutaPDF']);
+
+    //Inicio del fileUpload
+	$target_dir = "pdf/";
+	$target_file = $target_dir . basename($_FILES["rutaPDF"]["name"]);
+	$uploadOk = 1;
+	$pdfFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+	// Check if image file is a actual image or fake image
+	if(isset($_POST["submit"])) {
+	    $check = getimagesize($_FILES["rutaPDF"]["tmp_name"]);
+	        if($check !== false) {
+		        echo "File is a document - " . $check["mime"] . ".";
+		        $uploadOk = 1;
+		    } else {
+		        $errores[] = "File is not a document";
+		        $uploadOk = 0;
+		    }
+        }
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            $errores[] = "Sorry, file already exists.";
+            $uploadOk = 0;
+            }
+		// Check file size
+		if ($_FILES["rutaPDF"]["size"] > 500000) {
+		    $errores[] = "Sorry, your file is too large.";
+		    $uploadOk = 0;
+		}
+		// Allow certain file formats
+		if($pdfFileType != "pdf") {
+		    $errores[] = "Sorry, only PDF files are allowed.";
+		    $uploadOk = 0;
+        } 
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            $errores[] = "Sorry, your file was not uploaded.";
+        // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["rutaPDF"]["tmp_name"], $target_file)) {
+                echo "The file ". basename( $_FILES["rutaPDF"]["name"]). " has been uploaded.";
+            } else {
+                $errores[] = "Sorry, there was an error uploading your file.";
+            }
+        }
+    
+    //fin del fileUpload
     
     //Insercion de los datos a la BD
 
-    if($con !== null) {
-        $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,ultimaParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $dec -> bind_param("ssssssssssiiidddsssi", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$ultimaParticipacion,$rutaPDF,$idUser);
+   if($con){
+    $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,ultimaParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $dec -> bind_param("ssssssssssiiidddsssi", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$ultimaParticipacion,$target_file,$idUser);
         $dec -> execute();
         $resultado = $dec -> affected_rows;
         $dec -> free_result();
@@ -87,9 +130,11 @@ function registro($idUser,$email,$usuario){
         } else {
             $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
         }
-    } else {
+    }else {
         $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
     }
+    
+
     return $errores;
 }
 /**
