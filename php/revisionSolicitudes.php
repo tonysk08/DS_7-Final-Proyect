@@ -20,6 +20,8 @@
 </head>
 <body>
 
+<!--NO OLVIDES RELLENAR ESTA TABLA. ESTA ES FAAAAACIL, NO SEAS PENDEJO. -->
+
     <!--Incluye el header-->
     <?php include_once("../partials/header.php"); ?>
 

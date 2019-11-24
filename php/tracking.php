@@ -1,6 +1,10 @@
 <?php
-
+    session_start();
     $titulo="tracking";
+?>
+
+<?php
+    include "../bd/conexion_PDO.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,10 +32,40 @@
         
     <div class="p-5">
     <h3>Seguimiento de la solicitud</h3>
+
+    <?php
+
+    //Asignamos el idUser guardado en la sesión a una variable
+     $idUser = $_SESSION['idUser'];
+
+
+    $sql = "SELECT idPeticion from estudiante where idUser=$idUser";
+
+
+    $consulta2 = $con->query($sql);
+        // output data of each row
+        while($row = $consulta2->fetch_assoc()) {
+            $idPeticion = $row["idPeticion"];
+        }
+    $con->close();
+    
+    //Hacemos una consulta para recibir el ultimo formulario de ese id
+
+    // FETCH_ASSOC
+        $consulta = $con->prepare("SELECT unidadEncargada, fechaActivacion, fechaFin, estado FROM administrativo WHERE idUser=9 AND idPeticion=3");
+        //AMM.. NO SEAS PENDEJO MAÑANA Y RECUERDA QUE TIENES QUE HACER INNER JOIN TRIPLE PARA RELLENAR BIEN ESTA TABLA
+
+    // Especificamos el fetch mode antes de llamar a fetch()
+        $consulta->setFetchMode(PDO::FETCH_ASSOC);
+
+     // Ejecutamos
+        $consulta->execute();
+    ?>
+
     <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">
         <thead class="thead-dark">
             <tr>
-                <th>Cargo del Encargado</th>
+                <th>Unidad Encargada</th> <!--Las opciones son Rectoria, Vida Universitaria y la Comisión-->
                 <th>Nombre del Encargado</th>
                 <th>Fecha de Inicio</th>
                 <th>Fecha de Finalización</th>
@@ -40,49 +74,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td id="CargoEncargado">Secretario de Vida Universitario</td>
-                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
-                <td id="FechaInicio">21/10/2019</td>
-                <td id="FechaFinalizacion">31/11/2019</td>
-                <td id="Estado" class="alert-success">Aprobado</td> 
-                <!-- Button to Open the Modal -->
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="CargoEncargado">Secretario de Vida Universitario</td>
-                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
-                <td id="FechaInicio">21/10/2019</td>
-                <td id="FechaFinalizacion">31/11/2019</td>
-                <td id="Estado" class="alert-danger">Denegado</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="CargoEncargado">Secretario de Vida Universitario</td>
-                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
-                <td id="FechaInicio">21/10/2019</td>
-                <td id="FechaFinalizacion">31/11/2019</td>
-                <td id="Estado" class="alert-warning">Pendiente</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="CargoEncargado">Rectoría</td>
-                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
-                <td id="FechaInicio">21/10/2019</td>
-                <td id="FechaFinalizacion">31/11/2019</td>
-                <td id="Estado" class="alert-primary">Recibido</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="CargoEncargado">Secretario de Vida Universitario</td>
-                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
-                <td id="FechaInicio">21/10/2019</td>
-                <td id="FechaFinalizacion">31/11/2019</td>
-                <td id="Estado" class="alert-primary">Recibido</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
+
+    <?php 
+    // Mostramos los resultados
+        while ($row = $consulta->fetch()){
+  ?>  
+          <tr>
+            <td><?php echo $row["unidadEncargada"];?></td>
+            <td><?php echo "asdasd"; ?></td>
+            <td><?php echo $row["fechaActivacion"];?></td>
+            <td><?php echo $row["fechaFin"];?></td>
+            <td><?php echo $row["estado"];?></td>
+          </tr>
+          <?php       }  ?>
         </tbody>
-    </table>
+      </table>
+</div>
 
     <!-- The Modal -->
         <div class="modal" id="myModal">

@@ -25,7 +25,7 @@
     <!--Incluye el nav-->
     <?php include_once("../partials/navigationpublic.php"); ?>
 
-
+<!--ESTA ES LA TABLA DE TRANSPARENCIA. NO HAY MUCHA COMPLICACIÓN TAMPOCO. COMO MUCHO UN INNER JOIN DOBLE PARA CONSULTAR LOS NOMBRES DE LOS ESTUDIANTES-->
 
     <div class="p-5 mt-n3">
     <h3 class="mt-5">Transparencia - Solicitudes del 2019</h3>
@@ -35,10 +35,10 @@
                 <th>No.</th>
                 <th>Evento</th>
                 <th>Fecha de Resolución</th>
-                <th>Cédula del estudiante</th>
+                <th>Nombres de los estudiantes</th>
                 <th>País de destino</th>
                 <th>Estado de la resolución</th>
-                <th class="fit">Detalles</th>
+                <th class="fit">Detalles</th> <!--Añadir las cédulas en los detalles. Aquí solo se muestra el reporte de viaje-->
             </tr>
         </thead>
         <tbody>
@@ -46,7 +46,7 @@
                 <td id="NoResolucion">1</td>
                 <td id="NombreEvento">Congreso mundial de Python 2019</td>
                 <td id="FechaResolucion">21/10/2019</td>
-                <td id="CedulaEstudiante">20-24-3998</td>
+                <td id="NombresEstudiantes">20-24-3998</td>
                 <td id="PaisDestino">España</td>
                 <td id="EstadoResolucion" class="alert-success">Aprobado</td>
                 <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal">Detalles</button></td>
@@ -55,7 +55,7 @@
                 <td id="NoResolucion">2</td>
                 <td id="NombreEvento">Congreso mundial de Python 2019</td>
                 <td id="FechaResolucion">22/10/2019</td>
-                <td id="CedulaEstudiante">20-14-3698</td>
+                <td id="NombresEstudiantes">20-14-3698</td>
                 <td id="PaisDestino">Brazil</td>
                 <td id="EstadoResolucion" class="alert-success">Aprobado</td>
                 <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
@@ -64,7 +64,7 @@
                 <td id="NoResolucion">3</td>
                 <td id="NombreEvento">Congreso mundial de Python 2019</td>
                 <td id="FechaResolucion">23/11/2019</td>
-                <td id="CedulaEstudiante">8-935-1097</td>
+                <td id="NombresEstudiantes">8-935-1097</td>
                 <td id="PaisDestino">Estados Unidos</td>
                 <td id="EstadoResolucion" class="alert-success">Aprobado</td>
                 <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
@@ -73,46 +73,10 @@
                 <td id="NoResolucion">4</td>
                 <td id="NombreEvento">Congreso mundial de Python 2019</td>
                 <td id="FechaResolucion">23/11/2019</td>
-                <td id="CedulaEstudiante">8-935-1097</td>
+                <td id="NombresEstudiantes">8-935-1097</td>
                 <td id="PaisDestino">Estados Unidos</td>
                 <td id="EstadoResolucion" class="alert-success">Aprobado</td>
                 <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="NoResolucion">5</td>
-                <td id="NombreEvento">Congreso mundial de Python 2019</td>
-                <td id="FechaResolucion">25/11/2019</td>
-                <td id="CedulaEstudiante">2-248-2794</td>
-                <td id="PaisDestino">India</td>
-                <td id="EstadoResolucion" class="alert-primary">Recibido</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="NoResolucion">6</td>
-                <td id="NombreEvento">Congreso mundial de Python 2019</td>
-                <td id="FechaResolucion">25/11/2019</td>
-                <td id="CedulaEstudiante">2-248-2794</td>
-                <td id="PaisDestino">India</td>
-                <td id="EstadoResolucion" class="alert-primary">Recibido</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="NoResolucion">7</td>
-                <td id="NombreEvento">Congreso mundial de Python 2019</td>
-                <td id="FechaResolucion">28/12/2019</td>
-                <td id="CedulaEstudiante">2-32-987</td>
-                <td id="PaisDestino">China</td>
-                <td id="EstadoResolucion" class="alert-warning">Pendiente</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="NoResolucion">8</td>
-                <td id="NombreEvento">Congreso mundial de Python 2019</td>
-                <td id="FechaResolucion">29/12/2019</td>
-                <td id="CedulaEstudiante">7-985-32</td>
-                <td id="PaisDestino">Japón</td>
-                <td id="EstadoResolucion" class="alert-danger">Denegado</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info" href="#demo" data-toggle="collapse">Detalles</button></td>
             </tr>
         </tbody>
     </table>
