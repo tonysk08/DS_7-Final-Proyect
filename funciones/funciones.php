@@ -50,6 +50,7 @@ function registro($idUser,$email,$usuario){
     
     $nombreEvento =limpiar($_POST['nombreEvento']); 
     $cedulaEncargado =limpiar($_POST['cedulaEncargado']);
+    $unidadAcademica = limpiar($_POST['unidadAcademica']);
     $descripcion =limpiar($_POST['descripcion']);
     $proyeccion =limpiar($_POST['proyeccion']);
     $alcance =limpiar($_POST['alcance']);
