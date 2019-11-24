@@ -4,7 +4,7 @@
 ?>
 
 <?php
-    include "../bd/conexion_PDO.php";
+    include "../bd/conexion.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,54 +41,85 @@
 
     $sql = "SELECT idPeticion from estudiante where idUser=$idUser";
 
+    $result = $con->query($sql);
 
-    $consulta2 = $con->query($sql);
-        // output data of each row
-        while($row = $consulta2->fetch_assoc()) {
-            $idPeticion = $row["idPeticion"];
-        }
-    $con->close();
+    if ($result->num_rows > 0) {
+        $row1 = $result->fetch_assoc();
+        $idPeticion = $row1["idPeticion"];
+    } else {
+        echo "No hay ninguna petición creada hasta ahora";
+    }
+
     
     //Hacemos una consulta para recibir el ultimo formulario de ese id
 
     // FETCH_ASSOC
-        $consulta = $con->prepare("SELECT unidadEncargada, fechaActivacion, fechaFin, estado FROM administrativo WHERE idUser=9 AND idPeticion=3");
-        //AMM.. NO SEAS PENDEJO MAÑANA Y RECUERDA QUE TIENES QUE HACER INNER JOIN TRIPLE PARA RELLENAR BIEN ESTA TABLA
+        $consulta1 = "SELECT unidadEncargada, fechaActivacion, fechaFin, estado FROM administrativo WHERE idPeticion=3";
+        $consulta = $con->query($consulta1);
+    
 
-    // Especificamos el fetch mode antes de llamar a fetch()
-        $consulta->setFetchMode(PDO::FETCH_ASSOC);
+        if ($consulta->num_rows > 0) {
+            echo "
+            <table class='table table-bordered table-hover table-responsive-lg table-sm track_tbl'>
+            <thead class='thead-dark''>
+                <tr>
+                    <th>Unidad Encargada</th>
+                    <th>Nombre del Encargado</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Finalización</th>
+                    <th>Estado</th>
+                    <th class='fit'>Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+            ";
+            // output data of each row
+            while($fila = $consulta->fetch_assoc()) {
 
-     // Ejecutamos
-        $consulta->execute();
+                if($fila["fechaActivacion"] === NULL)
+                {
+                    $fechaActivacion = "asdasd";
+                }
+                else{
+                    $fechaActivacion = $fila["fechaActivacion"];
+                }
+
+                if($fila["fechaFin"] === NULL)
+                {
+                    $fechaFin = "asdasd";
+                }
+                else{
+                    $fechaFin = $fila["fechaFin"];
+                }
+
+                if($fila["estado"] === NULL)
+                {
+                    $fechaFin = "asdasd";
+                }
+                else{
+                    $fechaFin = $fila["fechaFin"];
+                }
+
+
+                echo "
+                <tr>
+                <td>".$fila["unidadEncargada"]."</td>
+                <td>".$fila["unidadEncargada"]."</td>
+                <td>".$fechaActivacion."</td>
+                <td>".$fechaFin."</td>
+                <td>".$fila["estado"]."</td>
+                </tr>";
+            }
+            echo "
+            </tbody>
+            </table>
+            ";
+        } else {
+            echo "0 results";
+        }
+
+
     ?>
-
-    <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">
-        <thead class="thead-dark">
-            <tr>
-                <th>Unidad Encargada</th> <!--Las opciones son Rectoria, Vida Universitaria y la Comisión-->
-                <th>Nombre del Encargado</th>
-                <th>Fecha de Inicio</th>
-                <th>Fecha de Finalización</th>
-                <th>Estado</th>
-                <th class="fit">Detalles</th>
-            </tr>
-        </thead>
-        <tbody>
-
-    <?php 
-    // Mostramos los resultados
-        while ($row = $consulta->fetch()){
-  ?>  
-          <tr>
-            <td><?php echo $row["unidadEncargada"];?></td>
-            <td><?php echo "asdasd"; ?></td>
-            <td><?php echo $row["fechaActivacion"];?></td>
-            <td><?php echo $row["fechaFin"];?></td>
-            <td><?php echo $row["estado"];?></td>
-          </tr>
-          <?php       }  ?>
-        </tbody>
-      </table>
 </div>
 
     <!-- The Modal -->
