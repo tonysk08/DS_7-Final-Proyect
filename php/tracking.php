@@ -47,9 +47,7 @@
         $row1 = $result->fetch_assoc();
         $idPeticion = $row1["idPeticion"];
         $nombreEvento = $row1["nombreEvento"];
-    } else {
-        echo "No hay ninguna petición creada hasta ahora";
-    }
+    
 
     
     //Hacemos una consulta para recibir el ultimo formulario de ese id
@@ -190,6 +188,10 @@
             ";
         } else {
             echo "0 results";
+        }
+
+        }else {
+            echo "No hay ninguna petición creada hasta ahora";
         }
 
 
