@@ -70,9 +70,9 @@ function registro($idUser,$email,$usuario){
     $rutaPDF =limpiar($_POST['rutaPDF']);
     
     //Insercion de los datos a la BD
+
     if($con !== null) {
-        $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaInicio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,
-        montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,ultimaParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,ultimaParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         $dec -> bind_param("ssssssssssiiidddsssi", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$ultimaParticipacion,$rutaPDF,$idUser);
         $dec -> execute();
         $resultado = $dec -> affected_rows;
@@ -99,8 +99,7 @@ function registro($idUser,$email,$usuario){
      */
     function duplicacionCorrreo($con){
         $errores = []; 
-        
-        $usuario =limpiar($_POST['usuario']);
+
         $email =limpiar($_POST['email']);
         
         $dec = $con -> prepare("SELECT correo FROM usuario WHERE correo like ? ");
@@ -231,20 +230,12 @@ function mostrarErrores($errores){
                 'patron' => '/^[a-z\s]{2,350}$/i', 
                 'error' => 'LA DESCRIPCION solo pueden usar letras y espacios. No puede ser mas largo de 350 caracteres.'
             ],
-            'fechaInicio' => [
-                'patron' => '/^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/', 
-                'error' => 'Formato para la fecha dd/mm/yyyy o dd-mm-yyyy'
-            ],
-            'fechafin' => [
-                'patron' => '/^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/', 
-                'error' => 'Formato para la fecha dd/mm/yyyy o dd-mm-yyyy'
-            ],
-            'clave' => [
+           'clave' => [
                 'patron' => '/(?=^[\w\!@#\$%\^&\*\?]{8,30}$)(?=(.*\d){2,})(?=(.*[a-z]){2,})(?=(.*[A-Z]){2,})(?=(.*[\!@#\$%\^&\*\?_]){2,})^-*/', 
                 'error' => 'Por favor entre una contraseña valida. La contraseña debe tener por lo menos 2 letras mayuscula, 2 letras minusculas, 2 numeros y 2 simbolos.'
              ],
              'cedula-email'=> [
-                'patron' => '/(?=^[a-z]+[\w@\.][\W]{2,50}$)/i', 
+                'patron' => '/(?=^[a-z]+[\w@\.]{2,50}$)/i', 
                 'error' => 'Nombre de Usuario o Cedula invalido'
             ]
         ];
