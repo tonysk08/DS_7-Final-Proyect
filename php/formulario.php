@@ -210,7 +210,7 @@
             </div>
             <div class="form-check-inline">
               <label class="form-check-label" for="check8">
-                <input type="checkbox" class="form-check-input" id="apoyoEconomicoUTP[]" name="apoyoEconomicoUTP[]" <?php if(isset($_POST['apoyoEconomicoUTP'])){echo "checked ='checked'";}else {echo "checked= ''";}?> value="1">Apoyo Económico
+                <input type="checkbox" class="form-check-input" id="apoyoEconomicoUTP[]" name="apoyoEconomicoUTP[]" <?php if(isset($_POST['apoyoEconomicoUTP'])){echo "checked ='checked'";}?> value="1">Apoyo Económico
                 <input type="text" class="form-control" id="montoApoyoEconomico"  value="<?php echo $_POST['montoApoyoEconomico'] ?? '' ?>" placeholder="Monto" name="montoApoyoEconomico" required>
               </label>
             </div>
