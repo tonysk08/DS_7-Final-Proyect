@@ -228,7 +228,7 @@
     
         if ($con->multi_query($sql3) === TRUE) {
             echo "New records created successfully";
-
+            header('Location: tracking.php');
         } else {
         echo "Error: " . $sql3 . "<br>" . $con->error;
         } 
