@@ -188,11 +188,11 @@
             ";
 
         } else {
-            echo "No hay ninguna petición creada hasta ahora 1";
+            echo "No hay ninguna petición creada hasta ahora. Error 101.   ";
         }
 
     }else {
-        echo "No hay ninguna petición creada hasta ahora 2";
+        echo "No hay ninguna petición creada hasta ahora. Error 102.     ";
 
         $consultaRellenarCampos = "SELECT idPeticion FROM peticion ORDER BY idPeticion DESC LIMIT 1";
 
@@ -227,7 +227,7 @@
         UPDATE administrativo SET fechaActivacion=CURRENT_TIMESTAMP WHERE idUser=6 AND idPeticion=$idPeticion";
     
         if ($con->multi_query($sql3) === TRUE) {
-            echo "New records created successfully";
+            echo "Filas creadas y actualizadas correctamente";
             header('Location: tracking.php');
         } else {
         echo "Error: " . $sql3 . "<br>" . $con->error;
