@@ -34,6 +34,7 @@
 
     <?php
 
+
     //Asignamos el idUser guardado en la sesión a una variable
      $idUser = $_SESSION['idUser'];
 
@@ -52,7 +53,7 @@
     //Hacemos una consulta para recibir el ultimo formulario de ese id
 
     // FETCH_ASSOC
-        $consulta1 = "SELECT administrativo.idUser, administrativo.unidadEncargada, CONCAT(usuario.nombre, ' ', usuario.apellido) AS nombreAdministrativo, DATE_FORMAT(administrativo.fechaActivacion, '%d/%m/%Y') as fechaActivacion, DATE_FORMAT(administrativo.fechaFin, '%d/%m/%Y') as fechaFin, administrativo.estado AS estado, administrativo.comentario FROM administrativo INNER JOIN usuario ON administrativo.idUser = usuario.idUser WHERE administrativo.idPeticion = 3";
+        $consulta1 = "SELECT administrativo.idUser, administrativo.unidadEncargada, CONCAT(usuario.nombre, ' ', usuario.apellido) AS nombreAdministrativo, DATE_FORMAT(administrativo.fechaActivacion, '%d/%m/%Y') as fechaActivacion, DATE_FORMAT(administrativo.fechaFin, '%d/%m/%Y') as fechaFin, administrativo.estado AS estado, administrativo.comentario FROM administrativo INNER JOIN usuario ON administrativo.idUser = usuario.idUser WHERE administrativo.idPeticion = $idPeticion";
         $consulta = $con->query($consulta1);
     
 
@@ -185,12 +186,52 @@
             </tbody>
             </table>
             ";
+
         } else {
-            echo "No hay ninguna petición creada hasta ahora";
+            echo "No hay ninguna petición creada hasta ahora 1";
         }
 
     }else {
-        echo "No hay ninguna petición creada hasta ahora";
+        echo "No hay ninguna petición creada hasta ahora 2";
+
+        $consultaRellenarCampos = "SELECT idPeticion FROM peticion ORDER BY idPeticion DESC LIMIT 1";
+
+        $result = $con->query($consultaRellenarCampos);    
+        $row1 = $result->fetch_assoc();
+        $idPeticion = $row1["idPeticion"];
+
+        
+        $unidadAcademica = $_SESSION['unidadAcademica'];
+        $idUser = $_SESSION['idUser'];
+
+        $fechaActivacion = date('Y/m/d');
+        
+         //Prueba rafa
+        $sql3 = 
+        "
+        INSERT 
+        INTO estudiante 
+        (idPeticion, idUser, unidadAcademica) 
+        VALUES ($idPeticion , $idUser, 'FISC');
+
+        INSERT 
+        INTO administrativo 
+        (idUser, idPeticion, unidadEncargada) 
+        VALUES 
+        (6, $idPeticion, 'Vida Universitaria'),
+        (7, $idPeticion, 'Comite Evaluador-Vicerrector Academico'),  
+        (8, $idPeticion, 'Comite Evaluador-Secretario General'), 
+        (9, $idPeticion, 'Comite Evaluador-Coodinador General de los Centros Regionales'), 
+        (10, $idPeticion, 'Rectoria');
+        
+        UPDATE administrativo SET fechaActivacion=CURRENT_TIMESTAMP WHERE idUser=6 AND idPeticion=$idPeticion";
+    
+        if ($con->multi_query($sql3) === TRUE) {
+            echo "New records created successfully";
+
+        } else {
+        echo "Error: " . $sql3 . "<br>" . $con->error;
+        } 
     }
 
 

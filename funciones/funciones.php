@@ -138,6 +138,7 @@ function registro($idUser,$email,$usuario){
         
         if($resultado == 1) {
             echo'Datos insertados exitosamente';
+            $_SESSION['unidadAcademica'] = $unidadAcademica;
             header('Location: tracking.php');
             phpMailer($email, $usuario);
         } else {
@@ -347,17 +348,12 @@ function mostrarErrores($errores){
          return $errores;
     }
 
-    function creacionDatos($idUser) {
+    function creacionDatos() {
         
     require('../bd/conexion.php');    
-    $unidadAcademica = limpiar($_POST['unidadAcademica']);
 
     //Consulta para captar el idPeticion que se acaba de crear
-    $consultaRellenarCampos = "SELECT idPeticion FROM peticion ORDER BY idPeticion DESC LIMIT 1";
-
-    $result = $con->query($consultaRellenarCampos);    
-    $row1 = $result->fetch_assoc();
-    $idPeticion = $row1["idPeticion"];
+    
 
     //Llamada al procedimiento almacenado FieldsCreationAfterForm
     //Llamada al comando procedimiento almacenado
@@ -367,16 +363,17 @@ function mostrarErrores($errores){
     INTO administrativo 
     (idUser, idPeticion, unidadEncargada) 
     VALUES 
-    (6, $idPeticion, 'Vida Universitaria'), 
-    (7, $idPeticion, 'Comite Evaluador-Vicerrector Academico'),  
-    (8, $idPeticion, 'Comite Evaluador-Secretario General'), 
-    (9, $idPeticion, 'Comite Evaluador-Coodinador General de los Centros Regionales'), 
-    (10, $idPeticion, 'Rectoria')
+    (6, 12, 'Vida Universitaria'), 
+    (7, 12, 'Comite Evaluador-Vicerrector Academico'),  
+    (8, 12, 'Comite Evaluador-Secretario General'), 
+    (9, 12, 'Comite Evaluador-Coodinador General de los Centros Regionales'), 
+    (10, 12, 'Rectoria')
     
     INSERT 
     INTO estudiante 
     (idPeticion, idUser, unidadAcademica) 
-    VALUES ($idPeticion , $idUser, $unidadAcademica)";
+    VALUES (12 , 5, 'FISC?')";
+    mysqli_query($con, $sql);
 
     if (mysqli_query($con, $sql)) {
         echo "New record created successfully";

@@ -3,7 +3,7 @@
     $titulo="Formulario";
 
     require_once('../funciones/funciones.php');
-    require_once('../bd/conexion.php');
+    require('../bd/conexion.php');
 
     if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['ficha']) && validarFicha ($_POST['ficha'])){
     //Validar si la informacion es enviada por un robot
@@ -29,7 +29,7 @@
     if(isset($_SESSION['idUser'])){
       if(empty($errores)) {
         $errores = registro($_SESSION['idUser'],$_SESSION['correo'], $_SESSION['nombre']);
-        creacionDatos($_SESSION['idUser']);
+        creacionDatos();
       }
     }
   }
