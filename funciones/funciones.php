@@ -346,46 +346,6 @@ function mostrarErrores($errores){
         }
 
          return $errores;
-    }
-
-    function creacionDatos() {
-        
-    require('../bd/conexion.php');    
-
-    //Consulta para captar el idPeticion que se acaba de crear
-    
-
-    //Llamada al procedimiento almacenado FieldsCreationAfterForm
-    //Llamada al comando procedimiento almacenado
-
-    $sql = 
-    "INSERT 
-    INTO administrativo 
-    (idUser, idPeticion, unidadEncargada) 
-    VALUES 
-    (6, 12, 'Vida Universitaria'), 
-    (7, 12, 'Comite Evaluador-Vicerrector Academico'),  
-    (8, 12, 'Comite Evaluador-Secretario General'), 
-    (9, 12, 'Comite Evaluador-Coodinador General de los Centros Regionales'), 
-    (10, 12, 'Rectoria')
-    
-    INSERT 
-    INTO estudiante 
-    (idPeticion, idUser, unidadAcademica) 
-    VALUES (12 , 5, 'FISC?')";
-    mysqli_query($con, $sql);
-
-    if (mysqli_query($con, $sql)) {
-        echo "New record created successfully";
-    } else {
-        $errores = "Error: " . $sql . "<br>" . mysqli_error($con);
-    }
-    //-Fin de Llamada al procedimiento almacenado FieldsCreationAfterForm
-
-    return $errores;
-
-}
-
-    
+    }   
 
 ?>
