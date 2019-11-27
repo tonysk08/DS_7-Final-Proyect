@@ -29,6 +29,7 @@
     if(isset($_SESSION['idUser'])){
       if(empty($errores)) {
         $errores = registro($_SESSION['idUser'],$_SESSION['correo'], $_SESSION['nombre']);
+        creacionDatos($_SESSION['idUser']);
       }
     }
   }

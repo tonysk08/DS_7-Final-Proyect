@@ -137,33 +137,6 @@ function registro($idUser,$email,$usuario){
     
 
     return $errores;
-
-
-
-    //Consulta para captar el idPeticion que se acaba de crear
-    $consultaRellenarCampos = "SELECT idPeticion FROM peticion ORDER BY idPeticion DESC LIMIT 1";
-
-    $result = $con->query($consultaRellenarCampos);    
-        $row1 = $result->fetch_assoc();
-        $idPeticion = $row1["idPeticion"];
-
-    //Llamada al procedimiento almacenado FieldsCreationAfterForm
-    //Llamada al comando procedimiento almacenado
-    $dec1 = $con -> prepare("CALL FieldsCreationAfterForm(idUser, unidadAcademica, idPeticion)");
-
-    //Pasa los valores al comando
-    $dec1 -> bind_param("idUser", $idUser);
-    $dec1 -> bind_param("unidadAcademica", $unidadAcademica);
-    $dec1 -> bind_param("idPeticion", $idPeticion);
-    
-        //Ejecuta el procedimiento almacenado
-        $dec1 -> execute();
-        $resultado = $dec1 -> affected_rows;
-        $dec1 -> free_result();
-        $dec1 -> close();
-        $con -> close(); 
-    //-Fin de Llamada al procedimiento almacenado FieldsCreationAfterForm
-
 }
 
 /**
@@ -360,5 +333,49 @@ function mostrarErrores($errores){
 
          return $errores;
     }
+
+    function creacionDatos($idUser) {
+        
+    require('../bd/conexion.php');    
+    $unidadAcademica = limpiar($_POST['unidadAcademica']);
+
+    //Consulta para captar el idPeticion que se acaba de crear
+    $consultaRellenarCampos = "SELECT idPeticion FROM peticion ORDER BY idPeticion DESC LIMIT 1";
+
+    $result = $con->query($consultaRellenarCampos);    
+    $row1 = $result->fetch_assoc();
+    $idPeticion = $row1["idPeticion"];
+
+    //Llamada al procedimiento almacenado FieldsCreationAfterForm
+    //Llamada al comando procedimiento almacenado
+
+    $sql = 
+    "INSERT 
+    INTO administrativo 
+    (idUser, idPeticion, unidadEncargada) 
+    VALUES 
+    (6, $idPeticion, 'Vida Universitaria'), 
+    (7, $idPeticion, 'Comite Evaluador-Vicerrector Academico'),  
+    (8, $idPeticion, 'Comite Evaluador-Secretario General'), 
+    (9, $idPeticion, 'Comite Evaluador-Coodinador General de los Centros Regionales'), 
+    (10, $idPeticion, 'Rectoria')
+    
+    INSERT 
+    INTO estudiante 
+    (idPeticion, idUser, unidadAcademica) 
+    VALUES ($idPeticion , $idUser, $unidadAcademica)";
+
+    if (mysqli_query($con, $sql)) {
+        echo "New record created successfully";
+    } else {
+        $errores = "Error: " . $sql . "<br>" . mysqli_error($con);
+    }
+    //-Fin de Llamada al procedimiento almacenado FieldsCreationAfterForm
+
+    return $errores;
+
+}
+
+    
 
 ?>

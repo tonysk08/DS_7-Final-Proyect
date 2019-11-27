@@ -1,11 +1,10 @@
 <?php
     session_start();
     $titulo="Seguimiento de la Solicitud";
-?>
 
-<?php
     include "../bd/conexion.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
