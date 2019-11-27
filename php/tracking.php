@@ -187,12 +187,12 @@
             </table>
             ";
         } else {
-            echo "0 results";
-        }
-
-        }else {
             echo "No hay ninguna petición creada hasta ahora";
         }
+
+    }else {
+        echo "No hay ninguna petición creada hasta ahora";
+    }
 
 
     ?>

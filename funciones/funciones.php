@@ -122,7 +122,7 @@ function registro($idUser,$email,$usuario){
         $resultado = $dec -> affected_rows;
         $dec -> free_result();
         $dec -> close();
-        $con -> close(); 
+       /*  $con -> close();  */
         
         if($resultado == 1) {
             echo'Datos insertados exitosamente';
@@ -137,7 +137,35 @@ function registro($idUser,$email,$usuario){
     
 
     return $errores;
+
+
+
+    //Consulta para captar el idPeticion que se acaba de crear
+    $consultaRellenarCampos = "SELECT idPeticion FROM peticion ORDER BY idPeticion DESC LIMIT 1";
+
+    $result = $con->query($consultaRellenarCampos);    
+        $row1 = $result->fetch_assoc();
+        $idPeticion = $row1["idPeticion"];
+
+    //Llamada al procedimiento almacenado FieldsCreationAfterForm
+    //Llamada al comando procedimiento almacenado
+    $dec1 = $con -> prepare("CALL FieldsCreationAfterForm(idUser, unidadAcademica, idPeticion)");
+
+    //Pasa los valores al comando
+    $dec1 -> bind_param("idUser", $idUser);
+    $dec1 -> bind_param("unidadAcademica", $unidadAcademica);
+    $dec1 -> bind_param("idPeticion", $idPeticion);
+    
+        //Ejecuta el procedimiento almacenado
+        $dec1 -> execute();
+        $resultado = $dec1 -> affected_rows;
+        $dec1 -> free_result();
+        $dec1 -> close();
+        $con -> close(); 
+    //-Fin de Llamada al procedimiento almacenado FieldsCreationAfterForm
+
 }
+
 /**
      *Funcion para validar la existencia de correo del usuario
      *@param con
