@@ -164,6 +164,89 @@
                                     <h6>Estado</h6>
                                     <p>".$estadoTexto."</p>
                                 </div>
+    <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">
+        <thead class="thead-dark">
+            <tr>
+                <th>Cargo del Encargado</th>
+                <th>Nombre del Encargado</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha de Finalización</th>
+                <th>Estado</th>
+                <th class="fit">Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="CargoEncargado">Secretario de Vida Universitario</td>
+                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
+                <td id="FechaInicio">21/10/2019</td>
+                <td id="FechaFinalizacion">31/11/2019</td>
+                <td id="Estado" class="alert-success">Aprobado</td> 
+                <!-- Button to Open the Modal -->
+                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info btn-sm"  data-toggle="modal" data-target="#myModal">Detalles</button></td>
+            </tr>
+            <tr>
+                <td id="CargoEncargado">Secretario de Vida Universitario</td>
+                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
+                <td id="FechaInicio">21/10/2019</td>
+                <td id="FechaFinalizacion">31/11/2019</td>
+                <td id="Estado" class="alert-danger">Denegado</td>
+                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info btn-sm">Detalles</button></td>
+            </tr>
+            <tr>
+                <td id="CargoEncargado">Secretario de Vida Universitario</td>
+                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
+                <td id="FechaInicio">21/10/2019</td>
+                <td id="FechaFinalizacion">31/11/2019</td>
+                <td id="Estado" class="alert-warning">Pendiente</td>
+                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info btn-sm">Detalles</button></td>
+            </tr>
+            <tr>
+                <td id="CargoEncargado">Rectoría</td>
+                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
+                <td id="FechaInicio">21/10/2019</td>
+                <td id="FechaFinalizacion">31/11/2019</td>
+                <td id="Estado" class="alert-primary">Recibido</td>
+                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info btn-sm">Detalles</button></td>
+            </tr>
+            <tr>
+                <td id="CargoEncargado">Secretario de Vida Universitario</td>
+                <td id="NombreEncargado">Raúl Pérez Cabrera</td>
+                <td id="FechaInicio">21/10/2019</td>
+                <td id="FechaFinalizacion">31/11/2019</td>
+                <td id="Estado" class="alert-primary">Recibido</td>
+                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info btn-sm">Detalles</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+        
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title"><u>Solicitud de apoyo económico para el congreso mundial de Python 2019    </u></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+        
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h6>Cargo del encargado</h6>
+                                <p>Secretario de Vida Universitario</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <h6>Nombre del encargado</h6>
+                                <p>Raúl Pérez Cabrera</p>
+                            </div>
+                            <div class="col-sm-2">
+                                <h6>Fecha</h6>
+                                <p>21/10/2019</p>
                             </div>
                             <div  class=' form-group shadow-textarea'>
                                 <h6><label for='comment'>Comentario:</label></h6>
