@@ -53,13 +53,14 @@ function registro($idUser,$email,$usuario){
     $tipo = limpiar($_POST['tipo']);
     $fechaInicio = limpiar($_POST['fechaInicio']);
     $fechaFin = limpiar($_POST['fechaFin']);
-    $apoyoEvento = checkBoxArray($_POST['apoyoEvento']); 
-    
-    if(isset($_POST['inscripcionUTP'])) {
+    $apoyoEvento = implode(', ', $_POST['apoyoEvento']);
+
+     if(isset($_POST['inscripcionUTP'])) {
         $inscripcionUTP = checkBoxArray($_POST['inscripcionUTP']);
     } else {
         $inscripcionUTP = 0; 
     }
+    
     if(isset($_POST['gastosViajeUTP'])) {
         $gastosViajeUTP = checkBoxArray($_POST['gastosViajeUTP']);
     } else {
@@ -69,7 +70,7 @@ function registro($idUser,$email,$usuario){
         $apoyoEconomicoUTP = checkBoxArray($_POST['apoyoEconomicoUTP']);
         } else {
         $apoyoEconomicoUTP = 0; 
-    }
+    } 
     
     $montoInscripcion = limpiar($_POST['montoInscripcion']);
     $montoGastoViaje = limpiar($_POST['montoGastoViaje']);
@@ -136,6 +137,27 @@ function registro($idUser,$email,$usuario){
         } else {
             echo $con -> error; 
             $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
+            echo 
+            'nombreEvento='.$nombreEvento.'<br>',
+            'cedulaEncargado='.$cedulaEncargado.'<br>',
+            'descripcion='.$descripcion.'<br>',
+            'proyeccion='.$proyeccion.'<br>',
+            'alcance='.$alcance.'<br>',
+            'lugarEvento='.$lugarEvento.'<br>',
+            'tipo='.$tipo.'<br>',
+            'fechaIncio='.$fechaInicio.'<br>',
+            'fechaFin='.$fechaFin.'<br>',
+            'apoyoEvento='.$apoyoEvento.'<br>',
+            'inscripcionUTP='.$inscripcionUTP.'<br>',
+            'gastosViajeUTP='.$gastosViajeUTP.'<br>',
+            'apoyoEconomicoUTP='.$apoyoEconomicoUTP.'<br>',
+            'montoInscripcion='.$montoInscripcion.'<br>',
+            'montoGastoViaje='.$montoGastoViaje.'<br>',
+            'montoApoyoEconomico='.$montoApoyoEconomico.'<br>',
+            'justificacionParticipacion='.$justificacionParticipacion.'<br>',
+            'target_file='.$target_file.'<br>',
+            'idUser='.$idUser.'<br>';
+            echo implode(', ', $_POST['apoyoEvento']);
    
         }
         $con -> close(); 
@@ -170,24 +192,29 @@ function registro($idUser,$email,$usuario){
 
 /**
  * Funcion para concatenar caracteres de los checkbox en el formulario
- * @return arr
+ * @return arr 
  */
 function checkBoxArray($campo) {   
-    $cad = '';
-   if(isset($_POST['btn-enviar'])){
         if($campo == ''){
-           $campo = 0;
-       }
-    //$cad = '';
-    foreach($campo as $cadena) {
-        $s = ',';
-        if($cad == '') {
-            $cad = $cadena;
-                } else  {
-                $cad .= $s.$cadena;
-                }
+           $cad = 0;}
+           elseif($campo == '0'){
+               $cad = 0;
+           }
+           elseif($campo == '1'){
+               $cad = 1;
+           }
+       else{
+        $cad = implode(', ', $campo);}
+
+/* foreach($campo as $cadena) {
+    $s = ',';
+    if($cad == '') {
+        $cad = $cadena;
+            } else  {
+            $cad .= $s.$cadena;
             }
         }
+    } */
     return $cad;
 }
 

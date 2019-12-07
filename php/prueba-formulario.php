@@ -79,7 +79,9 @@
       <h2 class="text-center green-text font-weight-bold text-uppercase">Formulario de registro de solicitud RUTP-FV-4(M)</h2>
       <!-- Inicio del formulario -->
 
-      <?php	if(!empty($errores)){echo mostrarErrores($errores);}?>
+      <?php	if(!empty($errores)){
+        echo mostrarErrores($errores);
+        }?>
       <input type="hidden" name="ficha" value="<?php echo ficha_csrf()?>"/>
       <input type="hidden" name="robot" value=""/>
 
@@ -440,16 +442,16 @@
         <div class="col-lg-5" id="ProyeccionUniversidad">
           <h6 class="purple-text font-weight-bolder mb-n1">Proyección de la Institución a través del evento</h6>
           <div class="form-check form-check-inline ml-n1">
-            <input type="radio" class="form-check-input" id="proyeccionExcelente" name="proyeccion" <?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?> >
-            <label class="form-check-label" for="proyeccionExcelente">Excelente</label>
+            <input type="radio" class="form-check-input" value="Excelente" name="proyeccion" id="proyeccion1" <?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?> >
+            <label class="form-check-label" for="proyeccion1">Excelente</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="proyeccionBuena" name="proyeccion" <?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?>  >
-            <label class="form-check-label" for="proyeccionBuena">Buena</label>
+            <input type="radio" class="form-check-input" value="Buena" name="proyeccion" id="proyeccion2" <?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?>  >
+            <label class="form-check-label" for="proyeccion2">Buena</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="proyeccionNoTiene" name="proyeccion"<?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?>  >
-            <label class="form-check-label" for="proyeccionNoTiene">No Tiene</label>
+            <input type="radio" class="form-check-input" value="NoTiene" name="proyeccion" id="proyeccion3" <?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?>  >
+            <label class="form-check-label" for="proyeccion3">No Tiene</label>
           </div>
         </div>
         <div class="md-form md-outline col-lg-5 col-sm-12 mt-n1 ml-4">
@@ -507,16 +509,16 @@
         <h6 class="col-12 purple-text font-weight-bolder mt-n4">Apoyo solicitado a la Universidad Tecnológica de Panamá</h6>
         <div class="col-12 mt-n3">
           <div class="form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="apoyoInscripcionUTP" value="1" name="inscripcionUTP[]" <?php if(isset($_POST['inscripcionUTP'])){echo "checked ='checked'";}?>>
-            <label class="form-check-label" for="apoyoInscripcionUTP" >Inscripción</label>
+            <input type="checkbox" class="form-check-input" id="inscripcionUTP[]" value="1" name="inscripcionUTP[]" <?php if(isset($_POST['inscripcionUTP'])){echo "checked ='checked'";}?>>
+            <label class="form-check-label" for="inscripcionUTP[]" >Inscripción</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoGastosViajeUTP" value="1" name="gastosViajeUTP[]" <?php if(isset($_POST['gastosViajeUTP'])){echo "checked ='checked'";}?>>
-              <label class="form-check-label" for="apoyoGastosViajeUTP">Gastos Viaje</label>
+              <input type="checkbox" class="form-check-input" id="gastosViajeUTP[]" value="1" name="gastosViajeUTP[]" <?php if(isset($_POST['gastosViajeUTP'])){echo "checked ='checked'";}?>>
+              <label class="form-check-label" for="gastosViajeUTP[]">Gastos Viaje</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoEconomicoParcialUTP" value="1" name="apoyoEconomicoUTP[]" <?php if(isset($_POST['apoyoEconomicoUTP'])){echo "checked ='checked'";}?> >
-              <label class="form-check-label" for="apoyoEconomicoParcialUTP">Apoyo Económico Parcial</label>
+              <input type="checkbox" class="form-check-input" id="apoyoEconomicoUTP[]" value="1" name="apoyoEconomicoUTP[]" <?php if(isset($_POST['apoyoEconomicoUTP'])){echo "checked ='checked'";}?> >
+              <label class="form-check-label" for="apoyoEconomicoUTP[]">Apoyo Económico Parcial</label>
           </div>
         </div>
         <div class="md-form md-outline form-sm col-2 mr-n4">

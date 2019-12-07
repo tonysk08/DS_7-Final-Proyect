@@ -22,7 +22,8 @@ $('.datepicker').pickadate({
 
     //Para definir el primer día de la semana, el formato en el que se ve en el input y el formato en el que se guarda en HTML (y luego se manda a la BD)
     firstDay: 1,
-    format: 'dddd d !de mmmm !de yyyy',
+    /* format: 'dddd d !de mmmm !de yyyy', */
+    format: 'yyyy/mm/dd',
     formatSubmit: 'yyyy/mm/dd',
 
     // Para que se cierre al darle cerrar

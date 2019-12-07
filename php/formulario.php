@@ -244,7 +244,7 @@
                         </div>
                     </div>
                     <div class="adelanteatras btn-abajo col-md-6 mb-3">
-                        <input id="btn-abajo" name="btn-enviar"type="submit"class="btn btn-adelante float-right"/>
+                        <input id="btn-abajo" name="btn-enviar" type="submit"class="btn btn-adelante float-right"/>
                     </div>
       </fieldset>
       </form>
