@@ -75,7 +75,7 @@
       </div>
     <!-- Formulario -->
     <div class="col-9 border border-secondary rounded pl-4 pt-1 pl-2 border-3">
-      <form class="md-form mt-n1" id="formularioRegistro" method="POST">
+      <form class="md-form mt-n1" id="formularioRegistro" method="POST" enctype="multipart/form-data">
       <h2 class="text-center green-text font-weight-bold text-uppercase">Formulario de registro de solicitud RUTP-FV-4(M)</h2>
       <!-- Inicio del formulario -->
 
@@ -89,19 +89,19 @@
         <h5 class="col-12 purple-text font-weight-bold mb-n2">Datos del estudiante</h5>
         <div class="md-form md-outline col-lg-4 col-sm-12">
           <i class="fas fa-signature prefix"></i>
-          <input type="text" id="nombreEncargado" name="nombreEncargado" class="form-control">
+          <input type="text" id="nombreEncargado" name="nombreEncargado" value="<?php echo $_POST['nombreEncargado'] ?? '' ?>" class="form-control">
           <label class="ml-5" for="nombreEncargado">Nombre del estudiante</label>
           <small id="nombreEstudianteHelp" class="form-text text-muted">Ingrese correctamente su nombre tal cual aparece en su cédula.</small>
         </div>
         <div class="md-form md-outline col-lg-3 col-sm-12">
           <i class="far fa-id-card prefix"></i>
-          <input type="text" id="cedulaEncargado" name="cedulaEncargado" class="form-control">
+          <input type="text" id="cedulaEncargado" name="cedulaEncargado" value="<?php echo $_POST['cedulaEncargado'] ?? '' ?>" class="form-control">
           <label class="ml-5" for="cedulaEncargado">Cédula del estudiante</label>
           <small id="cedulaEstudianteHelp" class="form-text text-muted">Ingrese correctamente su cédula.</small>
         </div>
         <div class="md-form md-outline col-lg-4 col-sm-12">
           <i class="fas fa-graduation-cap prefix"></i>
-          <input type="text" id="unidadAcademica" name="unidadAcademica" class="form-control">
+          <input type="text" id="unidadAcademica" name="unidadAcademica" value="<?php echo $_POST['unidadAcademica'] ?? '' ?>"  class="form-control">
           <label class="ml-5" for="unidadAcademica">Unidad Académica o Centro Regional</label>
           <small id="facultadHelp" class="form-text text-muted">Ingrese el nombre de su facultad o centro regional.</small>
         </div>
@@ -113,19 +113,19 @@
         <h5 class="col-12 purple-text font-weight-bold mb-n2">Datos del evento</h5>
         <div class="md-form md-outline col-lg-5 col-sm-12">
           <i class="fas fa-calendar-week prefix"></i>
-          <input type="text" id="nombreEvento" name="nombreEvento" class="form-control">
+          <input type="text" id="nombreEvento" name="nombreEvento"  value="<?php echo $_POST['nombreEvento'] ?? '' ?>" class="form-control">
           <label class="ml-5" for="nombreEvento">Nombre del evento</label>
           <small id="nombreEventoHelp" class="form-text text-muted">Ingrese correctamente el nombre del evento al que asistirá.</small>
         </div>
         <div class="md-form md-outline col-lg-3 col-sm-12">
           <i class="fas fa-calendar-alt prefix"></i>
-          <input type="text" name="fechaInicio" id="fechaInicioEvento" class="form-control datepicker">
+          <input type="text" name="fechaInicio" id="fechaInicioEvento" value="<?php echo $_POST['fechaInicio'] ?? '' ?>" class="form-control datepicker">
           <label class="ml-5" for="fechaInicioEvento">Inicio del Evento</label>
           <small id="fechaInicioEventoHelp" class="form-text text-muted">Ingrese la fecha en la que inicia el evento.</small>
         </div>
         <div class="md-form md-outline col-lg-3 col-sm-12">
           <i class="fas fa-calendar-alt prefix"></i>
-          <input type="text" name="fechaFin" id="fechaFinEvento" class="form-control datepicker">
+          <input type="text" name="fechaFin" id="fechaFinEvento" value="<?php echo $_POST['fechaFin'] ?? '' ?>" class="form-control datepicker">
           <label class="ml-5" for="fechaFinEvento">Fin del evento</label>
           <small id="fechaFinEventoHelp" class="form-text text-muted">Ingrese la fecha en la que finaliza el evento.</small>
         </div>
@@ -135,18 +135,18 @@
       <div class="row" id="ColumnaDatosEvento">
         <div class="md-form md-outline col-lg-3 col-sm-12 mt-n1">
           <i class="fas fa-align-left prefix"></i>
-          <textarea id="descripcionEvento" class="md-textarea form-control noresize" rows="2" name="descripcion"></textarea>
+          <textarea id="descripcionEvento" class="md-textarea form-control noresize" rows="2" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
           <label class="ml-5" for="descripcionEvento">Descripción del evento</label>
           <small id="descripcionEventoHelp" class="form-text text-muted">Describa detalladamente el evento.</small>
         </div>
         <div class="col-lg-3 col-sm-12 mt-n1 mr-n5">
           <h6 class="purple-text font-weight-bolder mb-n2">Tipo de evento</h6>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="tipoCultural" name="tipo" value="Cultural">
+            <input type="radio" class="form-check-input" id="tipoCultural" name="tipo" value="Cultural" <?php if(isset($_POST['tipo'])){echo "checked ='checked'";}?> >
             <label class="form-check-label" for="tipoCultural">Cultural</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="tipoDeportivo" name="tipo" value="Deportivo">
+            <input type="radio" class="form-check-input" id="tipoDeportivo" name="tipo" value="Deportivo" <?php if(isset($_POST['tipo'])){echo "checked ='checked'";}?> >
             <label class="form-check-label" for="tipoDeportivo">Deportivo</label>
           </div>
           <small id="descripcionEventoHelp" class="form-text text-muted mt-3">Seleccione el tipo de evento</small>
@@ -154,17 +154,17 @@
         <div class="col-lg-3 ml-n4 mt-n1 mr-n5" id="AlcanceEvento">
           <h6 class="purple-text font-weight-bolder mb-n2">Alcance del evento</h6>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="alcanceNacional" name="alcance" value="Nacional">
+            <input type="radio" class="form-check-input" id="alcanceNacional" name="alcance" value="Nacional" <?php if(isset($_POST['alcance'])){echo "checked ='checked'";}?> >
             <label class="form-check-label" for="alcanceNacional">Nacional</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="alcanceInternacional" name="alcance" value="Internacional">
+            <input type="radio" class="form-check-input" id="alcanceInternacional" name="alcance" value="Internacional" <?php if(isset($_POST['alcance'])){echo "checked ='checked'";}?> >
             <label class="form-check-label" for="alcanceInternacional">Internacional</label>
           </div>
           <small id="descripcionEventoHelp" class="form-text text-muted mt-3">Seleccione el alcance del evento.</small>
         </div>
         <div class="col-lg-3 col-sm-12 select-outline ml-n5 mt-n2" enabled="false">
-          <select class="mdb-select md-form md-outline colorful-select dropdown-primary pl-2" id="lugarEvento" name="lugarEvento" searchable=" ">
+          <select class="mdb-select md-form md-outline colorful-select dropdown-primary pl-2" id="lugarEvento" name="lugarEvento" value="<?php echo $_POST['lugarEvento'] ?? '' ?>" searchable=" ">
             <optgroup label="Provincias">
               <option value="Bocas del Toro">Bocas del Toro</option>
               <option value="Coclé">Coclé</option>
@@ -440,21 +440,21 @@
         <div class="col-lg-5" id="ProyeccionUniversidad">
           <h6 class="purple-text font-weight-bolder mb-n1">Proyección de la Institución a través del evento</h6>
           <div class="form-check form-check-inline ml-n1">
-            <input type="radio" class="form-check-input" id="proyeccionExcelente" name="proyeccion">
+            <input type="radio" class="form-check-input" id="proyeccionExcelente" name="proyeccion" <?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?> >
             <label class="form-check-label" for="proyeccionExcelente">Excelente</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="proyeccionBuena" name="proyeccion">
+            <input type="radio" class="form-check-input" id="proyeccionBuena" name="proyeccion" <?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?>  >
             <label class="form-check-label" for="proyeccionBuena">Buena</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="proyeccionNoTiene" name="proyeccion">
+            <input type="radio" class="form-check-input" id="proyeccionNoTiene" name="proyeccion"<?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?>  >
             <label class="form-check-label" for="proyeccionNoTiene">No Tiene</label>
           </div>
         </div>
         <div class="md-form md-outline col-lg-5 col-sm-12 mt-n1 ml-4">
           <i class="fas fa-align-left prefix"></i>
-          <textarea id="justificacionParticipacion" class="md-textarea form-control noresize" rows="2" name="justificacionParticipacion"></textarea>
+          <textarea id="justificacionParticipacion" class="md-textarea form-control noresize" rows="2" name="justificacionParticipacion"  value="<?php echo $_POST['justificacionParticipacion'] ?? '' ?>"  ></textarea>
           <label class="ml-5" for="justificacionParticipacion">Justificación y beneficios de la participación</label>
           <small id="justificacionParticipacionHelp" class="form-text text-muted">Indique cómo beneficia este viaje a la universidad.</small>
         </div>
@@ -463,28 +463,28 @@
         <div class="col-5 mt-n5">
           <h6 class="col-12 purple-text font-weight-bolder ml-n3 mb-n1 mt-n2">Apoyo ofrecido por organizadores o patrocinadores del evento</h6>
           <div class="form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="apoyoInscripcion" value="Inscripcion" name="apoyoEvento[]">
+            <input type="checkbox" class="form-check-input" id="apoyoInscripcion" value="Inscripcion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
             <label class="form-check-label" for="apoyoInscripcion">Inscripción</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoHospedaje" value="Hospedaje" name="apoyoEvento[]">
+              <input type="checkbox" class="form-check-input" id="apoyoHospedaje" value="Hospedaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
               <label class="form-check-label" for="apoyoHospedaje">Hospedaje</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoEconomicoParcial" value="Apoyo economico parcial" name="apoyoEvento[]">
+              <input type="checkbox" class="form-check-input" id="apoyoEconomicoParcial" value="Apoyo economico parcial" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
               <label class="form-check-label" for="apoyoEconomicoParcial">Apoyo Económico Parcial</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoGastosViaje" value="Gastos de viaje" name="apoyoEvento[]">
+              <input type="checkbox" class="form-check-input" id="apoyoGastosViaje" value="Gastos de viaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
               <label class="form-check-label" for="apoyoGastosViaje">Gastos de Viaje</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoManutencion" value="Manutencion" name="apoyoEvento[]">
+              <input type="checkbox" class="form-check-input" id="apoyoManutencion" value="Manutencion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
               <label class="form-check-label" for="apoyoManutencion">Manutención</label>
           </div>
         </div>
         <div class="col-6 ml-5">
-            <!-- <div class="file-field">
+            <div class="file-field">
               <div class="btn blue-gradient btn-sm float-left">
                 <span><i class="fas fa-cloud-upload-alt mr-2" aria-hidden="true"></i>Seleccione el archivo</span>
                 <input type="file" class="form-control" type="file" id="rutaPDF" name="rutaPDF">
@@ -493,13 +493,13 @@
                 <input class="file-path validate" type="text" placeholder="Sube un único archivo PDF">
               </div>
               <small id="subirArchivoHelp" class="form-text text-muted mt-1 ml-2">Anexe carta de invitación, programa del evento, carta de objetivos y resultados esperados del evento, redactada por los estudiantes y dirigida al Secretario de Vida Universitaria y cualquier otro documento adicional de sustento.</small>
-            </div> -->
-            <div class="form-row">
+            </div> 
+            <!-- <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <h4>Anexe el archivo PDF con todos los documentos solicitados</h4>
-                    <input class="form-control" type="file" id="rutaPDF" name="rutaPDF" value="<?php echo $_POST['rutaPDF'] ?? '' ?>" placeholder="Seleccione su archivo"  />
+                    <input class="form-control" type="file" id="rutaPDF" name="rutaPDF" value="" placeholder="Seleccione su archivo"  />
                 </div>
-            </div>
+            </div> -->
         </div>
       </div>
       <div class="row mt-n4" id="ColumnaProyeccionUniversidad">
@@ -507,28 +507,28 @@
         <h6 class="col-12 purple-text font-weight-bolder mt-n4">Apoyo solicitado a la Universidad Tecnológica de Panamá</h6>
         <div class="col-12 mt-n3">
           <div class="form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="apoyoInscripcionUTP" value="1" name="inscripcionUTP[]">
-            <label class="form-check-label" for="apoyoInscripcionUTP">Inscripción</label>
+            <input type="checkbox" class="form-check-input" id="apoyoInscripcionUTP" value="1" name="inscripcionUTP[]" <?php if(isset($_POST['inscripcionUTP'])){echo "checked ='checked'";}?>>
+            <label class="form-check-label" for="apoyoInscripcionUTP" >Inscripción</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoGastosViajeUTP" value="1" name="gastosViajeUTP[]">
+              <input type="checkbox" class="form-check-input" id="apoyoGastosViajeUTP" value="1" name="gastosViajeUTP[]" <?php if(isset($_POST['gastosViajeUTP'])){echo "checked ='checked'";}?>>
               <label class="form-check-label" for="apoyoGastosViajeUTP">Gastos Viaje</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoEconomicoParcialUTP" value="1" name="apoyoEconomicoUTP[]">
+              <input type="checkbox" class="form-check-input" id="apoyoEconomicoParcialUTP" value="1" name="apoyoEconomicoUTP[]" <?php if(isset($_POST['apoyoEconomicoUTP'])){echo "checked ='checked'";}?> >
               <label class="form-check-label" for="apoyoEconomicoParcialUTP">Apoyo Económico Parcial</label>
           </div>
         </div>
         <div class="md-form md-outline form-sm col-2 mr-n4">
-          <input type="text" id="montoApoyoInscripcionUTP" name="montoInscripcion" class="form-control-sm">
+          <input type="text" id="montoApoyoInscripcionUTP" name="montoInscripcion" value="<?php echo $_POST['montoInscripcion'] ?? '' ?>" class="form-control-sm">
           <label class="ml-3" for="montoApoyoInscripcionUTP">Monto Inscripcion</label>
         </div>
         <div class="md-form md-outline form-sm col-2 mr-n4">
-          <input type="text" id="montoGastoViajeUTP" name="montoGastoViaje" class="form-control-sm">
-          <label class="ml-3" for="montoGastoViajeUTP">Monto Gastos Viaje</label>
+          <input type="text" id="montoGastoViajeUTP" name="montoGastoViaje" value="<?php echo $_POST['montoGastoViaje'] ?? '' ?>" class="form-control-sm">
+          <label class="ml-3" for="montoGastoViajeUTP" >Monto Gastos Viaje</label>
         </div>
         <div class="md-form md-outline form-sm col-2 mr-n4">
-          <input type="text" id="montoApoyoParcialUTP" name="montoApoyoEconomico" class="form-control-sm">
+          <input type="text" id="montoApoyoParcialUTP" name="montoApoyoEconomico" value="<?php echo $_POST['montoApoyoEconomico'] ?? '' ?>" class="form-control-sm">
           <label class="ml-3" for="montoApoyoParcialUTP">Monto Apoyo Parcial</label>
         </div>
       </div>
