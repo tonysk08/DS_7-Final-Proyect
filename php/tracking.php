@@ -216,8 +216,6 @@
         $unidadAcademica = ' ';
         $unidadAcademica = $_SESSION['unidadAcademica'];
         $idUser = $_SESSION['idUser'];
-
-        $fechaActivacion = date('Y/m/d');
         
          //Prueba rafa
         $sql3 = 
