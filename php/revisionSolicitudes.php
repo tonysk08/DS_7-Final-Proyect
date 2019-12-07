@@ -1,6 +1,9 @@
 <?php
     session_start();
     $titulo="Revisión de solicitudes";
+    if(isset($_SESSION['idUser'])){
+        $idUsuario = $_SESSION['idUser'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,87 +48,23 @@
             </tr>
         </thead>
         <tbody>
+        <?php 
+        require_once "../bd/conexion_PDO.php";
+        $stmt = $conPDO->prepare("SELECT peticion.idPeticion, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaIncio, peticion.fechaFin, peticion.lugarEvento FROM administrativo INNER JOIN peticion ON administrativo.idPeticion = peticion.idPeticion WHERE administrativo.idUser = $idUsuario AND administrativo.fechaFin IS NULL AND administrativo.fechaActivacion IS NOT NULL");
+        $stmt->execute();
+        for($i=0; $row = $stmt->fetch(); $i++){
+        ?>
             <tr>
-                <td id="Número de Solicitud">1074</td>
-                <td id="CedulaResponsable">20-24-3998</td>
-                <td id="NombreEvento">IBM Think</td>
-                <td id="FechaSolicitud">21/09/2019</td>
-                <td id="FechaLlegada">25/09/2019</td>
-                <td id="PaisDestino">Estados Unidos</td>
-                <td id="Validacion" class="text-center"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Validar</button></td>
+                <td><?php echo $row['idPeticion']; ?></td>
+                <td><?php echo $row['cedulaEncargado']; ?></td>
+                <td><?php echo $row['nombreEvento']; ?></td>
+                <td><?php echo $row['fechaIncio']; ?></td>
+                <td><?php echo $row['fechaFin']; ?></td>
+                <td><?php echo $row['lugarEvento']; ?></td>
+                <td id="Validacion" class="text-center">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Validar</button></td>
             </tr>
-            <tr>
-                <td id="Número de Solicitud">1076</td>
-                <td id="CedulaResponsable">8-98-412</td>
-                <td id="NombreEvento">Mobile World Congress</td>
-                <td id="FechaSolicitud">24/09/2019</td>
-                <td id="FechaLlegada">27/09/2019</td>
-                <td id="PaisDestino">España</td>
-                <td id="Validacion" class="text-center"><button type="button" class="btn btn-info">Validar</button></td>
-            </tr>
-            <tr>
-                <td id="Número de Solicitud">1077</td>
-                <td id="CedulaResponsable">8-961-745</td>
-                <td id="NombreEvento">RSA Conference</td>
-                <td id="FechaSolicitud">29/09/2019</td>
-                <td id="FechaLlegada">02/10/2019</td>
-                <td id="PaisDestino">Estados Unidos</td>
-                <td id="Validacion" class="text-center"><button type="button" class="btn btn-info">Validar</button></td>
-            </tr>
-            <tr>
-                <td id="Número de Solicitud">1078</td>
-                <td id="CedulaResponsable">8-1097-845</td>
-                <td id="NombreEvento">DataWorks Summit</td>
-                <td id="FechaSolicitud">01/10/2019</td>
-                <td id="FechaLlegada">10/10/2019</td>
-                <td id="PaisDestino">España</td>
-                <td id="Validacion" class="text-center"><button type="button" class="btn btn-info">Validar</button></td>
-            </tr>
-            <tr>
-                <td id="Número de Solicitud">1079</td>
-                <td id="CedulaResponsable">3-10-156</td>
-                <td id="NombreEvento">Atlassian Summit 2019</td>
-                <td id="FechaSolicitud">03/10/2019</td>
-                <td id="FechaLlegada">13/10/2019</td>
-                <td id="PaisDestino">España</td>
-                <td id="Validacion" class="text-center"><button type="button" class="btn btn-info">Validar</button></td>
-            </tr>
-            <tr>
-                <td id="Número de Solicitud">1083</td>
-                <td id="CedulaResponsable">2-1457-35</td>
-                <td id="NombreEvento">Google Cloud Next</td>
-                <td id="FechaSolicitud">05/10/2019</td>
-                <td id="FechaLlegada">17/10/2019</td>
-                <td id="PaisDestino">Estados Unidos</td>
-                <td id="Validacion" class="text-center"><button type="button" class="btn btn-info">Validar</button></td>
-            </tr>
-            <tr>
-                <td id="Número de Solicitud">1085</td>
-                <td id="CedulaResponsable">2-1475-12</td>
-                <td id="NombreEvento">F8 – Facebook Developer Conference</td>
-                <td id="FechaSolicitud">07/10/2019</td>
-                <td id="FechaLlegada">21/10/2019</td>
-                <td id="PaisDestino">Estados Unidos</td>
-                <td id="Validacion" class="text-center"><button type="button" class="btn btn-info">Validar</button></td>
-            </tr>
-            <tr>
-                <td id="Número de Solicitud">1086</td>
-                <td id="CedulaResponsable">7-89-5412</td>
-                <td id="NombreEvento">Google I/O 2019</td>
-                <td id="FechaSolicitud">12/10/2019</td>
-                <td id="FechaLlegada">24/10/2019</td>
-                <td id="PaisDestino">Estados Unidos</td>
-                <td id="Validacion" class="text-center"><button type="button" class="btn btn-info">Validar</button></td>
-            </tr>
-            <tr>
-                <td id="Número de Solicitud">1094</td>
-                <td id="CedulaResponsable">6-98-12</td>
-                <td id="NombreEvento">Global Robot Expo 2019</td>
-                <td id="FechaSolicitud">15/10/2019</td>
-                <td id="FechaLlegada">28/10/2019</td>
-                <td id="PaisDestino">España</td>
-                <td id="Validacion" class="text-center"><button type="button" class="btn btn-info">Validar</button></td>
-            </tr>
+        <?php } ?>
         </tbody>
     </table>
 
@@ -259,7 +198,6 @@
         </div>
     </div>
     </div>
-
     <!--Incluye el footer-->
     <?php include_once ("../partials/footer.php"); ?>
 </body>

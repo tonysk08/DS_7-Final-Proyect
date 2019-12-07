@@ -22,7 +22,7 @@ class TableRows extends RecursiveIteratorIterator {
 }
 //Consulta
 try {
-    $stmt = $conPDO->prepare("SELECT * from estudiante");
+    $stmt = $conPDO->prepare("SELECT idPeticion, cedulaEncargado, nombreEvento, fechaIncio, fechaFin, lugarEvento FROM peticion");
     $stmt->execute();
 
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
