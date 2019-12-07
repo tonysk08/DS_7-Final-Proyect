@@ -79,16 +79,18 @@ function registro($idUser,$email,$usuario){
     $justificacionParticipacion = limpiar($_POST['justificacionParticipacion']);
     $ultimaParticipacion = limpiar($_POST['ultimaParticipacion']);
 
+	
+  
     //Inicio del fileUpload
 	$target_dir = "pdf/";
-	$target_file = $target_dir.basename($_FILES["rutaPDF"]["name"]);
+	$target_file = $target_dir . basename($_FILES["rutaPDF"]["name"]);
 	$uploadOk = 1;
 	$pdfFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 	// Check if image file is a actual image or fake image
 	if(isset($_POST["submit"])) {
 	    $check = getimagesize($_FILES["rutaPDF"]["tmp_name"]);
 	        if($check !== false) {
-		        echo "File is a document - ".$check["mime"].".";
+		        echo "File is a document - " . $check["mime"] . ".";
 		        $uploadOk = 1;
 		    } else {
 		        $errores[] = "File is not a document";
@@ -116,40 +118,38 @@ function registro($idUser,$email,$usuario){
         // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["rutaPDF"]["tmp_name"], $target_file)) {
-                echo "The file ".basename( $_FILES["rutaPDF"]["name"])." has been uploaded.";
+                echo "The file ". basename( $_FILES["rutaPDF"]["name"]). " has been uploaded.";
             } else {
                 $errores[] = "Sorry, there was an error uploading your file.";
             }
         }
-    
-    //fin del fileUpload
-    
     //Insercion de los datos a la BD
 
-   if($con){
 
-    $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,ultimaParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $dec -> bind_param("ssssssssssiiidddsssi", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$ultimaParticipacion,$target_file,$idUser);
-        $dec -> execute();
-        $resultado = $dec -> affected_rows;
-        $dec -> free_result();
-        $dec -> close();
-        $con -> close(); 
-        
-        if($resultado == 1) {
-            echo'Datos insertados exitosamente';
-            header('Location: tracking.php');
-            phpMailer($email, $usuario);
-        } else {
+        if($con){
+            $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,ultimaParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $dec -> bind_param("ssssssssssiiidddsssi", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$ultimaParticipacion,$target_file,$idUser);
+                $dec -> execute();
+                $resultado = $dec -> affected_rows;
+                $dec -> free_result();
+                $dec -> close();
+                $con -> close(); 
+                
+                if($resultado == 1) {
+                    echo'Datos insertados exitosamente';
+                    header('Location: tracking.php');
+                    //phpMailer($email, $usuario);
+                } else {
+                    $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
+                }
+        }else {
             $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
         }
-    }else {
-        $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
+        
+        return $errores;
     }
-    
-    return $errores;
-}
-/**
+   
+    /**
      *Funcion para validar la existencia de correo del usuario
      *@param con
      *@return any
