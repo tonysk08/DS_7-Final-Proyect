@@ -34,7 +34,7 @@
     
    
     <div class="p-5">
-    <?php echo $_SESSION['nombre']. " " .$_SESSION['apellido'];?>
+    <?php echo "Que gusto verle,"." ".$_SESSION['nombre']. " " .$_SESSION['apellido']. " " .$_SESSION['unidadEncargada'];?>
     <br>
     <h3>Revisión de solicitudes</h3>
     <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">

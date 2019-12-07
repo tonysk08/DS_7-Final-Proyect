@@ -327,7 +327,6 @@ function mostrarErrores($errores){
         $linea = $resultado -> fetch_assoc();
         $dec -> free_result();
         $dec -> close();
-   
 
         if($cantidad == 1) {
             if(!empty($errores)){
@@ -340,8 +339,9 @@ function mostrarErrores($errores){
                 $_SESSION['apellido'] = $linea['apellido'];
                 $_SESSION['correo'] = $linea['correo'];
                 $_SESSION['idUser'] = $linea['idUser'];
+                $_SESSION['unidadEncargada'] = $linea2['unidadEncargada'];
                
-
+                //PARA DISTINGUIR SI ES ADMINISTRATIVO O ESTUDIANTE
                 if ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 ||$_SESSION['idUser']==9 ||$_SESSION['idUser']==10)
                 {
                     header('Location: php/revisionSolicitudes.php');
@@ -357,7 +357,7 @@ function mostrarErrores($errores){
             $errores[] = 'El Nombre de Usuario, Cedula o la contraseña no son validos.';       
         }
 
-        // return $errores;
+        return $errores;
     }
 
 ?>
