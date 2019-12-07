@@ -62,7 +62,7 @@ function registro($idUser,$email,$usuario){
     } else {
         $inscripcionUTP = 0; 
     }
-    if(isset($_POST['inscripcionUTP'])) {
+    if(isset($_POST['gastosViajeUTP'])) {
         $gastosViajeUTP = checkBoxArray($_POST['gastosViajeUTP']);
     } else {
         $gastosViajeUTP = 0; 
@@ -77,7 +77,7 @@ function registro($idUser,$email,$usuario){
     $montoGastoViaje = limpiar($_POST['montoGastoViaje']);
     $montoApoyoEconomico = limpiar($_POST['montoApoyoEconomico']);
     $justificacionParticipacion = limpiar($_POST['justificacionParticipacion']);
-    $ultimaParticipacion = limpiar($_POST['ultimaParticipacion']);
+    //$ultimaParticipacion = limpiar($_POST['ultimaParticipacion']);
 
 	
   
@@ -124,31 +124,29 @@ function registro($idUser,$email,$usuario){
             }
         }
     //Insercion de los datos a la BD
-
-
-        if($con){
-            $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,ultimaParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            $dec -> bind_param("ssssssssssiiidddsssi", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$ultimaParticipacion,$target_file,$idUser);
-                $dec -> execute();
-                $resultado = $dec -> affected_rows;
-                $dec -> free_result();
-                $dec -> close();
-                $con -> close(); 
-                
-                if($resultado == 1) {
-                    echo'Datos insertados exitosamente';
-                    header('Location: tracking.php');
-                    //phpMailer($email, $usuario);
-                } else {
-                    $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
-                }
-        }else {
+    $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $dec -> bind_param("ssssssssssiiidddsssi", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$target_file,$idUser);
+        $dec -> execute();
+        $resultado = $dec -> affected_rows;
+        $dec -> free_result();
+        $dec -> close();
+        $con -> close(); 
+        
+        if($resultado == 1) {
+            echo'Datos insertados exitosamente';
+            $_SESSION['unidadAcademica'] = $unidadAcademica;
+            header('Location: tracking.php');
+           // phpMailer($email, $usuario);
+        } else {
             $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
         }
         
         return $errores;
     }
-   
+    
+    return $errores;
+}
+
     /**
      *Funcion para validar la existencia de correo del usuario
      *@param con
@@ -180,11 +178,12 @@ function registro($idUser,$email,$usuario){
  * @return arr
  */
 function checkBoxArray($campo) {   
+    $cad = '';
    if(isset($_POST['btn-enviar'])){
-       if($campo == ''){
+        if($campo == ''){
            $campo = 0;
        }
-    $cad = '';
+    //$cad = '';
     foreach($campo as $cadena) {
         $s = ',';
         if($cad == '') {
@@ -344,6 +343,6 @@ function mostrarErrores($errores){
         }
 
          return $errores;
-    }
+    }   
 
 ?>

@@ -3,7 +3,7 @@
     $titulo="Formulario";
 
     require_once('../funciones/funciones.php');
-    require_once('../bd/conexion.php');
+    require('../bd/conexion.php');
 
     if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['ficha']) && validarFicha ($_POST['ficha'])){
     //Validar si la informacion es enviada por un robot
