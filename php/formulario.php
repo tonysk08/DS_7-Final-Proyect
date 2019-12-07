@@ -57,6 +57,10 @@
     <!--Se incluye el nav-->
     <?php include_once("../partials/navigation.php") ?>
 
+  
+  
+
+
 <section class="formulario mb-3">
 <div class="container p-4">
   <?php	if(!empty($errores)){echo mostrarErrores($errores);}?>

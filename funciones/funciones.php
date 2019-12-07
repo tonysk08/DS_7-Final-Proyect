@@ -314,7 +314,7 @@ function mostrarErrores($errores){
 
         require_once('bd/conexion.php');
         $errores = []; 
-        
+
         $usuario = limpiar($_POST['cedula-email']);
         $clave =limpiar($_POST['clave']);
         
@@ -340,13 +340,24 @@ function mostrarErrores($errores){
                 $_SESSION['apellido'] = $linea['apellido'];
                 $_SESSION['correo'] = $linea['correo'];
                 $_SESSION['idUser'] = $linea['idUser'];
-                header('Location: php/formulario.php');
+               
+
+                if ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 ||$_SESSION['idUser']==9 ||$_SESSION['idUser']==10)
+                {
+                    header('Location: php/revisionSolicitudes.php');
+                }
+                else
+                {
+                     header('Location: php/formulario.php');
+                }
+                
             }
         } else {
+            header('Location: index.php');
             $errores[] = 'El Nombre de Usuario, Cedula o la contraseña no son validos.';       
         }
 
-         return $errores;
-    }   
+        // return $errores;
+    }
 
 ?>

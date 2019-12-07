@@ -1,6 +1,9 @@
 <?php
     session_start();
     $titulo="Revisión de solicitudes";
+
+    require_once('../funciones/funciones.php');
+    require('../bd/conexion.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,10 +20,9 @@
     <link href="../css/general.css" rel="stylesheet">
 
     <title>Revisión de solicitudes</title>
+
 </head>
 <body>
-
-<!--NO OLVIDES RELLENAR ESTA TABLA. ESTA ES FAAAAACIL, NO SEAS PENDEJO. -->
 
     <!--Incluye el header-->
     <?php include_once("../partials/header.php"); ?>
@@ -28,9 +30,12 @@
     <!--Incluye el nav-->
     <?php include_once("../partials/navigationadmin.php"); ?>
 
-
+        
+    
    
     <div class="p-5">
+    <?php echo $_SESSION['nombre']. " " .$_SESSION['apellido'];?>
+    <br>
     <h3>Revisión de solicitudes</h3>
     <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">
         <thead class="thead-dark  my-auto">
