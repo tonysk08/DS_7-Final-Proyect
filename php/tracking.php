@@ -19,7 +19,6 @@
     <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/general.css" rel="stylesheet">
 
-    <title>Seguimiento de la solicitud</title>
 </head>
 <body>
 
@@ -237,8 +236,6 @@
 
     ?>
 </div>
-
-    <!-- The Modal -->
 
     </div>
     <!--Incluye el footer-->

@@ -3,7 +3,7 @@
 
 
 <!-- Footer -->
-<footer class="bg-dark">
+<footer class="bg-dark mt-4">
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2019 Copyright:</br>

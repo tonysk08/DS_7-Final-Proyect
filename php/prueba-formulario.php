@@ -497,7 +497,7 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <h4>Anexe el archivo PDF con todos los documentos solicitados</h4>
-                    <input class="form-control" type="file" id="rutaPDF" name="rutaPDF" value="<?php echo $_POST['rutaPDF'] ?? '' ?>" placeholder="Sleccione su archivo"  />
+                    <input class="form-control" type="file" id="rutaPDF" name="rutaPDF" value="<?php echo $_POST['rutaPDF'] ?? '' ?>" placeholder="Seleccione su archivo"  />
                 </div>
             </div>
         </div>
