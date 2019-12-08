@@ -34,7 +34,25 @@
     
    
     <div class="p-5">
-    <?php echo "Que gusto verle,"." ".$_SESSION['nombre']. " " .$_SESSION['apellido']. " " .$_SESSION['unidadEncargada'];?>
+    <?php 
+    if (!isset($_SESSION["sw"])){ 
+        //header('Location: ../index.php');
+        echo "<script>
+                                    alert('ERROR: Inicie Sesión');
+                                    window.location= '../index.php'
+                                </script>";
+    }
+    
+    if ($_SESSION['idUser']==1 || $_SESSION['idUser']==2 ||$_SESSION['idUser']==3 ||$_SESSION['idUser']==4 ||$_SESSION['idUser']==5){ 
+                            //header('Location: index.php');
+                            echo "<script>
+                                    alert('ERROR: Acceso denegado');
+                                    window.location= '../index.php'
+                                </script>";
+                        }
+                        
+    
+    echo "Que gusto verle,"." ".$_SESSION['nombre']. " " .$_SESSION['apellido'];?>
     <br>
     <h3>Revisión de solicitudes</h3>
     <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">

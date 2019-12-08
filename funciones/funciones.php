@@ -339,7 +339,7 @@ function mostrarErrores($errores){
                 $_SESSION['apellido'] = $linea['apellido'];
                 $_SESSION['correo'] = $linea['correo'];
                 $_SESSION['idUser'] = $linea['idUser'];
-                $_SESSION['unidadEncargada'] = $linea2['unidadEncargada'];
+                $_SESSION['sw'] = 1;
                
                 //PARA DISTINGUIR SI ES ADMINISTRATIVO O ESTUDIANTE
                 if ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 ||$_SESSION['idUser']==9 ||$_SESSION['idUser']==10)
@@ -353,8 +353,14 @@ function mostrarErrores($errores){
                 
             }
         } else {
-            header('Location: index.php');
-            $errores[] = 'El Nombre de Usuario, Cedula o la contraseña no son validos.';       
+           // $errores[] = 'El Nombre de Usuario, Cedula o la contraseña no son validos.';
+            
+            echo "<script>
+                alert('ERROR: El Nombre de Usuario, Cédula o la contraseña no son validos.');
+                window.location= 'index.php'
+                </script>";
+
+            //header('Location: index.php');     
         }
 
         return $errores;

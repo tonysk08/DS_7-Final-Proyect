@@ -57,7 +57,23 @@
     <!--Se incluye el nav-->
     <?php include_once("../partials/navigation.php") ?>
 
-  
+    <?php 
+    if (!isset($_SESSION["sw"])){ 
+        //header('Location: ../index.php');
+        echo "<script>
+                                    alert('ERROR: Inicie Sesión');
+                                    window.location= '../index.php'
+                                </script>";
+    }
+    
+    if ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 ||$_SESSION['idUser']==9 ||$_SESSION['idUser']==10){ 
+                            //header('Location: index.php');
+                            echo "<script>
+                                    alert('ERROR: Acceso denegado');
+                                    window.location= '../index.php'
+                                </script>";
+                        }
+    ?>
   
 
 

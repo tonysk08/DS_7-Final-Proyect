@@ -32,6 +32,24 @@
     <div class="p-5">
     <h3>Seguimiento de la solicitud</h3>
 
+    <?php 
+    if (!isset($_SESSION["sw"])){ 
+        //header('Location: ../index.php');
+        echo "<script>
+                                    alert('ERROR: Inicie Sesión');
+                                    window.location= '../index.php'
+                                </script>";
+    }
+    
+    if ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 ||$_SESSION['idUser']==9 ||$_SESSION['idUser']==10){ 
+                            //header('Location: index.php');
+                            echo "<script>
+                                    alert('ERROR: Acceso denegado');
+                                    window.location= '../index.php'
+                                </script>";
+                        }
+    ?>
+
     <?php
 
 
