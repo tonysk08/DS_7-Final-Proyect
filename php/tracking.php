@@ -34,7 +34,7 @@
     $idUser = $_SESSION['idUser'];
 
 
-    $sql = "SELECT estudiante.idPeticion, peticion.nombreEvento FROM estudiante INNER JOIN peticion ON estudiante.idPeticion = peticion.idPeticion WHERE estudiante.idUser = $idUser";
+    $sql = "SELECT estudiante.idPeticion, peticion.nombreEvento FROM estudiante INNER JOIN peticion ON estudiante.idPeticion = peticion.idPeticion WHERE estudiante.idUser = $idUser ORDER BY estudiante.idPeticion desc";
 
     $result = $con->query($sql);
 
@@ -200,43 +200,7 @@
         }
 
     }else {
-        /* echo "No hay ninguna petición creada hasta ahora. Error 102.     "; */
-
-        $consultaRellenarCampos = "SELECT idPeticion FROM peticion ORDER BY idPeticion DESC LIMIT 1";
-
-        $result = $con->query($consultaRellenarCampos);    
-        $row1 = $result->fetch_assoc();
-        $idPeticion = $row1["idPeticion"];
-
-        $unidadAcademica = ' ';
-        $unidadAcademica = $_SESSION['unidadAcademica'];
-        $idUser = $_SESSION['idUser'];
-        
-         //Prueba rafa
-        $sql3 = 
-        "
-        INSERT 
-        INTO estudiante 
-        (idPeticion, idUser, unidadAcademica) 
-        VALUES ($idPeticion , $idUser, 'FISC');
-
-        INSERT 
-        INTO administrativo 
-        (idUser, idPeticion, unidadEncargada) 
-        VALUES 
-        (6, $idPeticion, 'Vida Universitaria'),
-        (7, $idPeticion, 'Comite Evaluador-Vicerrector Academico'),  
-        (8, $idPeticion, 'Comite Evaluador-Secretario General'), 
-        (9, $idPeticion, 'Comite Evaluador-Coodinador General de los Centros Regionales'), 
-        (10, $idPeticion, 'Rectoria');
-        
-        UPDATE administrativo SET fechaActivacion=CURRENT_TIMESTAMP WHERE idUser=6 AND idPeticion=$idPeticion";
-    
-        if ($con->multi_query($sql3) === TRUE) {
-          header("Location: ".$_SERVER['PHP_SELF']);
-        } else {
-        echo "Error: " . $sql3 . "<br>" . $con->error;
-        } 
+        echo "¿Error?";
     }
 
 

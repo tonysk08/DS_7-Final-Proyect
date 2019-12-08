@@ -28,7 +28,7 @@
 
     if(isset($_SESSION['idUser'])){
       if(empty($errores)) {
-        $errores = registro($_SESSION['idUser'],$_SESSION['correo'], $_SESSION['nombre']);
+        $errores = registro($_SESSION['correo'], $_SESSION['nombre']);
       }
     }
   }
@@ -478,10 +478,11 @@
                 <input class="file-path validate" type="text" placeholder="Sube un único archivo PDF">
               </div>
               <small id="subirArchivoHelp" class="form-text text-muted mt-1 ml-2">Anexe carta de invitación, programa del evento, carta de objetivos y resultados esperados del evento, redactada por los estudiantes y dirigida al Secretario de Vida Universitaria y cualquier otro documento adicional de sustento.</small>
+              <small id="subirArchivoHelp" class="form-text text-muted mt-1 ml-2">*Anexe todo en un único documento PDF. Si no sabe cómo hacerlo, puede usar <a href="https://smallpdf.com/es/jpg-a-pdf">esta página</a></small>
             </div> 
         </div>
       </div>
-      <div class="row mt-n4" id="ColumnaProyeccionUniversidad">
+      <div class="row mt-n5" id="ColumnaProyeccionUniversidad">
         <!--Otra fila-->
         <h6 class="col-12 purple-text font-weight-bolder mt-n4">Apoyo solicitado a la Universidad Tecnológica de Panamá</h6>
         <div class="col-12 mt-n3">

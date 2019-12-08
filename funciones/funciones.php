@@ -38,7 +38,7 @@ function phpMailer($email, $usuario) {
  * @param  formularioINFO
  * @return any
  */
-function registro($idUser,$email,$usuario){
+function registro($email,$usuario){
     require('../bd/conexion.php');
     
     $errores = [];
@@ -122,8 +122,8 @@ function registro($idUser,$email,$usuario){
             }
         }
     //Insercion de los datos a la BD
-    $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $dec -> bind_param("ssssssssssiiidddssi", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$target_file,$idUser);
+    $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,rutaPDF) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $dec -> bind_param("ssssssssssiiidddss", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$target_file);
         $dec -> execute();
         $resultado = $dec -> affected_rows;
         $dec -> free_result();
@@ -132,11 +132,50 @@ function registro($idUser,$email,$usuario){
         if($resultado == 1) {
             echo'Datos insertados exitosamente';
             $_SESSION['unidadAcademica'] = $unidadAcademica;
-            header('Location: tracking.php');
-           // phpMailer($email, $usuario);
+
+            $consultaRellenarCampos = "SELECT idPeticion FROM peticion ORDER BY idPeticion DESC LIMIT 1";
+
+            $result = $con->query($consultaRellenarCampos);    
+            $row1 = $result->fetch_assoc();
+            $idPeticion = $row1["idPeticion"];
+
+            $unidadAcademica = ' ';
+            $unidadAcademica = $_SESSION['unidadAcademica'];
+            $idUser = $_SESSION['idUser'];
+            
+            //Prueba rafa
+            $sql3 = 
+            "
+            INSERT 
+            INTO estudiante 
+            (idPeticion, idUser, unidadAcademica) 
+            VALUES ($idPeticion , $idUser, 'FISC');
+
+            INSERT 
+            INTO administrativo 
+            (idUser, idPeticion, unidadEncargada) 
+            VALUES 
+            (6, $idPeticion, 'Vida Universitaria'),
+            (7, $idPeticion, 'Comite Evaluador-Vicerrector Academico'),  
+            (8, $idPeticion, 'Comite Evaluador-Secretario General'), 
+            (9, $idPeticion, 'Comite Evaluador-Coodinador General de los Centros Regionales'), 
+            (10, $idPeticion, 'Rectoria');
+            
+            UPDATE administrativo SET fechaActivacion=CURRENT_TIMESTAMP WHERE idUser=6 AND idPeticion=$idPeticion";
+        
+            if ($con->multi_query($sql3) === TRUE) {
+                header('Location: tracking.php');
+            } else {
+                echo "Error, no se pudieron insertar datos o redireccionar";
+            } 
+
+            // phpMailer($email, $usuario);
+
+            
+
         } else {
             echo $con -> error; 
-            $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
+            $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';   
             echo 
             'nombreEvento='.$nombreEvento.'<br>',
             'cedulaEncargado='.$cedulaEncargado.'<br>',
@@ -155,10 +194,8 @@ function registro($idUser,$email,$usuario){
             'montoGastoViaje='.$montoGastoViaje.'<br>',
             'montoApoyoEconomico='.$montoApoyoEconomico.'<br>',
             'justificacionParticipacion='.$justificacionParticipacion.'<br>',
-            'target_file='.$target_file.'<br>',
-            'idUser='.$idUser.'<br>';
+            'target_file='.$target_file.'<br>';
             echo implode(', ', $_POST['apoyoEvento']);
-   
         }
         $con -> close(); 
     return $errores;
