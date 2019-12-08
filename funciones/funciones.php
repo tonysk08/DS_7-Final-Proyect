@@ -1,6 +1,4 @@
 <?php
-
-//Desarrollado por Maycol Cuervo 20-14-3690
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 /**
@@ -55,13 +53,14 @@ function registro($idUser,$email,$usuario){
     $tipo = limpiar($_POST['tipo']);
     $fechaInicio = limpiar($_POST['fechaInicio']);
     $fechaFin = limpiar($_POST['fechaFin']);
-    $apoyoEvento = checkBoxArray($_POST['apoyoEvento']); 
-    
-    if(isset($_POST['inscripcionUTP'])) {
+    $apoyoEvento = implode(', ', $_POST['apoyoEvento']);
+
+     if(isset($_POST['inscripcionUTP'])) {
         $inscripcionUTP = checkBoxArray($_POST['inscripcionUTP']);
     } else {
         $inscripcionUTP = 0; 
     }
+    
     if(isset($_POST['gastosViajeUTP'])) {
         $gastosViajeUTP = checkBoxArray($_POST['gastosViajeUTP']);
     } else {
@@ -71,7 +70,7 @@ function registro($idUser,$email,$usuario){
         $apoyoEconomicoUTP = checkBoxArray($_POST['apoyoEconomicoUTP']);
         } else {
         $apoyoEconomicoUTP = 0; 
-    }
+    } 
     
     $montoInscripcion = limpiar($_POST['montoInscripcion']);
     $montoGastoViaje = limpiar($_POST['montoGastoViaje']);
@@ -80,15 +79,15 @@ function registro($idUser,$email,$usuario){
     //$ultimaParticipacion = limpiar($_POST['ultimaParticipacion']);
 
     //Inicio del fileUpload
-	$target_dir = "pdf/";
-	$target_file = $target_dir.basename($_FILES["rutaPDF"]["name"]);
+	$target_dir = "../pdf/";
+	$target_file = $target_dir . basename($_FILES["rutaPDF"]["name"]);
 	$uploadOk = 1;
 	$pdfFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 	// Check if image file is a actual image or fake image
 	if(isset($_POST["submit"])) {
 	    $check = getimagesize($_FILES["rutaPDF"]["tmp_name"]);
 	        if($check !== false) {
-		        echo "File is a document - ".$check["mime"].".";
+		        echo "File is a document - " . $check["mime"] . ".";
 		        $uploadOk = 1;
 		    } else {
 		        $errores[] = "File is not a document";
@@ -116,42 +115,56 @@ function registro($idUser,$email,$usuario){
         // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["rutaPDF"]["tmp_name"], $target_file)) {
-                echo "The file ".basename( $_FILES["rutaPDF"]["name"])." has been uploaded.";
+                echo "The file ". basename( $_FILES["rutaPDF"]["name"]). " has been uploaded.";
+                echo $target_file;
             } else {
                 $errores[] = "Sorry, there was an error uploading your file.";
             }
         }
-    
-    //fin del fileUpload
-    
     //Insercion de los datos a la BD
-
-   if($con){
-
-    $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $dec -> bind_param("ssssssssssiiidddsssi", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$target_file,$idUser);
+    $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $dec -> bind_param("ssssssssssiiidddssi", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$target_file,$idUser);
         $dec -> execute();
         $resultado = $dec -> affected_rows;
         $dec -> free_result();
         $dec -> close();
-       /*  $con -> close();  */
-        
+  
         if($resultado == 1) {
             echo'Datos insertados exitosamente';
             $_SESSION['unidadAcademica'] = $unidadAcademica;
             header('Location: tracking.php');
-            phpMailer($email, $usuario);
+           // phpMailer($email, $usuario);
         } else {
+            echo $con -> error; 
             $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
+            echo 
+            'nombreEvento='.$nombreEvento.'<br>',
+            'cedulaEncargado='.$cedulaEncargado.'<br>',
+            'descripcion='.$descripcion.'<br>',
+            'proyeccion='.$proyeccion.'<br>',
+            'alcance='.$alcance.'<br>',
+            'lugarEvento='.$lugarEvento.'<br>',
+            'tipo='.$tipo.'<br>',
+            'fechaIncio='.$fechaInicio.'<br>',
+            'fechaFin='.$fechaFin.'<br>',
+            'apoyoEvento='.$apoyoEvento.'<br>',
+            'inscripcionUTP='.$inscripcionUTP.'<br>',
+            'gastosViajeUTP='.$gastosViajeUTP.'<br>',
+            'apoyoEconomicoUTP='.$apoyoEconomicoUTP.'<br>',
+            'montoInscripcion='.$montoInscripcion.'<br>',
+            'montoGastoViaje='.$montoGastoViaje.'<br>',
+            'montoApoyoEconomico='.$montoApoyoEconomico.'<br>',
+            'justificacionParticipacion='.$justificacionParticipacion.'<br>',
+            'target_file='.$target_file.'<br>',
+            'idUser='.$idUser.'<br>';
+            echo implode(', ', $_POST['apoyoEvento']);
+   
         }
-    }else {
-        $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
-    }
-    
+        $con -> close(); 
     return $errores;
 }
 
-/**
+    /**
      *Funcion para validar la existencia de correo del usuario
      *@param con
      *@return any
@@ -179,24 +192,29 @@ function registro($idUser,$email,$usuario){
 
 /**
  * Funcion para concatenar caracteres de los checkbox en el formulario
- * @return arr
+ * @return arr 
  */
 function checkBoxArray($campo) {   
-    $cad = '';
-   if(isset($_POST['btn-enviar'])){
         if($campo == ''){
-           $campo = 0;
-       }
-    //$cad = '';
-    foreach($campo as $cadena) {
-        $s = ',';
-        if($cad == '') {
-            $cad = $cadena;
-                } else  {
-                $cad .= $s.$cadena;
-                }
+           $cad = 0;}
+           elseif($campo == '0'){
+               $cad = 0;
+           }
+           elseif($campo == '1'){
+               $cad = 1;
+           }
+       else{
+        $cad = implode(', ', $campo);}
+
+/* foreach($campo as $cadena) {
+    $s = ',';
+    if($cad == '') {
+        $cad = $cadena;
+            } else  {
+            $cad .= $s.$cadena;
             }
         }
+    } */
     return $cad;
 }
 

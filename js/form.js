@@ -24,6 +24,7 @@ $('.datepicker').pickadate({
     firstDay: 1,
     format: 'dddd d !de mmmm !de yyyy',
     formatSubmit: 'yyyy/mm/dd',
+    hiddenName: true,
 
     // Para que se cierre al darle cerrar
     closeOnSelect: false,

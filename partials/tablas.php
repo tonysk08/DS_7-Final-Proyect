@@ -10,9 +10,9 @@
 
   <!-- SCRIPTS  -->
   <!-- JQuery  -->
-  <script src="../js/jquery-3.3.1.min.js"></script>
+  <script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!-- Bootstrap tooltips  -->
-  <script type="text/javascript" src="../js/popper.min.js"></script>
+  <script type="text/javascript" src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <!-- Bootstrap core JavaScript  -->
   <script type="text/javascript" src="../bootstrap/4.3.1/js/bootstrap.js"></script>
   <!-- MDB core JavaScript  -->
@@ -43,7 +43,7 @@
     });
     $('#dtMaterialDesignExample_wrapper .dataTables_filter, #dt-material-checkbox_wrapper .dataTables_filter').find(
       'input').each(function () {
-      $('input').attr("placeholder", "Buscar    ");
+      $('input').attr("placeholder", "Buscar");
       $('input').removeClass('form-control-sm');
     });
     $('#dtMaterialDesignExample_wrapper .dataTables_length, #dt-material-checkbox_wrapper .dataTables_length').addClass(
