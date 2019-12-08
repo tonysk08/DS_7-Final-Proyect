@@ -1,7 +1,6 @@
-<header class="titulo pt-3 pb-3">
-        <h2 class="text-center">
-            <img align="float-left" src="../img/utplogo.png" alt="Logo" class="responsive" Maxwidth="50" height="50">
-            <span> Sistema de Solicitud de Apoyo Económico Estudiantil UTP</span>
-
-        </h2>
-</header>
+<header class="titulo text-center pt-2 pb-2">
+    <h1>
+      <img align="float-left" src="../img/utplogo.png" alt="Logo" class="responsive" width="100" height="100">
+      <span> Sistema de Solicitud de Apoyo Económico Estudiantil UTP</span>
+    </h1>
+  </header>

@@ -9,9 +9,6 @@
 <html lang="es">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
   <?php include_once("../partials/head.php"); ?>
 
       <!--CSS de tablas para ajustar los botones-->
@@ -19,7 +16,6 @@
     
 
     <!--CSS del menú-->
-    <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/general.css" rel="stylesheet">
 </head>
 <body>
@@ -197,7 +193,6 @@
             </tfoot>
             </table>
             </div>
-            </div>
             ";
 
         } else {
@@ -246,10 +241,11 @@
 
 
 ?>
-</div>
+
     <!--Incluye el footer-->
     <?php include_once("../partials/footer.php"); ?>
     <?php include_once("../partials/tablas.php"); ?>
+    </div></div>
   </body>
 
 </html>

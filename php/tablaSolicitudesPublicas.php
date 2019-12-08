@@ -9,9 +9,6 @@
 <html lang="es">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
   <?php include_once("../partials/head.php"); ?>
 
       <!--CSS de tablas para ajustar los botones-->
@@ -19,7 +16,6 @@
     
 
     <!--CSS del menú-->
-    <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/general.css" rel="stylesheet">
 </head>
 <body>
@@ -28,7 +24,6 @@
 
     <!--Incluye el header-->
     <?php include_once("../partials/header.php"); ?>
-
 
     <div class="col-md-12">
     <h2 class="my-4 dark-grey-text font-weight-bold">Transparencia</h2>
@@ -49,18 +44,13 @@
         <tbody>
         <?php 
         require_once "../bd/conexion_PDO.php";
-        /* $stmt = $conPDO->prepare("
+        $stmt = $conPDO->prepare("
         SELECT peticion.idPeticion, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaIncio, peticion.fechaFin, peticion.lugarEvento 
         FROM administrativo INNER JOIN peticion 
         ON administrativo.idPeticion = peticion.idPeticion 
         WHERE administrativo.idUser=10 
         AND administrativo.fechaFin IS NOT NULL 
-        AND administrativo.estado = 'Si'"); */
-        $stmt = $conPDO->prepare("
-        SELECT peticion.idPeticion, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaIncio, peticion.fechaFin, peticion.lugarEvento 
-        FROM administrativo INNER JOIN peticion 
-        ON administrativo.idPeticion = peticion.idPeticion 
-        ");
+        AND administrativo.estado = 'Si'");
         $stmt->execute();
         for($i=0; $row = $stmt->fetch(); $i++){
         ?>
@@ -207,6 +197,8 @@
     </div>
     <!--Incluye el footer-->
     <?php include_once("../partials/footer.php"); ?>
+        
     <?php include_once("../partials/tablas.php"); ?>
+    </div>
 </body>
 </html>
