@@ -62,14 +62,9 @@
                 <td><?php echo $row['fechaFin']; ?></td>
                 <td><?php echo $row['lugarEvento']; ?></td>
                 <td id="Validacion" class="text-center">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Validar</button></td>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal<?php echo $row['idPeticion'];?>">Validar</button></td>
             </tr>
-        <?php } ?>
-        </tbody>
-    </table>
-
-    <!-- The Modal -->
-    <div class="modal" id="myModal">
+            <div class="modal" id="myModal<?php echo $row['idPeticion'];?>">
         <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
     
@@ -145,10 +140,6 @@
                             <h6>Justificación y beneficios de la participación</h6>
                             <p>Es una oportunidad única para la universidad de tener un representante en un congreso de fama mundial</p>
                         </div>
-                        <div class="col-sm-2">
-                            <h6>Última vez que participó en un evento en representación de la UTP</h6>
-                            <p>14/10/2016</p>
-                        </div>
                     </div>
                     <div class="row col-sm-11">
                         <h6>Otros comentarios:</h6>
@@ -197,6 +188,12 @@
         </div>
         </div>
     </div>
+        <?php } ?>
+        </tbody>
+    </table>
+
+    <!-- The Modal -->
+    
     </div>
     <!--Incluye el footer-->
     <?php include_once ("../partials/footer.php"); ?>
