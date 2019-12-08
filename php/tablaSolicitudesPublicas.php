@@ -1,113 +1,212 @@
+<?php
+    session_start();
+    $titulo="Transparencia";
 
-    <div class="p-5 mt-n3">
-    <h3 class="mt-5">Transparencia - Solicitudes del 2019</h3>
-    <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl mt-3">
-        <thead class="thead-dark  my-auto">
-            <tr>
-                <th>No.</th>
-                <th>Evento</th>
-                <th>Fecha de Resolución</th>
-                <th>Nombres de los estudiantes</th>
-                <th>País de destino</th>
-                <th>Estado de la resolución</th>
-                <th class="fit">Detalles</th> <!--Añadir las cédulas en los detalles. Aquí solo se muestra el reporte de viaje-->
-            </tr>
+    include "../bd/conexion.php";
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <?php include_once("../partials/head.php"); ?>
+
+      <!--CSS de tablas para ajustar los botones-->
+    <link href="../css/tablas.css" rel="stylesheet">
+    
+
+    <!--CSS del menú-->
+    <link href="../css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="../css/general.css" rel="stylesheet">
+</head>
+<body>
+
+<!--NO OLVIDES RELLENAR ESTA TABLA. ESTA ES FAAAAACIL, NO SEAS PENDEJO. -->
+
+    <!--Incluye el header-->
+    <?php include_once("../partials/header.php"); ?>
+
+
+    <div class="col-md-12">
+    <h2 class="my-4 dark-grey-text font-weight-bold">Transparencia</h2>
+    <div class='card'>
+        <div class='card-body table-responsive'>
+        <table id='dtMaterialDesignExample' class='table table-bordered table-hover table-responsive-lg table-sm track_tbl' cellspacing='0' width='100%'>
+        <thead class='thead-dark'>
+        <tr>
+            <th>Número de solicitud</th>
+            <th>Cédula del responsable</th>
+            <th>Evento</th>
+            <th>Fecha de solicitud</th>
+            <th>Fecha activación de revisión</th>
+            <th>País destino</th>
+            <th class="fit">Validación</th>
+        </tr>
         </thead>
         <tbody>
+        <?php 
+        require_once "../bd/conexion_PDO.php";
+        /* $stmt = $conPDO->prepare("
+        SELECT peticion.idPeticion, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaIncio, peticion.fechaFin, peticion.lugarEvento 
+        FROM administrativo INNER JOIN peticion 
+        ON administrativo.idPeticion = peticion.idPeticion 
+        WHERE administrativo.idUser=10 
+        AND administrativo.fechaFin IS NOT NULL 
+        AND administrativo.estado = 'Si'"); */
+        $stmt = $conPDO->prepare("
+        SELECT peticion.idPeticion, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaIncio, peticion.fechaFin, peticion.lugarEvento 
+        FROM administrativo INNER JOIN peticion 
+        ON administrativo.idPeticion = peticion.idPeticion 
+        ");
+        $stmt->execute();
+        for($i=0; $row = $stmt->fetch(); $i++){
+        ?>
             <tr>
-                <td id="NoResolucion">1</td>
-                <td id="NombreEvento">Congreso mundial de Python 2019</td>
-                <td id="FechaResolucion">21/10/2019</td>
-                <td id="NombresEstudiantes">20-24-3998</td>
-                <td id="PaisDestino">España</td>
-                <td id="EstadoResolucion" class="alert-success">Aprobado</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal">Detalles</button></td>
+                <td><?php echo $row['idPeticion']; ?></td>
+                <td><?php echo $row['cedulaEncargado']; ?></td>
+                <td><?php echo $row['nombreEvento']; ?></td>
+                <td><?php echo $row['fechaIncio']; ?></td>
+                <td><?php echo $row['fechaFin']; ?></td>
+                <td><?php echo $row['lugarEvento']; ?></td>
+                <td id="Validacion" class="text-center">
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal<?php echo $row['idPeticion'];?>">Validar</button></td>
             </tr>
-            <tr>
-                <td id="NoResolucion">2</td>
-                <td id="NombreEvento">Congreso mundial de Python 2019</td>
-                <td id="FechaResolucion">22/10/2019</td>
-                <td id="NombresEstudiantes">20-14-3698</td>
-                <td id="PaisDestino">Brazil</td>
-                <td id="EstadoResolucion" class="alert-success">Aprobado</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="NoResolucion">3</td>
-                <td id="NombreEvento">Congreso mundial de Python 2019</td>
-                <td id="FechaResolucion">23/11/2019</td>
-                <td id="NombresEstudiantes">8-935-1097</td>
-                <td id="PaisDestino">Estados Unidos</td>
-                <td id="EstadoResolucion" class="alert-success">Aprobado</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
-            <tr>
-                <td id="NoResolucion">4</td>
-                <td id="NombreEvento">Congreso mundial de Python 2019</td>
-                <td id="FechaResolucion">23/11/2019</td>
-                <td id="NombresEstudiantes">8-935-1097</td>
-                <td id="PaisDestino">Estados Unidos</td>
-                <td id="EstadoResolucion" class="alert-success">Aprobado</td>
-                <td id="MasDetalles" class="text-center"><button type="button" class="btn btn-info">Detalles</button></td>
-            </tr>
+            <div class="modal" id="myModal<?php echo $row['idPeticion'];?>">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"><u>Solicitud de apoyo económico para IBM Think 2020</u></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6>Nombre encargado</h6>
+                            <p>Rafael Pérez</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <h6>Cédula encargado</h6>
+                            <p>20-24-3998</p>
+                        </div>
+                        <div class="col-sm-7">
+                            <h6>Unidad Académica</h6>
+                            <p>Facultad de Ingeniería de Sistemas Computacionales</p>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-sm-3">
+                            <h6>Nombre del evento</h6>
+                            <p>IBM Think 2020</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <h6>Tipo de evento</h6>
+                            <p>Cultural</p>
+                        </div>
+                        <div class="col-sm-7">
+                            <h6>Descripción del evento</h6>
+                            <p>IBM Think es una conferencia que se centra en soluciones movilidad, cloud computing, seguridad, inteligencia artificial, machine learning e inteligencia artificial. El objetivo de la edición de este año es ayudar a las empresas a construir «compañías  digitales  verdaderamente cognitivas y orientadas al cliente».</p>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-sm-2">
+                            <h6>Alcance del evento</h6>
+                            <p>Internacional</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <h6>Lugar del evennto</h6>
+                            <p>Estados Unidos</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <h6>Proyección de la Institución a través del evento</h6>
+                            <p>Excelente</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <h6>Fecha de inicio del evento</h6>
+                            <p>25/02/2020</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <h6>Fecha de finalización del evento</h6>
+                            <p>27/02/2020</p>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-sm-3">
+                            <h6>Apoyo ofrecido por organizadores o patrocinadores del evento</h6>
+                            <p>Inscripción, Hospedaje, Gastos de Viaje</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <h6>Apoyo solicitado a UTP</h6>
+                            <p>Apoyo Económico ($200)</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <h6>Justificación y beneficios de la participación</h6>
+                            <p>Es una oportunidad única para la universidad de tener un representante en un congreso de fama mundial</p>
+                        </div>
+                    </div>
+                    <div class="row col-sm-11">
+                        <h6>Otros comentarios:</h6>
+                        <p>Secretario de Vida Univesitario (Aprobado): Considero que es una gran oportunidad para la universidad y el estudiante, no veo porque tendríamos que rechazarlo</p>
+                        <p>Secretario de Vida Univesitario (Aprobado): Es uno de los mayores eventos tecnológicos a nivel mundial y un estudiante nos representará, sin duda es una gran oportunidad.</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h6>Relevancia o nivel del evento</h6>
+                            <select class="form-control">
+                                <option>Alto</option>
+                                <option>Medio</option>
+                                <option>Bajo</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <h6>Proyección de la institución a través del evento</h6>
+                            <select class="form-control">
+                                <option>Excelente</option>
+                                <option>Buena</option>
+                                <option>No tiene</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <h6>Procede</h6>
+                            <select class="form-control">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class=" form-group shadow-textarea mt-3">
+                        <h6><label for="comment">Observaciones y recomendaciones del comité evaluador:</label></h6>
+                        <textarea class="form-control z-depth-1" rows="5" id="comment"></textarea>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Enviar</button>
+            </div>
+    
+        </div>
+        </div>
+    </div>
+        <?php } ?>
         </tbody>
     </table>
 
     <!-- The Modal -->
-        <div class="modal" id="myModal">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-        
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title"><u>Solicitud de apoyo económico para IBM Think 2019</u></h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-        
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <h6>Nombre del estudiante encargado</h6>
-                                <p>Rafael Pérez</p>
-                            </div>
-                            <div class="col-sm-2">
-                                <h6>Cédula del estudiante encargado</h6>
-                                <p>20-24-3998</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <h6>Unidad Académica</h6>
-                                <p>Facultad de Ingeniería de Sistemas Computacionales</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <h6>Nombre del evento</h6>
-                                <p>IBM Think 2019</p>
-                            </div>
-                            <div class="col-sm-2">
-                                <h6>Tipo de evento</h6>
-                                <p>Cultural</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <h6>Descripción del evento</h6>
-                                <p>IBM Think es una conferencia que se centra en soluciones movilidad, cloud computing, seguridad, inteligencia artificial, machine learning e inteligencia artificial. El objetivo de la edición de este año es ayudar a las empresas a construir «compañías  digitales  verdaderamente cognitivas y orientadas al cliente».</p>
-                            </div>
-                        </div>
-                        <div  class=" form-group shadow-textarea">
-                            <h6><label for="comment">Comentario:</label></h6>
-                            <textarea class="form-control z-depth-1" rows="5" id="comment">Considero que el estudiante cumple con todos los requisitos pertinentes. Por tanto, apruebo esta solicitud.</textarea>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                </div>
-        
-            </div>
-            </div>
-        </div>
-        </div>
+    
+    </div>
+    <!--Incluye el footer-->
+    <?php include_once("../partials/footer.php"); ?>
+    <?php include_once("../partials/tablas.php"); ?>
+</body>
+</html>
