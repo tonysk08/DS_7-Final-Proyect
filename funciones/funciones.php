@@ -38,7 +38,7 @@ function phpMailer($email, $usuario) {
  * @param  formularioINFO
  * @return any
  */
-function registro($idUser,$email,$usuario){
+function registro($email,$usuario){
     require('../bd/conexion.php');
     
     $errores = [];
@@ -76,7 +76,7 @@ function registro($idUser,$email,$usuario){
     $montoGastoViaje = limpiar($_POST['montoGastoViaje']);
     $montoApoyoEconomico = limpiar($_POST['montoApoyoEconomico']);
     $justificacionParticipacion = limpiar($_POST['justificacionParticipacion']);
-    //$ultimaParticipacion = limpiar($_POST['ultimaParticipacion']);
+
 
     //Inicio del fileUpload
 	$target_dir = "../pdf/";
@@ -122,8 +122,8 @@ function registro($idUser,$email,$usuario){
             }
         }
     //Insercion de los datos a la BD
-    $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,rutaPDF,idUser) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $dec -> bind_param("ssssssssssiiidddssi", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$target_file,$idUser);
+    $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,rutaPDF) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $dec -> bind_param("ssssssssssiiidddss", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$target_file);
         $dec -> execute();
         $resultado = $dec -> affected_rows;
         $dec -> free_result();
@@ -132,11 +132,50 @@ function registro($idUser,$email,$usuario){
         if($resultado == 1) {
             echo'Datos insertados exitosamente';
             $_SESSION['unidadAcademica'] = $unidadAcademica;
-            header('Location: tracking.php');
-           // phpMailer($email, $usuario);
+
+            $consultaRellenarCampos = "SELECT idPeticion FROM peticion ORDER BY idPeticion DESC LIMIT 1";
+
+            $result = $con->query($consultaRellenarCampos);    
+            $row1 = $result->fetch_assoc();
+            $idPeticion = $row1["idPeticion"];
+
+            $unidadAcademica = ' ';
+            $unidadAcademica = $_SESSION['unidadAcademica'];
+            $idUser = $_SESSION['idUser'];
+            
+            //Prueba rafa
+            $sql3 = 
+            "
+            INSERT 
+            INTO estudiante 
+            (idPeticion, idUser, unidadAcademica) 
+            VALUES ($idPeticion , $idUser, 'FISC');
+
+            INSERT 
+            INTO administrativo 
+            (idUser, idPeticion, unidadEncargada) 
+            VALUES 
+            (6, $idPeticion, 'Vida Universitaria'),
+            (7, $idPeticion, 'Comite Evaluador-Vicerrector Academico'),  
+            (8, $idPeticion, 'Comite Evaluador-Secretario General'), 
+            (9, $idPeticion, 'Comite Evaluador-Coodinador General de los Centros Regionales'), 
+            (10, $idPeticion, 'Rectoria');
+            
+            UPDATE administrativo SET fechaActivacion=CURRENT_TIMESTAMP WHERE idUser=6 AND idPeticion=$idPeticion";
+        
+            if ($con->multi_query($sql3) === TRUE) {
+                header('Location: tracking.php');
+            } else {
+                echo "Error, no se pudieron insertar datos o redireccionar";
+            } 
+
+            // phpMailer($email, $usuario);
+
+            
+
         } else {
             echo $con -> error; 
-            $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';
+            $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';   
             echo 
             'nombreEvento='.$nombreEvento.'<br>',
             'cedulaEncargado='.$cedulaEncargado.'<br>',
@@ -155,10 +194,8 @@ function registro($idUser,$email,$usuario){
             'montoGastoViaje='.$montoGastoViaje.'<br>',
             'montoApoyoEconomico='.$montoApoyoEconomico.'<br>',
             'justificacionParticipacion='.$justificacionParticipacion.'<br>',
-            'target_file='.$target_file.'<br>',
-            'idUser='.$idUser.'<br>';
+            'target_file='.$target_file.'<br>';
             echo implode(', ', $_POST['apoyoEvento']);
-   
         }
         $con -> close(); 
     return $errores;
@@ -205,16 +242,6 @@ function checkBoxArray($campo) {
            }
        else{
         $cad = implode(', ', $campo);}
-
-/* foreach($campo as $cadena) {
-    $s = ',';
-    if($cad == '') {
-        $cad = $cadena;
-            } else  {
-            $cad .= $s.$cadena;
-            }
-        }
-    } */
     return $cad;
 }
 
@@ -265,7 +292,7 @@ function mostrarErrores($errores){
             return false;
         }
     }
- /**
+     /**
      * Funcion para validar campos 
      *@param campos
      *@return any
@@ -274,7 +301,7 @@ function mostrarErrores($errores){
         $errores = []; 
         foreach($campos as $nombre => $mostrar) {
             if(!isset($_POST[$nombre]) || $_POST[$nombre] == null) {
-                $errores[] = $mostrar. ' Es un campo requerido.';
+                $errores[] = $mostrar. ' es un campo requerido.';
             } else { 
                 $valides= campos();
                 foreach($valides as $campo => $opcion){
@@ -306,17 +333,13 @@ function mostrarErrores($errores){
                 'patron' => '/^[a-z\s]{2,50}$/i', 
                 'error' => 'NOMBRE DEL ENCARGADO solo pueden usar letras y espacios. No puede ser mas largo de 50 caracteres.'
             ],
-            'descripcion' => [
-                'patron' => '/^[a-z\s]{2,350}$/i', 
-                'error' => 'LA DESCRIPCION solo pueden usar letras y espacios. No puede ser mas largo de 350 caracteres.'
-            ],
            'clave' => [
                 'patron' => '/(?=^[\w\!@#\$%\^&\*\?]{8,30}$)(?=(.*\d){2,})(?=(.*[a-z]){2,})(?=(.*[A-Z]){2,})(?=(.*[\!@#\$%\^&\*\?_]){2,})^-*/', 
                 'error' => 'Por favor entre una contraseña valida. La contraseña debe tener por lo menos 2 letras mayuscula, 2 letras minusculas, 2 numeros y 2 simbolos.'
              ],
              'cedula-email'=> [
                 'patron' => '/(?=^[a-z]+[\w@\.]{2,50}$)/i', 
-                'error' => 'Nombre de Usuario o Cedula invalido'
+                'error' => 'Email o Cedula invalido'
             ]
         ];
         return $validacion;

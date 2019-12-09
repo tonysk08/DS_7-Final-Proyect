@@ -14,28 +14,22 @@
     <!--CSS de tablas para ajustar los botones-->
     <link href="../css/tablas.css" rel="stylesheet">
 
-    
-    <!--CSS del menú-->
-    <link href="../css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/general.css" rel="stylesheet">
 
     <title>Revisión de solicitudes</title>
 </head>
 <body>
 
-<!--NO OLVIDES RELLENAR ESTA TABLA. ESTA ES FAAAAACIL, NO SEAS PENDEJO. -->
-
     <!--Incluye el header-->
     <?php include_once("../partials/header.php"); ?>
 
-    <!--Incluye el nav-->
-    <?php include_once("../partials/navigationadmin.php"); ?>
-
 
    
-    <div class="p-5">
+    <div class="col-md-12">
     <h3>Revisión de solicitudes</h3>
-    <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">
+    <div class='card'>
+        <div class='card-body table-responsive'>
+        <table id='dtMaterialDesignExample' class='table table-bordered table-hover table-responsive-lg table-sm track_tbl' cellspacing='0' width='100%'>
         <thead class="thead-dark  my-auto">
             <tr>
                 <th>Número de solicitud</th>
@@ -196,6 +190,7 @@
     
     </div>
     <!--Incluye el footer-->
-    <?php include_once ("../partials/footer.php"); ?>
+    
+    <?php include_once("../partials/tablas.php"); ?>
 </body>
 </html>

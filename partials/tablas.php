@@ -1,32 +1,8 @@
-  <!-- Font Awesome  -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-  <!-- Bootstrap core CSS  -->
-  <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
-  <!-- Material Design Bootstrap  -->
-  <link rel="stylesheet" href="../css/mdb.min.css">
-  <!-- DataTables.net  -->
-  <link rel="stylesheet" type="text/css" href="../css/addons/datatables.min.css">
-  <link rel="stylesheet" href="../css/addons/datatables-select.min.css">
-
-  <!-- SCRIPTS  -->
-  <!-- JQuery  -->
-  <script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <!-- Bootstrap tooltips  -->
-  <script type="text/javascript" src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <!-- Bootstrap core JavaScript  -->
-  <script type="text/javascript" src="../bootstrap/4.3.1/js/bootstrap.js"></script>
-  <!-- MDB core JavaScript  -->
-  <script type="text/javascript" src="../js/mdb.min.js"></script>
-  <!-- DataTables  -->
-  <script type="text/javascript" src="../js/addons/datatables.min.js"></script>
-  <!-- DataTables Select  -->
-  <script type="text/javascript" src="../js/addons/datatables-select.min.js"></script>
-  <!-- Custom scripts -->
+ 
+ <!-- Script de carga de datatable -->
   <script>
     $('#dtMaterialDesignExample').DataTable();
-
     $('#dt-material-checkbox').dataTable({
-
       columnDefs: [{
         orderable: false,
         className: 'select-checkbox',
@@ -37,7 +13,6 @@
         selector: 'td:first-child'
       }
     });
-
     $('#dtMaterialDesignExample_wrapper, #dt-material-checkbox_wrapper').find('label').each(function () {
       $(this).parent().append($(this).children());
     });
@@ -56,5 +31,4 @@
     $('#dtMaterialDesignExample_wrapper .mdb-select, #dt-material-checkbox_wrapper .mdb-select').materialSelect();
     $('#dtMaterialDesignExample_wrapper .dataTables_filte, #dt-material-checkbox_wrapper .dataTables_filterr').find(
       'label').remove();
-
   </script>

@@ -11,24 +11,25 @@
       return header('Location: error.php');
     }
     $campos = [
-      'nombreEvento' => 'Nombre',
-      'nombreEncargado' => 'Nombre',
+      'nombreEvento' => 'Nombre de evento',
+      'nombreEncargado' => 'Nombre de encargado',
       'cedulaEncargado' => 'Cedula',
       'unidadAcademica' => 'Unidad Academica',
       'descripcion' => 'Descripcion del evento',
-      'lugarEvento' => 'Lugar del evento', 
+      'lugarEvento' => 'El lugar del evento', 
       'fechaInicio' => 'Fecha de inicio del evento',
       'fechaFin' => 'Fecha de culminacion del evento',
       'montoInscripcion' => 'Monto de inscripcion', 
       'montoGastoViaje'=> 'Monto del gasto de viaje',
       'montoApoyoEconomico' => 'Monto de apoyo economico deseado', 
-      'justificacionParticipacion' => 'Justificacion de participacion'
+      'justificacionParticipacion' => 'Justificacion de participacion', 
+      'rutaPDF' => 'Documentos en su formato PDF'
     ];
     $errores = validarCampos($campos);
 
     if(isset($_SESSION['idUser'])){
       if(empty($errores)) {
-        $errores = registro($_SESSION['idUser'],$_SESSION['correo'], $_SESSION['nombre']);
+        $errores = registro($_SESSION['correo'], $_SESSION['nombre']);
       }
     }
   }
@@ -37,34 +38,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Prueba de Formulario</title>
-  
+<head>  
   <?php include_once("../partials/head.php"); ?>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
-  <!-- Material Design Bootstrap -->
-  <link rel="stylesheet" href="../css/mdb.min.css">
   <!-- Your custom styles (optional) -->
   <link href="../css/style.css" rel="stylesheet">
-
 </head>
 
 <body>
 
   <!-- Start your project here -->
   <!-- Page header -->
-  <header class="titulo text-center pt-2 pb-2">
-    <h1>
-      <img align="float-left" src="../img/logo_utp.png" alt="Logo" class="responsive" width="100" height="100">
-      <span> Sistema de Solicitud de Apoyo Económico Estudiantil UTP</span>
-    </h1>
-  </header>
+  <?php include_once("../partials/header.php"); ?>
 
   <!-- This container has everything apart from the header and the footer -->
   <div class="container-fluid">
@@ -144,11 +128,11 @@
         <div class="col-lg-3 col-sm-12 mt-n1 mr-n5">
           <h6 class="purple-text font-weight-bolder mb-n2">Tipo de evento</h6>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="tipoCultural" name="tipo" value="Cultural" <?php if(isset($_POST['tipo'])){echo "checked ='checked'";}?> >
+            <input type="radio" class="form-check-input" id="tipoCultural" name="tipo" value="Cultural" >
             <label class="form-check-label" for="tipoCultural">Cultural</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="tipoDeportivo" name="tipo" value="Deportivo" <?php if(isset($_POST['tipo'])){echo "checked ='checked'";}?> >
+            <input type="radio" class="form-check-input" id="tipoDeportivo" name="tipo" value="Deportivo">
             <label class="form-check-label" for="tipoDeportivo">Deportivo</label>
           </div>
           <small id="descripcionEventoHelp" class="form-text text-muted mt-3">Seleccione el tipo de evento</small>
@@ -465,23 +449,23 @@
         <div class="col-5 mt-n5">
           <h6 class="col-12 purple-text font-weight-bolder ml-n3 mb-n1 mt-n2">Apoyo ofrecido por organizadores o patrocinadores del evento</h6>
           <div class="form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="apoyoInscripcion" value="Inscripcion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
+            <input type="checkbox" class="form-check-input" id="apoyoInscripcion" value="Inscripcion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
             <label class="form-check-label" for="apoyoInscripcion">Inscripción</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoHospedaje" value="Hospedaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
+              <input type="checkbox" class="form-check-input" id="apoyoHospedaje" value="Hospedaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
               <label class="form-check-label" for="apoyoHospedaje">Hospedaje</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoEconomicoParcial" value="Apoyo economico parcial" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
+              <input type="checkbox" class="form-check-input" id="apoyoEconomicoParcial" value="Apoyo economico parcial" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
               <label class="form-check-label" for="apoyoEconomicoParcial">Apoyo Económico Parcial</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoGastosViaje" value="Gastos de viaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
+              <input type="checkbox" class="form-check-input" id="apoyoGastosViaje" value="Gastos de viaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
               <label class="form-check-label" for="apoyoGastosViaje">Gastos de Viaje</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoManutencion" value="Manutencion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
+              <input type="checkbox" class="form-check-input" id="apoyoManutencion" value="Manutencion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
               <label class="form-check-label" for="apoyoManutencion">Manutención</label>
           </div>
         </div>
@@ -495,16 +479,11 @@
                 <input class="file-path validate" type="text" placeholder="Sube un único archivo PDF">
               </div>
               <small id="subirArchivoHelp" class="form-text text-muted mt-1 ml-2">Anexe carta de invitación, programa del evento, carta de objetivos y resultados esperados del evento, redactada por los estudiantes y dirigida al Secretario de Vida Universitaria y cualquier otro documento adicional de sustento.</small>
+              <small id="subirArchivoHelp" class="form-text text-muted mt-1 ml-2">*Anexe todo en un único documento PDF. Si no sabe cómo hacerlo, puede usar <a href="https://smallpdf.com/es/jpg-a-pdf">esta página</a></small>
             </div> 
-            <!-- <div class="form-row">
-                <div class="col-md-6 mb-3">
-                    <h4>Anexe el archivo PDF con todos los documentos solicitados</h4>
-                    <input class="form-control" type="file" id="rutaPDF" name="rutaPDF" value="" placeholder="Seleccione su archivo"  />
-                </div>
-            </div> -->
         </div>
       </div>
-      <div class="row mt-n4" id="ColumnaProyeccionUniversidad">
+      <div class="row mt-n5" id="ColumnaProyeccionUniversidad">
         <!--Otra fila-->
         <h6 class="col-12 purple-text font-weight-bolder mt-n4">Apoyo solicitado a la Universidad Tecnológica de Panamá</h6>
         <div class="col-12 mt-n3">
@@ -534,28 +513,12 @@
           <label class="ml-3" for="montoApoyoParcialUTP">Monto Apoyo Parcial</label>
         </div>
       </div>
-      <button class="btn btn-secondary float-right mb-2" type="submit">Enviar</button>
+      <button class="btn btn-secondary float-right mb-2"  type="submit">Enviar</button>
     </form>
     </div>
-    <!-- Fin de la fila datos de evento-->   
-
+    </div>
     </div>
 
-    </div>
-
-
-  <!-- .Start your project here-->
-
-  <!-- SCRIPTS -->
-  <!-- JQuery -->
-  <script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="../js/popper.min.js"></script>
-  <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="../bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="../js/mdb.min.js"></script>
   <!-- JavaScript personalizado -->
   <script type="text/javascript" src="../js/form.js"></script>
 

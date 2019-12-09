@@ -9,11 +9,8 @@
 <head>
     <!--Incluye el head-->
     <?php include_once("../partials/head.php"); ?>
-    <!--CSS del menú-->
-    <link href="../css/menu.css" rel="stylesheet" type="text/css" />
 
     <link href="../css/creditos.css" rel="stylesheet">
-    <link href="../css/general.css" rel="stylesheet">
 
 
     
@@ -21,10 +18,6 @@
 <body>
     <!--Incluye el header-->
     <?php include_once("../partials/header.php"); ?>
-
-    <!--SE ESTÁ UTILIZANDO EL NAV DE solicitudesPublicas-->
-    <!--Incluye el nav-->
-    <?php include_once("../partials/navigationpublic.php"); ?>
 
 
 <section>
@@ -79,8 +72,6 @@
                 </div>
                 <p class="mt-3 w-100 float-left text-center"><strong></strong></p>
         </div>
-
-        <!-- <div class="col-md-4"></div> -->
 
         <div class="col-md-4">
             <div class="card profile-card-1">
