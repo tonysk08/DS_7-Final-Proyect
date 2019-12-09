@@ -3,7 +3,7 @@
     $titulo="Revisión de solicitudes";
 
     require_once('../funciones/funciones.php');
-    ControlAcceso();
+    ControlAcceso($titulo);
     require('../bd/conexion.php');
 ?>
 <!DOCTYPE html>
@@ -34,20 +34,19 @@
         
     
    
+
     <div class="p-5">
-    <?php 
-    if (!isset($_SESSION["sw"])){ 
-        //header('Location: ../index.php');
-        echo "<script>
-                                    alert('ERROR: Inicie Sesión');
-                                    window.location= '../index.php'
-                                </script>";
-    }
-    
-   
-                        
-    
-    echo "Que gusto verle,"." ".$_SESSION['nombre']. " " .$_SESSION['apellido'];?>
+
+
+
+
+    <!-- ESTO VA A LA MASTER -->
+    <?php echo "Que gusto verle,"." ".$_SESSION['nombre']. " " .$_SESSION['apellido'];?>
+
+
+
+
+
     <br>
     <h3>Revisión de solicitudes</h3>
     <table class="table table-bordered table-hover table-responsive-lg table-sm track_tbl">

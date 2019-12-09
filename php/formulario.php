@@ -3,7 +3,7 @@
     $titulo="Formulario";
 
     require_once('../funciones/funciones.php');
-    ControlAcceso();
+    ControlAcceso($titulo);
     require('../bd/conexion.php');
 
     if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['ficha']) && validarFicha ($_POST['ficha'])){

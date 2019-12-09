@@ -342,7 +342,7 @@ function mostrarErrores($errores){
                 $_SESSION['sw'] = 1;
                
                 //PARA DISTINGUIR SI ES ADMINISTRATIVO O ESTUDIANTE
-                if ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 ||$_SESSION['idUser']==9 ||$_SESSION['idUser']==10)
+                if ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 || $_SESSION['idUser']==8 || $_SESSION['idUser']==9 || $_SESSION['idUser']==10)
                 {
                     header('Location: php/revisionSolicitudes.php');
                 }
@@ -366,30 +366,37 @@ function mostrarErrores($errores){
         return $errores;
     }
 
-    function ControlAcceso()
+    function ControlAcceso($titulo)
     {
-        if ($_SESSION["sw"]!=1){ 
-            
-            echo "<script> alert('ERROR: Inicie Sesión')  </script>";
-            header('Location: ../index.php');}
-
-
-       elseif ($_SESSION['idUser']!=6 && $_SESSION['idUser']!=7 && $_SESSION['idUser']!=8 && $_SESSION['idUser']!=9 && $_SESSION['idUser']!=10){ 
-                            
-            echo "<script>
-                    alert('ERROR: Acceso denegado');
-                </script>";
-            header('Location: ./formulario.php');
-        }
+        /* 
+        Reporte viaje: Si fechaFin de peticion es menor a la fecha actual
+        Tracking: Si 
         
-        elseif ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 ||$_SESSION['idUser']==9 ||$_SESSION['idUser']==10){ 
-            
-            echo "<script>
-                    alert('ERROR: Acceso denegado');
-                    
-                </script>";
-                header('Location: ./revisionSolicitudes.php');
+        */
 
+
+        if ($_SESSION["sw"]!=1){ 
+            echo "<script> 
+            alert('ERROR: Inicie Sesión') 
+            window.location= '../index.php'
+            </script>";}
+
+       elseif ($_SESSION['idUser']!=6 && $_SESSION['idUser']!=7 && $_SESSION['idUser']!=8 && $_SESSION['idUser']!=9 && $_SESSION['idUser']!=10){     
+
+            if ($titulo !== "Formulario" || $titulo !== "Seguimiento de la Solicitud"){
+                echo "<script>
+                alert('ERROR: Acceso denegado') 
+                window.location= './formulario.php'
+                </script>";}
+
+        }
+        elseif ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 ||$_SESSION['idUser']==9 ||$_SESSION['idUser']==10){ 
+
+            if ($titulo !== "Revisión de solicitudes"){
+                echo "<script>
+                alert('ERROR: Acceso denegado') 
+                window.location='./revisionSolicitudes.php'
+                </script>";}
         }
     }
 
