@@ -1,6 +1,8 @@
 <?php
     session_start();
     $titulo="Revisión de solicitudes";
+    require_once('../funciones/funciones.php');
+    ControlAcceso($titulo);
     if(isset($_SESSION['idUser'])){
         $idUsuario = $_SESSION['idUser'];
     }
@@ -43,7 +45,7 @@
         </thead>
         <tbody>
         <?php 
-        require_once "../bd/conexion_PDO.php";
+        
         $stmt = $conPDO->prepare("SELECT peticion.idPeticion, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaIncio, peticion.fechaFin, peticion.lugarEvento FROM administrativo INNER JOIN peticion ON administrativo.idPeticion = peticion.idPeticion WHERE administrativo.idUser = $idUsuario AND administrativo.fechaFin IS NULL AND administrativo.fechaActivacion IS NOT NULL");
         $stmt->execute();
         for($i=0; $row = $stmt->fetch(); $i++){

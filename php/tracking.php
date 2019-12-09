@@ -1,9 +1,8 @@
 <?php
     session_start();
     $titulo="Seguimiento de la Solicitud";
-
-    include "../bd/conexion.php";
-
+    require_once('../funciones/funciones.php');
+    ControlAcceso($titulo);
     $idUser = $_SESSION['idUser'];
     require_once("../bd/conexion_PDO.php");
 ?>

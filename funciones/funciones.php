@@ -405,6 +405,7 @@ function mostrarErrores($errores){
                 $_SESSION['apellido'] = $linea['apellido'];
                 $_SESSION['correo'] = $linea['correo'];
                 $_SESSION['idUser'] = $linea['idUser'];
+                $_SESSION['sw'] = 1;
                 header('Location: php/formulario.php');
             }
         } else {
@@ -412,6 +413,86 @@ function mostrarErrores($errores){
         }
 
          return $errores;
+    }
+
+    function ControlAcceso($titulo)
+    {
+        /* 
+        Tracking: Si tiene una solicitud en proceso **HARIA FALTA CREAR UN CAMPO LLAMADO fechaAceptacion PARA CUANDO LA PETICIÓN YA FUE ACEPTADA. SI ES NULL, PUEDE LLEVAR A TRACKING*
+        Formulario: Si no tiene ninguna solicitud en proceso y la última fue hace más de 2 meses
+        */
+
+        $idUser = $_SESSION['idUser'];
+
+        /* FUE NECESARIO HACER LA CONEXIÓN DE NUEVO PORQUE MANDABA ERROR CON LA VARIABLE */
+
+        $dsn = 'mysql:dbname=b2vdjpobhtdchvq4s4ff;host=b2vdjpobhtdchvq4s4ff-mysql.services.clever-cloud.com';
+        $dbuser = "ul0jkfxdb11tfmvi";
+        $dbpass = "SG7R7X63pFXEdUK9ac2I";
+
+        $conPDO2 = new PDO($dsn, $dbuser, $dbpass);
+
+        //Consulta para comprobar si el usuario tiene que reportar su viaje. Si la fecha del evento es menor a la fecha actual le dice al estudiante que debe hacer el reporte.
+        $consulta1 = $conPDO2->prepare("SELECT estudiante.idPeticion 
+        FROM estudiante 
+        INNER JOIN peticion ON estudiante.idPeticion = peticion.idPeticion 
+        WHERE estudiante.idUser = $idUser
+        AND peticion.fechaFin < NOW() 
+        ORDER BY estudiante.idPeticion DESC
+        LIMIT 1");
+
+        $consulta1->execute();
+        $fila1 = $consulta1->fetch();
+
+        $idPeticion = $fila1['idPeticion'];
+
+        if ($_SESSION["sw"]!=1){
+            echo "<script> 
+            alert('ERROR: Inicie Sesión') 
+            window.location= '../index.php'
+            </script>";}
+
+       elseif ($_SESSION['idUser']!=6 && $_SESSION['idUser']!=7 && $_SESSION['idUser']!=8 && $_SESSION['idUser']!=9 && $_SESSION['idUser']!=10){     
+        
+            if ($titulo !== "Formulario" && $titulo !== "Seguimiento de la Solicitud" && $titulo !== "Reporte de viaje"){
+                if($idPeticion==""){
+                    echo "<script>
+                    alert('ERROR: Acceso denegado. Debe hacer el formulario.') 
+                    window.location= './formulario.php'
+                    </script>"; 
+                }else{
+                    echo "<script>
+                    alert('ERROR: Acceso denegado. Debe hacer el reporte de viaje.') 
+                    window.location= './reporte.php'
+                    </script>";
+                }
+            }
+
+            elseif ($titulo == "Formulario" || $titulo== "Seguimiento de la Solicitud"){
+                if($idPeticion==""){   
+                    echo "<script>
+                    alert('ERROR: Debe pasar por el formulario antes de ir a otras pantallas') 
+                    window.location= './formulario.php'
+                    </script>"; 
+                }else{
+                    echo "<script>
+                    alert('ERROR: Su evento ha finalizado. Debe hacer el reporte de viaje') 
+                    window.location= './reporte.php'
+                    </script>";
+                }
+            }
+
+        }
+        elseif ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 || $_SESSION['idUser']==9 || $_SESSION['idUser']==10){ 
+
+            if ($titulo !== "Revisión de solicitudes"){
+                echo "<script>
+                alert('ERROR: Acceso denegado') 
+                window.location='./revisionSolicitudes.php'
+                </script>";}
+        }
+
+
     }   
 
 ?>
