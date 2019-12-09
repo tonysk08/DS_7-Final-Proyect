@@ -22,8 +22,11 @@
       'montoInscripcion' => 'Monto de inscripcion', 
       'montoGastoViaje'=> 'Monto del gasto de viaje',
       'montoApoyoEconomico' => 'Monto de apoyo economico deseado', 
-      'justificacionParticipacion' => 'Justificacion de participacion', 
-      'rutaPDF' => 'Documentos en su formato PDF'
+      'justificacionParticipacion' => 'Justificacion de participacion',
+      'alcance' => 'Alcance de evento', 
+      'tipo' => 'Tipo de evento', 
+      'proyeccion' => 'Proyeccion del evento', 
+      'apoyoEvento' => 'Apoyo del evento'
     ];
     $errores = validarCampos($campos);
 
@@ -59,13 +62,12 @@
       </div>
     <!-- Formulario -->
     <div class="col-9 border border-secondary rounded pl-4 pt-1 pl-2 border-3">
+    <?php	if(!empty($errores)){
+        echo mostrarErrores($errores);
+        }?>
       <form class="md-form mt-n1" id="formularioRegistro" method="POST" enctype="multipart/form-data">
       <h2 class="text-center green-text font-weight-bold text-uppercase">Formulario de registro de solicitud RUTP-FV-4(M)</h2>
       <!-- Inicio del formulario -->
-
-      <?php	if(!empty($errores)){
-        echo mostrarErrores($errores);
-        }?>
       <input type="hidden" name="ficha" value="<?php echo ficha_csrf()?>"/>
       <input type="hidden" name="robot" value=""/>
 
@@ -140,11 +142,11 @@
         <div class="col-lg-3 ml-n4 mt-n1 mr-n5" id="AlcanceEvento">
           <h6 class="purple-text font-weight-bolder mb-n2">Alcance del evento</h6>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="alcanceNacional" name="alcance" value="Nacional" <?php if(isset($_POST['alcance'])){echo "checked ='checked'";}?> >
+            <input type="radio" class="form-check-input" id="alcanceNacional" name="alcance" value="Nacional">
             <label class="form-check-label" for="alcanceNacional">Nacional</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="alcanceInternacional" name="alcance" value="Internacional" <?php if(isset($_POST['alcance'])){echo "checked ='checked'";}?> >
+            <input type="radio" class="form-check-input" id="alcanceInternacional" name="alcance" value="Internacional">
             <label class="form-check-label" for="alcanceInternacional">Internacional</label>
           </div>
           <small id="descripcionEventoHelp" class="form-text text-muted mt-3">Seleccione el alcance del evento.</small>
@@ -426,15 +428,15 @@
         <div class="col-lg-5" id="ProyeccionUniversidad">
           <h6 class="purple-text font-weight-bolder mb-n1">Proyección de la Institución a través del evento</h6>
           <div class="form-check form-check-inline ml-n1">
-            <input type="radio" class="form-check-input" value="Excelente" name="proyeccion" id="proyeccion1" <?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?> >
+            <input type="radio" class="form-check-input" value="Excelente" name="proyeccion" id="proyeccion1">
             <label class="form-check-label" for="proyeccion1">Excelente</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" value="Buena" name="proyeccion" id="proyeccion2" <?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?>  >
+            <input type="radio" class="form-check-input" value="Buena" name="proyeccion" id="proyeccion2" >
             <label class="form-check-label" for="proyeccion2">Buena</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" value="NoTiene" name="proyeccion" id="proyeccion3" <?php if(isset($_POST['proyeccion'])){echo "checked ='checked'";}?>  >
+            <input type="radio" class="form-check-input" value="NoTiene" name="proyeccion" id="proyeccion3">
             <label class="form-check-label" for="proyeccion3">No Tiene</label>
           </div>
         </div>
@@ -449,23 +451,23 @@
         <div class="col-5 mt-n5">
           <h6 class="col-12 purple-text font-weight-bolder ml-n3 mb-n1 mt-n2">Apoyo ofrecido por organizadores o patrocinadores del evento</h6>
           <div class="form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="apoyoInscripcion" value="Inscripcion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
+            <input type="checkbox" class="form-check-input" id="apoyoInscripcion" value="Inscripcion" name="apoyoEvento[]">
             <label class="form-check-label" for="apoyoInscripcion">Inscripción</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoHospedaje" value="Hospedaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
+              <input type="checkbox" class="form-check-input" id="apoyoHospedaje" value="Hospedaje" name="apoyoEvento[]">
               <label class="form-check-label" for="apoyoHospedaje">Hospedaje</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoEconomicoParcial" value="Apoyo economico parcial" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
+              <input type="checkbox" class="form-check-input" id="apoyoEconomicoParcial" value="Apoyo economico parcial" name="apoyoEvento[]">
               <label class="form-check-label" for="apoyoEconomicoParcial">Apoyo Económico Parcial</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoGastosViaje" value="Gastos de viaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
+              <input type="checkbox" class="form-check-input" id="apoyoGastosViaje" value="Gastos de viaje" name="apoyoEvento[]">
               <label class="form-check-label" for="apoyoGastosViaje">Gastos de Viaje</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoManutencion" value="Manutencion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
+              <input type="checkbox" class="form-check-input" id="apoyoManutencion" value="Manutencion" name="apoyoEvento[]">
               <label class="form-check-label" for="apoyoManutencion">Manutención</label>
           </div>
         </div>
@@ -521,8 +523,6 @@
 
   <!-- JavaScript personalizado -->
   <script type="text/javascript" src="../js/form.js"></script>
-
-  <script src="../js/formulario.js"></script>
 
 </body>
 

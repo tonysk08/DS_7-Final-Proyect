@@ -47,13 +47,36 @@ function registro($email,$usuario){
     $cedulaEncargado =limpiar($_POST['cedulaEncargado']);
     $unidadAcademica = limpiar($_POST['unidadAcademica']);
     $descripcion =limpiar($_POST['descripcion']);
-    $proyeccion =limpiar($_POST['proyeccion']);
-    $alcance =limpiar($_POST['alcance']);
     $lugarEvento = limpiar($_POST['lugarEvento']);
-    $tipo = limpiar($_POST['tipo']);
     $fechaInicio = limpiar($_POST['fechaInicio']);
     $fechaFin = limpiar($_POST['fechaFin']);
-    $apoyoEvento = implode(', ', $_POST['apoyoEvento']);
+
+    if(!isset($_POST['apoyoEvento'])){
+        $errores[] = "Seleccione el tipo de apoyo que brinda el evento";
+    }else { 
+        $apoyoEvento = implode(', ', $_POST['apoyoEvento']);
+    }
+    if(!isset($_POST['proyeccion'])){
+           
+        $errores[] = "Seleccione la proyeccion del evento";
+    } else {
+        $proyeccion =limpiar($_POST['proyeccion']);
+    }
+
+    if(!isset($_POST['tipo'])){
+           
+        $errores[] = "Seleccione el tipo de evento que tiene";
+    } else {
+        $tipo = limpiar($_POST['tipo']);
+    }
+
+    
+    if(!isset($_POST['alcance'])){
+
+     $errores[] = "Seleccione el alcance del evento";
+    } else {
+        $alcance =limpiar($_POST['alcance']);
+    }
 
      if(isset($_POST['inscripcionUTP'])) {
         $inscripcionUTP = checkBoxArray($_POST['inscripcionUTP']);
@@ -121,6 +144,7 @@ function registro($email,$usuario){
                 $errores[] = "Sorry, there was an error uploading your file.";
             }
         }
+    
     //Insercion de los datos a la BD
     $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,rutaPDF) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     $dec -> bind_param("ssssssssssiiidddss", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$target_file);
