@@ -4,17 +4,6 @@
 <!-- Logo/Nombre de la página -->
 <a class="navbar-brand" href="#">Sistema de Apoyo Económico Estudiantil</a>
 
-<!-- Enlaces -->
-<ul class="navbar-nav">
-    <li class="nav-item">
-        <a class="nav-link" href="../php/dashboard.php">Estadisticas</a>
-    </li>
-</ul>
-<ul class="navbar-nav">
-    <li class="nav-item">
-        <a class="nav-link" href="creditos.php">Créditos</a>
-    </li>
-</ul>
 <!--  -->
 <ul class="navbar-nav ml-auto">
     <li class="nav-item right">
