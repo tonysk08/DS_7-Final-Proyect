@@ -3,6 +3,7 @@
     $titulo="Revisión de solicitudes";
 
     require_once('../funciones/funciones.php');
+    ControlAcceso();
     require('../bd/conexion.php');
 ?>
 <!DOCTYPE html>
@@ -43,13 +44,7 @@
                                 </script>";
     }
     
-    if ($_SESSION['idUser']==1 || $_SESSION['idUser']==2 ||$_SESSION['idUser']==3 ||$_SESSION['idUser']==4 ||$_SESSION['idUser']==5){ 
-                            //header('Location: index.php');
-                            echo "<script>
-                                    alert('ERROR: Acceso denegado');
-                                    window.location= '../index.php'
-                                </script>";
-                        }
+   
                         
     
     echo "Que gusto verle,"." ".$_SESSION['nombre']. " " .$_SESSION['apellido'];?>

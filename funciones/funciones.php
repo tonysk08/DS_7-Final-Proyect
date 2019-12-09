@@ -353,17 +353,44 @@ function mostrarErrores($errores){
                 
             }
         } else {
-           // $errores[] = 'El Nombre de Usuario, Cedula o la contraseña no son validos.';
+           $errores[] = 'El Nombre de Usuario, Cedula o la contraseña no son validos.';
             
-            echo "<script>
+            /*echo "<script>
                 alert('ERROR: El Nombre de Usuario, Cédula o la contraseña no son validos.');
                 window.location= 'index.php'
-                </script>";
+                </script>";*/
 
             //header('Location: index.php');     
         }
 
         return $errores;
+    }
+
+    function ControlAcceso()
+    {
+        if ($_SESSION["sw"]!=1){ 
+            
+            echo "<script> alert('ERROR: Inicie Sesión')  </script>";
+            header('Location: ../index.php');}
+
+
+       elseif ($_SESSION['idUser']!=6 && $_SESSION['idUser']!=7 && $_SESSION['idUser']!=8 && $_SESSION['idUser']!=9 && $_SESSION['idUser']!=10){ 
+                            
+            echo "<script>
+                    alert('ERROR: Acceso denegado');
+                </script>";
+            header('Location: ./formulario.php');
+        }
+        
+        elseif ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 ||$_SESSION['idUser']==9 ||$_SESSION['idUser']==10){ 
+            
+            echo "<script>
+                    alert('ERROR: Acceso denegado');
+                    
+                </script>";
+                header('Location: ./revisionSolicitudes.php');
+
+        }
     }
 
 ?>

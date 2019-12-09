@@ -3,6 +3,7 @@
     $titulo="Formulario";
 
     require_once('../funciones/funciones.php');
+    ControlAcceso();
     require('../bd/conexion.php');
 
     if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['ficha']) && validarFicha ($_POST['ficha'])){
@@ -66,13 +67,6 @@
                                 </script>";
     }
     
-    if ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 ||$_SESSION['idUser']==9 ||$_SESSION['idUser']==10){ 
-                            //header('Location: index.php');
-                            echo "<script>
-                                    alert('ERROR: Acceso denegado');
-                                    window.location= '../index.php'
-                                </script>";
-                        }
     ?>
   
 
