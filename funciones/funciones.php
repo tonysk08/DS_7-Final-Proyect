@@ -76,7 +76,7 @@ function registro($email,$usuario){
     $montoGastoViaje = limpiar($_POST['montoGastoViaje']);
     $montoApoyoEconomico = limpiar($_POST['montoApoyoEconomico']);
     $justificacionParticipacion = limpiar($_POST['justificacionParticipacion']);
-    //$ultimaParticipacion = limpiar($_POST['ultimaParticipacion']);
+
 
     //Inicio del fileUpload
 	$target_dir = "../pdf/";
@@ -242,16 +242,6 @@ function checkBoxArray($campo) {
            }
        else{
         $cad = implode(', ', $campo);}
-
-/* foreach($campo as $cadena) {
-    $s = ',';
-    if($cad == '') {
-        $cad = $cadena;
-            } else  {
-            $cad .= $s.$cadena;
-            }
-        }
-    } */
     return $cad;
 }
 
@@ -302,7 +292,7 @@ function mostrarErrores($errores){
             return false;
         }
     }
- /**
+     /**
      * Funcion para validar campos 
      *@param campos
      *@return any
@@ -311,7 +301,7 @@ function mostrarErrores($errores){
         $errores = []; 
         foreach($campos as $nombre => $mostrar) {
             if(!isset($_POST[$nombre]) || $_POST[$nombre] == null) {
-                $errores[] = $mostrar. ' Es un campo requerido.';
+                $errores[] = $mostrar. ' es un campo requerido.';
             } else { 
                 $valides= campos();
                 foreach($valides as $campo => $opcion){
@@ -343,17 +333,13 @@ function mostrarErrores($errores){
                 'patron' => '/^[a-z\s]{2,50}$/i', 
                 'error' => 'NOMBRE DEL ENCARGADO solo pueden usar letras y espacios. No puede ser mas largo de 50 caracteres.'
             ],
-            'descripcion' => [
-                'patron' => '/^[a-z\s]{2,350}$/i', 
-                'error' => 'LA DESCRIPCION solo pueden usar letras y espacios. No puede ser mas largo de 350 caracteres.'
-            ],
            'clave' => [
                 'patron' => '/(?=^[\w\!@#\$%\^&\*\?]{8,30}$)(?=(.*\d){2,})(?=(.*[a-z]){2,})(?=(.*[A-Z]){2,})(?=(.*[\!@#\$%\^&\*\?_]){2,})^-*/', 
                 'error' => 'Por favor entre una contraseña valida. La contraseña debe tener por lo menos 2 letras mayuscula, 2 letras minusculas, 2 numeros y 2 simbolos.'
              ],
              'cedula-email'=> [
                 'patron' => '/(?=^[a-z]+[\w@\.]{2,50}$)/i', 
-                'error' => 'Nombre de Usuario o Cedula invalido'
+                'error' => 'Email o Cedula invalido'
             ]
         ];
         return $validacion;

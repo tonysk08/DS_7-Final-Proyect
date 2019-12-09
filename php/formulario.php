@@ -11,18 +11,19 @@
       return header('Location: error.php');
     }
     $campos = [
-      'nombreEvento' => 'Nombre',
-      'nombreEncargado' => 'Nombre',
+      'nombreEvento' => 'Nombre de evento',
+      'nombreEncargado' => 'Nombre de encargado',
       'cedulaEncargado' => 'Cedula',
       'unidadAcademica' => 'Unidad Academica',
       'descripcion' => 'Descripcion del evento',
-      'lugarEvento' => 'Lugar del evento', 
+      'lugarEvento' => 'El lugar del evento', 
       'fechaInicio' => 'Fecha de inicio del evento',
       'fechaFin' => 'Fecha de culminacion del evento',
       'montoInscripcion' => 'Monto de inscripcion', 
       'montoGastoViaje'=> 'Monto del gasto de viaje',
       'montoApoyoEconomico' => 'Monto de apoyo economico deseado', 
-      'justificacionParticipacion' => 'Justificacion de participacion'
+      'justificacionParticipacion' => 'Justificacion de participacion', 
+      'rutaPDF' => 'Documentos en su formato PDF'
     ];
     $errores = validarCampos($campos);
 
@@ -127,11 +128,11 @@
         <div class="col-lg-3 col-sm-12 mt-n1 mr-n5">
           <h6 class="purple-text font-weight-bolder mb-n2">Tipo de evento</h6>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="tipoCultural" name="tipo" value="Cultural" <?php if(isset($_POST['tipo'])){echo "checked ='checked'";}?> >
+            <input type="radio" class="form-check-input" id="tipoCultural" name="tipo" value="Cultural" >
             <label class="form-check-label" for="tipoCultural">Cultural</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="tipoDeportivo" name="tipo" value="Deportivo" <?php if(isset($_POST['tipo'])){echo "checked ='checked'";}?> >
+            <input type="radio" class="form-check-input" id="tipoDeportivo" name="tipo" value="Deportivo">
             <label class="form-check-label" for="tipoDeportivo">Deportivo</label>
           </div>
           <small id="descripcionEventoHelp" class="form-text text-muted mt-3">Seleccione el tipo de evento</small>
@@ -448,23 +449,23 @@
         <div class="col-5 mt-n5">
           <h6 class="col-12 purple-text font-weight-bolder ml-n3 mb-n1 mt-n2">Apoyo ofrecido por organizadores o patrocinadores del evento</h6>
           <div class="form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="apoyoInscripcion" value="Inscripcion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
+            <input type="checkbox" class="form-check-input" id="apoyoInscripcion" value="Inscripcion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
             <label class="form-check-label" for="apoyoInscripcion">Inscripción</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoHospedaje" value="Hospedaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
+              <input type="checkbox" class="form-check-input" id="apoyoHospedaje" value="Hospedaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
               <label class="form-check-label" for="apoyoHospedaje">Hospedaje</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoEconomicoParcial" value="Apoyo economico parcial" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
+              <input type="checkbox" class="form-check-input" id="apoyoEconomicoParcial" value="Apoyo economico parcial" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
               <label class="form-check-label" for="apoyoEconomicoParcial">Apoyo Económico Parcial</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoGastosViaje" value="Gastos de viaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
+              <input type="checkbox" class="form-check-input" id="apoyoGastosViaje" value="Gastos de viaje" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
               <label class="form-check-label" for="apoyoGastosViaje">Gastos de Viaje</label>
           </div>
           <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="apoyoManutencion" value="Manutencion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])){echo "checked ='checked'";}?>>
+              <input type="checkbox" class="form-check-input" id="apoyoManutencion" value="Manutencion" name="apoyoEvento[]" <?php if(isset($_POST['apoyoEvento'])?"checked":"")?>>
               <label class="form-check-label" for="apoyoManutencion">Manutención</label>
           </div>
         </div>
@@ -512,7 +513,7 @@
           <label class="ml-3" for="montoApoyoParcialUTP">Monto Apoyo Parcial</label>
         </div>
       </div>
-      <button class="btn btn-secondary float-right mb-2" type="submit">Enviar</button>
+      <button class="btn btn-secondary float-right mb-2"  type="submit">Enviar</button>
     </form>
     </div>
     </div>
