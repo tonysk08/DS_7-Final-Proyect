@@ -23,100 +23,89 @@
 ?>
 
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?php echo $titulo ?? "SAEE"?></title>
-    <link href="bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="css/estilo.css" rel="stylesheet">
+<html lang="en">
+<head>
+  <title><?php echo $titulo ?? "SAEE"?></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="img/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('img/utp5.jpg');">
+			<div class="wrap-login100 p-t-30 p-b-50">
+				<span class="login100-form-title p-b-41">
+				SAEE - Login
+				</span>
+        <?php	if(!empty($errores)){echo mostrarErrores($errores);}?>
+				<form class="login100-form validate-form p-b-33 p-t-5"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method ="POST" >
+        <input type="hidden" name="ficha" value="<?php echo ficha_csrf()?>">  
+        <input type="hidden" name="robot" value="">  
+				
+        	<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" value="<?php echo $_POST['cedula-email'] ?? '' ?>" name="cedula-email" placeholder="Correo electronico">
+						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
 
-    <link href="css/all.min.css" rel="stylesheet">
-    <link href="css/fontawesome.min.css" rel="stylesheet"> 
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="clave" placeholder="Contraseña">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
 
-    <script src="ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
-    <title>Sistema de Solicitud de Apoyo Económico Estudiantil UTP</title>
-  </head>
+					<div class="container-login100-form-btn m-t-32">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div>
 
-  <body class="cuerpo">
-    <section class="login-block">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 login-sec">
- 
-              <h2 class="text-center">Iniciar Sesión</h2>
-              <?php	if(!empty($errores)){echo mostrarErrores($errores);}?>
-              
-              <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method ="POST" class="login-form">
-                <input type="hidden" name="ficha" value="<?php echo ficha_csrf()?>">  
-                <input type="hidden" name="robot" value="">  
-                  <div class="form-group">
-                    <label for="exampleInputEmail1" class="text-uppercase">Cédula del Estudiante</label>
-                    <input type="text" class="form-control" name="cedula-email"  value="<?php echo $_POST['cedula-email'] ?? '' ?>" placeholder="Ingrese su cedula o su correo">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
-                    <input type="password" class="form-control" name="clave" placeholder="Ingrese su contraseña">
-                  </div>
-                  <div class="form-check">
-                  
-                    <button type="submit" class="btn btn-login float-right">Iniciar Sesión</button><br><br> 
-                  </div>
-              </form>
+				</form>
+			</div>
+		</div>
+	</div>
+	
 
-               <div class="copy-text"><a href="php/creditos.php">Creado por <i class="fa fa-bug"></i> MARHA <i class="fa fa-bug"></i></a></div>
-          </div>
-         
-          <div class="col-md-8 banner-sec">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-              </ol>
-              <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                  <img class="d-block img-fluid" src="img/avion.jpg" alt="First slide">
-                  <div class="carousel-caption d-none d-md-block">
-                    <div class="banner-text">
-                      <h2>Sistema de Apoyo Económico Estudiantil</h2>
-                      <p align="justify">Los estudiantes interesados en participar en eventos culturales y deportivos (nacionales e internacionales) deberán presentar ante el Secretario de Vida Universitaria, la solicitud de apoyo dispuesta en el formulario RUTP-FV-4, con al menos dos meses y medio de anticipación a la fecha de inicio de la actividad.</p>
-                      <a href="http://www.utp.ac.pa/documentos/2014/doc/RUTP-FV-4"><button type="button" class="btn btn-info">Más información</button></a>
-                    </div>  
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block img-fluid" src="img/avion.jpg" alt="First slide">
-                  <div class="carousel-caption d-none d-md-block">
-                    <div class="banner-text">
-                      <h2>Transparencia</h2>
-                      <p align="justify">Contamos con un registro de todas las solicitudes realizadas que cualquier persona puede ver</p>
-                      <a href="php/solicitudesPublicas.php"><button type="button" class="btn btn-info">Más información</button></a>
-                    </div>  
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block img-fluid" src="img/avion.jpg" alt="First slide">
-                  <div class="carousel-caption d-none d-md-block">
-                    <div class="banner-text">
-                      <h2>Créditos</h2>
-                      <p align="justify">Este proyecto ha sido creado por estudiantes de la Universidad Tecnológica de Panamá, de la Facultad en Ingeniería en Sistemas Computaciones</p>
-                      <a href="php/creditos.php"><button type="button" class="btn btn-info">Más información</button></a>
-                    </div>  
-                  </div>
-                </div>
-              </div>               
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
 
-    <?php include "include/footer.php"; ?>
-    
 </body>
-
 </html>
+
+
