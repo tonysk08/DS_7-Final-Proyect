@@ -29,7 +29,7 @@
 
     if(isset($_SESSION['idUser'])){
       if(empty($errores)) {
-        $errores = registro($_SESSION['idUser'],$_SESSION['correo'], $_SESSION['nombre']);
+        $errores = registro($_SESSION['correo'], $_SESSION['nombre']);
       }
     }
   }
@@ -38,34 +38,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Prueba de Formulario</title>
-  
+<head>  
   <?php include_once("../partials/head.php"); ?>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="../bootstrap/4.3.1/css/bootstrap.min.css">
-  <!-- Material Design Bootstrap -->
-  <link rel="stylesheet" href="../css/mdb.min.css">
   <!-- Your custom styles (optional) -->
   <link href="../css/style.css" rel="stylesheet">
-
 </head>
 
 <body>
 
   <!-- Start your project here -->
   <!-- Page header -->
-  <header class="titulo text-center pt-2 pb-2">
-    <h1>
-      <img align="float-left" src="../img/logo_utp.png" alt="Logo" class="responsive" width="100" height="100">
-      <span> Sistema de Solicitud de Apoyo Económico Estudiantil UTP</span>
-    </h1>
-  </header>
+  <?php include_once("../partials/header.php"); ?>
 
   <!-- This container has everything apart from the header and the footer -->
   <div class="container-fluid">
@@ -496,10 +479,11 @@
                 <input class="file-path validate" type="text" placeholder="Sube un único archivo PDF">
               </div>
               <small id="subirArchivoHelp" class="form-text text-muted mt-1 ml-2">Anexe carta de invitación, programa del evento, carta de objetivos y resultados esperados del evento, redactada por los estudiantes y dirigida al Secretario de Vida Universitaria y cualquier otro documento adicional de sustento.</small>
+              <small id="subirArchivoHelp" class="form-text text-muted mt-1 ml-2">*Anexe todo en un único documento PDF. Si no sabe cómo hacerlo, puede usar <a href="https://smallpdf.com/es/jpg-a-pdf">esta página</a></small>
             </div> 
         </div>
       </div>
-      <div class="row mt-n4" id="ColumnaProyeccionUniversidad">
+      <div class="row mt-n5" id="ColumnaProyeccionUniversidad">
         <!--Otra fila-->
         <h6 class="col-12 purple-text font-weight-bolder mt-n4">Apoyo solicitado a la Universidad Tecnológica de Panamá</h6>
         <div class="col-12 mt-n3">
@@ -532,26 +516,9 @@
       <button class="btn btn-secondary float-right mb-2"  type="submit">Enviar</button>
     </form>
     </div>
-    <!-- Fin de la fila datos de evento-->   
-
+    </div>
     </div>
 
-    </div>
-
-
-  <!-- .Start your project here-->
-
-  <!-- SCRIPTS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-  <!-- JQuery -->
-  <script src="../ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="../ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="../js/popper.min.js"></script>
-  <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="../bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="../js/mdb.min.js"></script>
   <!-- JavaScript personalizado -->
   <script type="text/javascript" src="../js/form.js"></script>
 
