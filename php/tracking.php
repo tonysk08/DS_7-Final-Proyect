@@ -1,7 +1,8 @@
 <?php
     session_start();
     $titulo="Seguimiento de la Solicitud";
-
+    require_once('../funciones/funciones.php');
+    ControlAcceso($titulo);
     include "../bd/conexion.php";
 
     $idUser = $_SESSION['idUser'];

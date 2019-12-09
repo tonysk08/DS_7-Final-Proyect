@@ -402,6 +402,40 @@ function mostrarErrores($errores){
         }
 
          return $errores;
+    }
+
+    function ControlAcceso($titulo)
+    {
+        /* 
+        Reporte viaje: Si fechaFin de peticion es menor a la fecha actual
+        Tracking: Si 
+        
+        */
+
+
+        if ($_SESSION["sw"]!=1){ 
+            echo "<script> 
+            alert('ERROR: Inicie Sesión') 
+            window.location= '../index.php'
+            </script>";}
+
+       elseif ($_SESSION['idUser']!=6 && $_SESSION['idUser']!=7 && $_SESSION['idUser']!=8 && $_SESSION['idUser']!=9 && $_SESSION['idUser']!=10){     
+
+            if ($titulo !== "Formulario" || $titulo !== "Seguimiento de la Solicitud"){
+                echo "<script>
+                alert('ERROR: Acceso denegado') 
+                window.location= './formulario.php'
+                </script>";}
+
+        }
+        elseif ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 ||$_SESSION['idUser']==9 ||$_SESSION['idUser']==10){ 
+
+            if ($titulo !== "Revisión de solicitudes"){
+                echo "<script>
+                alert('ERROR: Acceso denegado') 
+                window.location='./revisionSolicitudes.php'
+                </script>";}
+        }
     }   
 
 ?>
