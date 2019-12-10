@@ -20,13 +20,13 @@ body {
 	color: #fff;
 }
 .accordion ul li:nth-child(1) {
-	background-image: url("http://maksim.be/codepen/img-1.jpg");
+	background-image: url("../img/login-img.jpg");
 }
 .accordion ul li:nth-child(2) {
-	background-image: url("http://maksim.be/codepen/img-2.jpg");
+	background-image: url("../img/plane.jpg");
 }
 .accordion ul li:nth-child(3) {
-	background-image: url("http://maksim.be/codepen/img-3.jpg");
+	background-image: url("../img/dashboard.jpg");
 }
 .accordion ul li::before {
 	position: absolute;

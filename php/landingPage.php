@@ -6,19 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="../css/landingPage.css" rel="stylesheet" type="text/css" />
+
+    <?php include_once("../partials/head.php"); ?>
+
+    <!--CSS del menú-->
+    <link href="../css/general.css" rel="stylesheet">
 </head>
 <body>
+        <!--Incluye el header-->
+        <?php include_once("../partials/header.php"); ?>
 <div class="accordion">
   <ul>
     <li><a href="../index.php">
       <div>
         <h1>Iniciar Sesión</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut consequat.</p>
+        <p>Ingresa a la plataforma para realizar tu solicitud de apoyo economico.</p>
       </div>
       </a> </li>
     <li><a href="solicitudesPublicas.php">
       <div>
-        <h1>Solicitudes Públicas</h1>
+        <h1>Transparencia</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       </div>
       </a> </li>
@@ -30,5 +37,9 @@
       </a> </li>
   </ul>
 </div>
+</div>
+    <!--Incluye el footer-->
+    <?php include_once("../partials/footer.php"); ?>
+    </div>
 </body>
 </html>
