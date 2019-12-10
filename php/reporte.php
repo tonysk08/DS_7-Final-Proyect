@@ -2,7 +2,7 @@
     session_start();
     $titulo="Reporte de viaje";
     require_once('../funciones/funciones.php');
-    /* ControlAcceso($titulo); */
+    ControlAcceso($titulo);
     require('../bd/conexion.php');
 ?>
 
