@@ -61,18 +61,18 @@
             <h6 class="col-12 purple-text font-weight-bolder mb-n2">El impacto en las funciones bajo su responsabilidad será:</h6>
             <div class="md-form md-outline col-lg-3 col-sm-12">
             <i class="fas fa-dice-one prefix"></i>
-              <textarea id="descripcionEvento" class="md-textarea form-control noresize" rows="3" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
-              <label class="ml-5" for="descripcionEvento">Corto Plazo</label>
+              <textarea id="impactoCortoPlazo" class="md-textarea form-control noresize" rows="3" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
+              <label class="ml-5" for="impactoCortoPlazo">Corto Plazo</label>
             </div>
             <div class="md-form md-outline col-lg-3 col-sm-12">
             <i class="fas fa-dice-two prefix"></i>
-              <textarea id="descripcionEvento" class="md-textarea form-control noresize" rows="3" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
-              <label class="ml-5" for="descripcionEvento">Medio Plazo</label>
+              <textarea id="impactoMedioPlazo" class="md-textarea form-control noresize" rows="3" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
+              <label class="ml-5" for="impactoMedioPlazo">Medio Plazo</label>
             </div>
             <div class="md-form md-outline col-lg-3 col-sm-12">
             <i class="fas fa-dice-three prefix"></i>
-              <textarea id="descripcionEvento" class="md-textarea form-control noresize" rows="3" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
-              <label class="ml-5" for="descripcionEvento">Largo Plazo</label>
+              <textarea id="impactoLargoPlazo" class="md-textarea form-control noresize" rows="3" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
+              <label class="ml-5" for="impactoLargoPlazo">Largo Plazo</label>
             </div>
             <small id="descripcionEventoHelp" class="form-text text-muted col-md-12 mt-n4 ml-4">Redacte los logros del viaje.Redacte los logros del viaje.Redacte los logros del viaje.Redacte los logros del viaje.</small>
           </div>
