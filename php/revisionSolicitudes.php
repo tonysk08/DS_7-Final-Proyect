@@ -2,7 +2,7 @@
     session_start();
     $titulo="Revisión de solicitudes";
     require_once('../funciones/funciones.php');
-    ControlAcceso($titulo);
+    /* ControlAcceso($titulo); */
     if(isset($_SESSION['idUser'])){
         $idUsuario = $_SESSION['idUser'];
     }
@@ -28,6 +28,21 @@
 
    
     <div class="col-md-12">
+    <!-- Bienvenida del administrativo/a -->
+    <?php 
+        
+        if($_SESSION['idUser'] === 6){
+            $nombre = "Vida Universitaria";
+        }
+        elseif($_SESSION['idUser'] === 10){
+            $nombre = "Rectoria";
+        }
+        else{
+            $nombre = $_SESSION['nombre']. " " .$_SESSION['apellido'];
+        }
+
+    ?>
+    <?php echo "Que gusto verle,"." ".$_SESSION['nombre']. " " .$_SESSION['apellido'];?>
     <h3>Revisión de solicitudes</h3>
     <div class='card'>
         <div class='card-body table-responsive'>

@@ -443,7 +443,7 @@ function mostrarErrores($errores){
         $consulta1->execute();
         $fila1 = $consulta1->fetch();
 
-        $idPeticion = $fila1['idPeticion'];
+        $requisitoReporte = $fila1['idPeticion'];
 
         if ($_SESSION["sw"]!=1){
             echo "<script> 
@@ -453,8 +453,21 @@ function mostrarErrores($errores){
 
        elseif ($_SESSION['idUser']!=6 && $_SESSION['idUser']!=7 && $_SESSION['idUser']!=8 && $_SESSION['idUser']!=9 && $_SESSION['idUser']!=10){     
         
-            if ($titulo !== "Formulario" && $titulo !== "Seguimiento de la Solicitud" && $titulo !== "Reporte de viaje"){
-                if($idPeticion==""){
+            if (($titulo == "Formulario" || $titulo== "Seguimiento de la Solicitud") && $requisitoReporte!==""){
+                    echo "<script>
+                    alert('ERROR: Su evento ha finalizado. Debe hacer el reporte de viaje') 
+                    window.location= './reporte.php'
+                    </script>";
+            }
+            elseif ($titulo="Reporte de viaje"  && $requisitoReporte==""){
+                    echo "<script>
+                    alert('ERROR: Aún no debe hacer el reporte de viaje.') 
+                    window.location= './formulario.php'
+                    </script>";
+            }
+            elseif ($titulo !== "Formulario" && $titulo !== "Seguimiento de la Solicitud" && $titulo !== "Reporte de viaje"){
+
+                if($requisitoReporte==""){
                     echo "<script>
                     alert('ERROR: Acceso denegado. Debe hacer el formulario.') 
                     window.location= './formulario.php'
@@ -465,23 +478,11 @@ function mostrarErrores($errores){
                     window.location= './reporte.php'
                     </script>";
                 }
+    
             }
 
-            elseif ($titulo == "Formulario" || $titulo== "Seguimiento de la Solicitud"){
-                if($idPeticion==""){   
-                    echo "<script>
-                    alert('ERROR: Debe pasar por el formulario antes de ir a otras pantallas') 
-                    window.location= './formulario.php'
-                    </script>"; 
-                }else{
-                    echo "<script>
-                    alert('ERROR: Su evento ha finalizado. Debe hacer el reporte de viaje') 
-                    window.location= './reporte.php'
-                    </script>";
-                }
-            }
+        }       
 
-        }
         elseif ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 || $_SESSION['idUser']==9 || $_SESSION['idUser']==10){ 
 
             if ($titulo !== "Revisión de solicitudes"){
@@ -489,6 +490,7 @@ function mostrarErrores($errores){
                 alert('ERROR: Acceso denegado') 
                 window.location='./revisionSolicitudes.php'
                 </script>";}
+
         }
 
 
