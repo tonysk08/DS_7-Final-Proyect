@@ -432,18 +432,19 @@ function mostrarErrores($errores){
         $conPDO2 = new PDO($dsn, $dbuser, $dbpass);
 
         //Consulta para comprobar si el usuario tiene que reportar su viaje. Si la fecha del evento es menor a la fecha actual le dice al estudiante que debe hacer el reporte.
-        $consulta1 = $conPDO2->prepare("SELECT estudiante.idPeticion 
+        $consulta1 = $conPDO2->prepare("SELECT estudiante.idPeticion, peticion.estado, peticion.fechaFin
         FROM estudiante 
         INNER JOIN peticion ON estudiante.idPeticion = peticion.idPeticion 
         WHERE estudiante.idUser = $idUser
-        AND peticion.fechaFin < NOW() 
         ORDER BY estudiante.idPeticion DESC
         LIMIT 1");
 
         $consulta1->execute();
-        $fila1 = $consulta1->fetch();
+        $fila1 = $consulta1->fetch(); 
+        $estado = $fila1['estado'];
+        $fechaFin = strtotime($fila1['fechaFin']);
 
-        $requisitoReporte = $fila1['idPeticion'];
+        $fechaActual = strtotime(date("Y-m-d", time()));
 
         if ($_SESSION["sw"]!=1){
             echo "<script> 
@@ -453,34 +454,50 @@ function mostrarErrores($errores){
 
        elseif ($_SESSION['idUser']!=6 && $_SESSION['idUser']!=7 && $_SESSION['idUser']!=8 && $_SESSION['idUser']!=9 && $_SESSION['idUser']!=10){     
         
-            if (($titulo == "Formulario" || $titulo== "Seguimiento de la Solicitud") && $requisitoReporte!==""){
-                    echo "<script>
-                    alert('ERROR: Su evento ha finalizado. Debe hacer el reporte de viaje') 
-                    window.location= './reporte.php'
-                    </script>";
+            if (($titulo == "Formulario" || $titulo== "Seguimiento de la Solicitud") && $estado == 'Aceptado' && $fechaFin<$fechaActual){
+                echo "<script>
+                alert('ERROR: Su evento ha finalizado. Debe hacer el reporte de viaje') 
+                window.location= './reporte.php'
+                </script>";
             }
-            elseif ($titulo="Reporte de viaje"  && $requisitoReporte==""){
-                    echo "<script>
-                    alert('ERROR: Aún no debe hacer el reporte de viaje.') 
-                    window.location= './formulario.php'
-                    </script>";
+            elseif ($titulo == "Formulario" && ($estado=='Rechazado' || $estado=='Pendiente' || $estado='Aceptado')){
+                echo "<script>
+                alert('ERROR: Ya tiene una petición pendiente.') 
+                window.location= './tracking.php'
+                </script>";
+            }
+            elseif($titulo == "Reporte de viaje" && ($estado=='Rechazado' || $estado=='Pendiente' || $estado='Aceptado')){
+                echo "<script>
+                alert('ERROR: Aun no debe hacer el reporte de viaje.') 
+                window.location= './tracking.php'
+                </script>";
+            }
+            elseif(($titulo == "Reporte de viaje" || $titulo== "Seguimiento de la Solicitud") && $estado!=='Rechazado' && $estado!=='Pendiente' && $estado!=='Aceptado'){
+                echo "<script>
+                alert('ERROR: Por favor proceda a completar el formulario.') 
+                window.location= './formulario.php'
+                </script>";
             }
             elseif ($titulo !== "Formulario" && $titulo !== "Seguimiento de la Solicitud" && $titulo !== "Reporte de viaje"){
 
-                if($requisitoReporte==""){
+                if($estado=='Rechazado' || $estado=='Pendiente' || $estado='Aceptado'){
                     echo "<script>
-                    alert('ERROR: Acceso denegado. Debe hacer el formulario.') 
-                    window.location= './formulario.php'
+                    alert('ERROR: Acceso denegado.') 
+                    window.location= './tracking.php'
                     </script>"; 
-                }else{
+                }elseif($estado == 'Aceptado' && $fechaFin<$fechaActual){
                     echo "<script>
-                    alert('ERROR: Acceso denegado. Debe hacer el reporte de viaje.') 
+                    alert('ERROR: Acceso denegado.') 
                     window.location= './reporte.php'
                     </script>";
                 }
-    
+                elseif($estado!=='Rechazado' && $estado!=='Pendiente' && $estado!=='Aceptado'){
+                    echo "<script>
+                    alert('ERROR: Acceso denegado.') 
+                    window.location= './formulario.php'
+                    </script>";
+                }
             }
-
         }       
 
         elseif ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 || $_SESSION['idUser']==9 || $_SESSION['idUser']==10){ 
@@ -490,7 +507,6 @@ function mostrarErrores($errores){
                 alert('ERROR: Acceso denegado') 
                 window.location='./revisionSolicitudes.php'
                 </script>";}
-
         }
 
 

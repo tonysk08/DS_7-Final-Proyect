@@ -1,6 +1,7 @@
 <?php
-
     $titulo="Solicitudes";
+    require_once('../funciones/funciones.php');
+    /* ControlAcceso($titulo); */
 ?>
 <!DOCTYPE html>
 <html lang="en">
