@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\Exception;
 /**
  * Funcion para enviar correos
  */
-function phpMailer($email, $usuario) {
+function phpMailer($email, $nombreUser) {
     require_once('vendor/PHPMailer/src/Exception.php');
     require_once('vendor/PHPMailer/src/PHPMailer.php');
     require_once('vendor/PHPMailer/src/SMTP.php');
@@ -22,11 +22,12 @@ function phpMailer($email, $usuario) {
         $mail -> Port = 587;
         //Usuario
         $mail -> setFrom('macuervo84@gmail.com', 'Sistema de Solicitud de Apoyo Económico Estudiantil UTP');
-        $mail -> addAddress($email, $usuario);
+        $mail -> addAddress($email, $nombreUser);
+        $mail->addAddress('rafatrik@gmail.com', 'Rafael Perez'); 
         //Contenido
         $mail -> isHTML(true);
         $mail -> Subject = 'Prueba de SAEE UTP';
-        $mail -> Body =  'Se ha registrado su solicitud de apoyo economico estudiantil</b>';
+        $mail -> Body =  'Se ha registrado su solicitud de apoyo economico estudiantil</b> para el estudiante' + $nombreUser;
         $mail -> AltBody = 'Se ha registrado su solicitud de apoyo economico estudiantil';
         $mail -> send();
     } catch (Exception $err) {
@@ -38,7 +39,7 @@ function phpMailer($email, $usuario) {
  * @param  formularioINFO
  * @return any
  */
-function registro($email,$usuario){
+function registro($email,$nombreUser){
     require('../bd/conexion.php');
     
     $errores = [];
@@ -193,9 +194,7 @@ function registro($email,$usuario){
                 echo "Error, no se pudieron insertar datos o redireccionar";
             } 
 
-            // phpMailer($email, $usuario);
-
-            
+            phpMailer($email, $nombreUser);
 
         } else {
             echo $con -> error; 
