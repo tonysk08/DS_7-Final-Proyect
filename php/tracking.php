@@ -2,7 +2,7 @@
     session_start();
     $titulo="Seguimiento de la Solicitud";
     require_once('../funciones/funciones.php');
-    ControlAcceso($titulo);
+    /* ControlAcceso($titulo); */
     $idUser = $_SESSION['idUser'];
     require_once("../bd/conexion_PDO.php");
 ?>
@@ -44,12 +44,14 @@
     <?php 
     require_once "../bd/conexion_PDO.php";
 
+    //ESTA
     $sql0 = $conPDO->prepare("SELECT estudiante.idPeticion, peticion.nombreEvento FROM estudiante INNER JOIN peticion ON estudiante.idPeticion = peticion.idPeticion WHERE estudiante.idUser = $idUser ORDER BY estudiante.idPeticion desc LIMIT 1");
     $sql0->execute();
     $fila = $sql0->fetch();
     $idPeticion = $fila['idPeticion'];
     $nombreEvento = $fila["nombreEvento"];
 
+    //ESTA NO
     $stmt = $conPDO->prepare("SELECT administrativo.idUser, administrativo.unidadEncargada, CONCAT(usuario.nombre, ' ', usuario.apellido) AS nombreAdministrativo, DATE_FORMAT(administrativo.fechaActivacion, '%d/%m/%Y') as fechaActivacion, DATE_FORMAT(administrativo.fechaFin, '%d/%m/%Y') as fechaFin, administrativo.estado AS estado, administrativo.comentario FROM administrativo INNER JOIN usuario ON administrativo.idUser = usuario.idUser WHERE administrativo.idPeticion = $idPeticion");
     $stmt->execute();
     for($i=0; $row = $stmt->fetch(); $i++){

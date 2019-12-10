@@ -2,7 +2,7 @@
     session_start();
     $titulo="Revisión de solicitudes";
     require_once('../funciones/funciones.php');
-    ControlAcceso($titulo);
+    /* ControlAcceso($titulo); */
     if(isset($_SESSION['idUser'])){
         $idUsuario = $_SESSION['idUser'];
     }
