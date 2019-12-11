@@ -25,6 +25,8 @@
     <!--Incluye el header-->
     <?php include_once("../partials/header.php"); ?>
 
+    <?php include_once("../partials/navigation.php"); ?>
+
     <div class="col-md-12">
 
     <h2 class="my-4 dark-grey-text font-weight-bold">Seguimiento de la Solicitud</h2>

@@ -1,3 +1,6 @@
+<!-- CSS DEL MENÚ -->
+<link href="../css/menu.css" rel="stylesheet">
+
 <!--Barra de navegación de usuario cliente-->
 <nav class="navbar navbar-expand-sm bg-menuUTP navbar-dark sticky-top ">
 
