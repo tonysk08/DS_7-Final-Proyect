@@ -1,5 +1,4 @@
 <?php
-
     $titulo="Creditos";
 ?>
 
@@ -11,8 +10,6 @@
     <?php include_once("../partials/head.php"); ?>
 
     <link href="../css/creditos.css" rel="stylesheet">
-
-
     
 </head>
 <body>
