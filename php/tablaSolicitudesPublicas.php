@@ -43,7 +43,7 @@
         <?php 
         require_once "../bd/conexion_PDO.php";
         $stmt = $conPDO->prepare("
-        SELECT peticion.idPeticion, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaIncio, peticion.fechaFin, peticion.lugarEvento 
+        SELECT peticion.idPeticion, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaInicioSolicitud, peticion.fechaFin, peticion.lugarEvento 
         FROM administrativo INNER JOIN peticion 
         ON administrativo.idPeticion = peticion.idPeticion 
         WHERE administrativo.idUser=10 
@@ -56,7 +56,7 @@
                 <td><?php echo $row['idPeticion']; ?></td>
                 <td><?php echo $row['cedulaEncargado']; ?></td>
                 <td><?php echo $row['nombreEvento']; ?></td>
-                <td><?php echo $row['fechaIncio']; ?></td>
+                <td><?php echo $row['fechaInicioSolicitud']; ?></td>
                 <td><?php echo $row['fechaFin']; ?></td>
                 <td><?php echo $row['lugarEvento']; ?></td>
                 <td id="Validacion" class="text-center">
