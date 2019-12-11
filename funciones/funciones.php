@@ -232,6 +232,7 @@ function registro($email,$nombreUser){
      * Funcion para obtener el idPeticion del estudiante 
      * @param con 
      * @param idUser
+     * @return idPeticion
      */
     function EstudentidPeticion($idUser, $con) {
 
@@ -267,7 +268,8 @@ function registro($email,$nombreUser){
         require('../bd/conexion.php');
         
          //Obtencion de idPeticion
-         $idPeticion = EstudentidPeticion($idUser, $con);   
+        $idPeticion = EstudentidPeticion($idUser, $con);   
+        
         $errores = [];
 
         $objetivoParticipacion =limpiar($_POST['objetivoParticipacion']); 
@@ -319,11 +321,6 @@ function registro($email,$nombreUser){
                     $errores[] = "Sorry, there was an error uploading your file.";
                 }
             }
-        
-
-            
-
-
         //Insercion de los datos a la BD
         $dec = $con -> prepare("UPDATE peticion SET objetivoParticipacion = ? , logrosViaje = ?, logrosCortoPlazo = ?, logrosMedianoPlazo = ? ,LogrosLargoPlazo = ?, rutaReporte = ? WHERE (`idPeticion` = ?)");
         $dec -> bind_param("ssssssi",$objetivoParticipacion,$resultadosParticipacion, $impactoCortoPlazo, $impactoMedioPlazo, $impactoLargoPlazo, $target_file, $idPeticion);
@@ -332,9 +329,13 @@ function registro($email,$nombreUser){
         $dec -> free_result();
         $dec -> close();
       
-            if($resultado == 1) {        
-                echo'Datos insertados exitosamente';
-            }
+        if($resultado == 1) {        
+
+            echo "<script>
+            alert('Su mensaje reporte ha sido enviadio correctamente') 
+            window.location= '../index.php'
+            </script>";
+        }
         $con -> close(); 
 
         return $errores;
