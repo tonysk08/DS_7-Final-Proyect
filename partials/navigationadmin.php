@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-sm bg-menuUTP navbar-dark sticky-top ">
 
 <!-- Logo/Nombre de la página -->
-<a class="navbar-brand" href="#">Sistema de Apoyo Económico Estudiantil</a>
+<a class="navbar-brand" href="../php/landingPage.php">Sistema de Apoyo Económico Estudiantil</a>
 <!-- Cerrar Sesion -->
 <ul class="navbar-nav ml-auto">
     <li class="nav-item right">
