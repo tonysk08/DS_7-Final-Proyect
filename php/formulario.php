@@ -57,7 +57,7 @@
   <?php include_once("../partials/navigation.php"); ?>
 
   <!-- This container has everything apart from the header and the footer -->
-  <div class="container-fluid">
+  <div class="container-fluid mt-3">
     <!-- Imagen a la derecha-->
     <div class="row">
       <div class="col-3 view ml-n1 mr-n1 view overlay">    

@@ -14,9 +14,6 @@
       <!--CSS de tablas para ajustar los botones-->
     <link href="../css/tablas.css" rel="stylesheet">
     
-
-    <!--CSS del menú-->
-    <link href="../css/general.css" rel="stylesheet">
 </head>
 <body>
 
