@@ -229,14 +229,13 @@ function registro($email,$nombreUser){
 
 
     /**
-     * Funcion para obtener el idPeticion
+     * Funcion para obtener el idPeticion del estudiante 
+     * @param con 
+     * @param idUser
      */
-    function EstudentidPeticion($idUser) {
-        require_once('../bd/conexion.php'); 
+    function EstudentidPeticion($idUser, $con) {
 
-        $dec = $con -> prepare("SELECT peticion.idPeticion FROM estudiante 
-        INNER JOIN peticion ON estudiante.idPeticion = peticion.idPeticion 
-        WHERE estudiante.idUser = ?  limit 1");
+        $dec = $con -> prepare("SELECT peticion.idPeticion FROM estudiante  INNER JOIN peticion ON estudiante.idPeticion = peticion.idPeticion  WHERE estudiante.idUser = ?  limit 1");
         $dec -> bind_param("i", $idUser); 
         $dec -> execute(); 
 
@@ -250,8 +249,11 @@ function registro($email,$nombreUser){
            
             return $linea['idPeticion'];
         }
+        else { 
+            echo $con -> error; 
+        }
         $con -> close(); 
-        
+
         return $linea['idPeticion'];
 
     }
@@ -264,6 +266,8 @@ function registro($email,$nombreUser){
      function registroReportes($idUser){ 
         require('../bd/conexion.php');
         
+         //Obtencion de idPeticion
+         $idPeticion = EstudentidPeticion($idUser, $con);   
         $errores = [];
 
         $objetivoParticipacion =limpiar($_POST['objetivoParticipacion']); 
@@ -317,8 +321,8 @@ function registro($email,$nombreUser){
             }
         
 
-        //Obtencion de idPeticion
-            $idPeticion = EstudentidPeticion($idUser);
+            
+
 
         //Insercion de los datos a la BD
         $dec = $con -> prepare("UPDATE peticion SET objetivoParticipacion = ? , logrosViaje = ?, logrosCortoPlazo = ?, logrosMedianoPlazo = ? ,LogrosLargoPlazo = ?, rutaReporte = ? WHERE (`idPeticion` = ?)");
