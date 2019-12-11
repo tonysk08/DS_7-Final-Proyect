@@ -47,11 +47,14 @@
   <link href="../css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="mb-5">
 
   <!-- Start your project here -->
   <!-- Page header -->
   <?php include_once("../partials/header.php"); ?>
+
+  <!-- Incluye el menú de navegación -->
+  <?php include_once("../partials/navigation.php"); ?>
 
   <!-- This container has everything apart from the header and the footer -->
   <div class="container-fluid">

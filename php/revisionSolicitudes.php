@@ -25,7 +25,8 @@
     <!--Incluye el header-->
     <?php include_once("../partials/header.php"); ?>
 
-
+    <!-- Incluye el menú de navegación -->
+    <?php include_once("../partials/navigation.php"); ?>
    
     <div class="col-md-12">
     <!-- Bienvenida del administrativo/a -->

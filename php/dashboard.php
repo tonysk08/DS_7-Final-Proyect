@@ -25,9 +25,8 @@
     <!--Incluye el header-->
     <?php include_once("../partials/header.php"); ?>
 
-    <!--SE ESTÁ UTILIZANDO EL NAV DE solicitudesPublicas-->
-    <!--Incluye el nav-->
-    <?php include_once("../partials/navigationpublic.php"); ?>
+    <!-- Incluye el menú de navegación -->
+    <?php include_once("../partials/navigation.php"); ?>
 
     <div class="album py-5 bg-light  ">
         <div class="container">

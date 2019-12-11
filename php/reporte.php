@@ -21,6 +21,9 @@
   <!-- Page header -->
   <?php include_once("../partials/header.php"); ?>
 
+    <!-- Incluye el menú de navegación -->
+    <?php include_once("../partials/navigation.php"); ?>
+
   <!-- This container has everything apart from the header and the footer -->
   <div class="container-fluid">
     <div class="row">

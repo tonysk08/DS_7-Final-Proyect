@@ -21,8 +21,11 @@
     <link href="../css/general.css" rel="stylesheet">
 </head>
 <body>
-    <!--Incluye el header-->
+    <!-- Incluye el header -->
     <?php include_once("../partials/header.php"); ?>
+
+    <!-- Incluye el menú de navegación -->
+    <?php include_once("../partials/navigation.php"); ?>
 
     <div class="col-md-12">
 

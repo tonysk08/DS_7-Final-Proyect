@@ -1,25 +1,20 @@
+<!-- CSS DEL MENÚ -->
+<link href="../css/menu.css" rel="stylesheet">
+
 <!--Barra de navegación de usuario cliente-->
-<nav class="navbar navbar-expand-sm bg-menuUTP navbar-dark sticky-top ">
+<nav class="navbar navbar-expand-sm bg-menuUTP navbar-dark sticky-top mb-2">
 
 <!-- Logo/Nombre de la página -->
-<a class="navbar-brand" href="#">Sistema de Apoyo Económico Estudiantil</a>
-
-<!-- Enlaces -->
-<ul class="navbar-nav">
-    <li class="nav-item">
-        <a class="nav-link" href="formulario.php">Formulario RUTP-FV-4</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="tracking.php">Solicitud Pendiente</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="creditos.php">Créditos</a>
-    </li>
-</ul>
+<a class="navbar-brand" href="../php/landingPage.php">Sistema de Apoyo Económico Estudiantil</a>
 <!--  -->
 <ul class="navbar-nav ml-auto">
     <li class="nav-item right">
+    <?php if(isset($_SESSION['idUser'])){ ?>
         <a class="nav-link" href="../php/logout.php">Cerrar Sesión</a>
+    <?php } else{ ?>
+        <a class="nav-link" href="../index.php">Iniciar Sesión</a>
+    <?php } ?>
+        
     </li>
 </ul>
 </nav>
