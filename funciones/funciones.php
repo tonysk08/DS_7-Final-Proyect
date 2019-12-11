@@ -227,6 +227,114 @@ function registro($email,$nombreUser){
     return $errores;
 }
 
+
+    /**
+     * Funcion para obtener el idPeticion
+     */
+    function EstudentidPeticion($idUser) {
+        require_once('../bd/conexion.php'); 
+
+        $dec = $con -> prepare("SELECT peticion.idPeticion FROM estudiante 
+        INNER JOIN peticion ON estudiante.idPeticion = peticion.idPeticion 
+        WHERE estudiante.idUser = ?  limit 1");
+        $dec -> bind_param("i", $idUser); 
+        $dec -> execute(); 
+
+        $resultado = $dec -> get_result();
+        $cantidad = mysqli_num_rows($resultado);
+        $linea = $resultado -> fetch_assoc();
+        $dec -> free_result();
+        $dec -> close();
+
+        if($cantidad == 1) {
+           
+            return $linea['idPeticion'];
+        }
+        $con -> close(); 
+        
+        return $linea['idPeticion'];
+
+    }
+
+    /**
+     * Funcion para registrar reportes 
+     * @return any
+     */
+
+     function registroReportes($idUser){ 
+        require('../bd/conexion.php');
+        
+        $errores = [];
+
+        $objetivoParticipacion =limpiar($_POST['objetivoParticipacion']); 
+        $resultadosParticipacion =limpiar($_POST['resultadosParticipacion']); 
+        $impactoCortoPlazo =limpiar($_POST['impactoCortoPlazo']); 
+        $impactoMedioPlazo =limpiar($_POST['impactoMedioPlazo']); 
+        $impactoLargoPlazo =limpiar($_POST['impactoLargoPlazo']); 
+
+        //Inicio del fileUpload
+        $target_dir = "../pdf/";
+        $target_file = $target_dir . basename($_FILES["rutaPDF"]["name"]);
+        $uploadOk = 1;
+        $pdfFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        // Check if image file is a actual image or fake image
+        if(isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["rutaPDF"]["tmp_name"]);
+                if($check !== false) {
+                    echo "File is a document - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } else {
+                    $errores[] = "File is not a document";
+                    $uploadOk = 0;
+                }
+            }
+            // Check if file already exists
+            if (file_exists($target_file)) {
+                $errores[] = "Sorry, file already exists.";
+                $uploadOk = 0;
+                }
+            // Check file size
+            if ($_FILES["rutaPDF"]["size"] > 500000) {
+                $errores[] = "Sorry, your file is too large.";
+                $uploadOk = 0;
+            }
+            // Allow certain file formats
+            if($pdfFileType != "pdf") {
+                $errores[] = "Sorry, only PDF files are allowed.";
+                $uploadOk = 0;
+            } 
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+                $errores[] = "Sorry, your file was not uploaded.";
+            // if everything is ok, try to upload file
+            } else {
+                if (move_uploaded_file($_FILES["rutaPDF"]["tmp_name"], $target_file)) {
+                    echo "The file ". basename( $_FILES["rutaPDF"]["name"]). " has been uploaded.";
+                    echo $target_file;
+                } else {
+                    $errores[] = "Sorry, there was an error uploading your file.";
+                }
+            }
+        
+
+        //Obtencion de idPeticion
+            $idPeticion = EstudentidPeticion($idUser);
+
+        //Insercion de los datos a la BD
+        $dec = $con -> prepare("UPDATE peticion SET objetivoParticipacion = ? , logrosViaje = ?, logrosCortoPlazo = ?, logrosMedianoPlazo = ? ,LogrosLargoPlazo = ?, rutaReporte = ? WHERE (`idPeticion` = ?)");
+        $dec -> bind_param("ssssssi",$objetivoParticipacion,$resultadosParticipacion, $impactoCortoPlazo, $impactoMedioPlazo, $impactoLargoPlazo, $target_file, $idPeticion);
+        $dec -> execute();
+        $resultado = $dec -> affected_rows;
+        $dec -> free_result();
+        $dec -> close();
+      
+            if($resultado == 1) {        
+                echo'Datos insertados exitosamente';
+            }
+        $con -> close(); 
+
+        return $errores;
+     }
     /**
      *Funcion para validar la existencia de correo del usuario
      *@param con
@@ -379,7 +487,7 @@ function mostrarErrores($errores){
      */
     function login() {
 
-        require_once('bd/conexion.php');
+        require_once('../bd/conexion.php');
         $errores = []; 
         
         $usuario = limpiar($_POST['cedula-email']);
@@ -408,7 +516,7 @@ function mostrarErrores($errores){
                 $_SESSION['correo'] = $linea['correo'];
                 $_SESSION['idUser'] = $linea['idUser'];
                 $_SESSION['sw'] = 1;
-                header('Location: php/formulario.php');
+                header('Location: formulario.php');
             }
         } else {
             $errores[] = 'El Nombre de Usuario, Cedula o la contraseña no son validos.';       
