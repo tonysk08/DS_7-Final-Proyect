@@ -5,9 +5,9 @@ use PHPMailer\PHPMailer\Exception;
  * Funcion para enviar correos
  */
 function phpMailer($email, $nombreUser) {
-    require_once('vendor/PHPMailer/src/Exception.php');
-    require_once('vendor/PHPMailer/src/PHPMailer.php');
-    require_once('vendor/PHPMailer/src/SMTP.php');
+    require_once('../vendor/PHPMailer/src/Exception.php');
+    require_once('../vendor/PHPMailer/src/PHPMailer.php');
+    require_once('../vendor/PHPMailer/src/SMTP.php');
 
     $mail = new PHPMailer(true);
     try{
@@ -16,8 +16,8 @@ function phpMailer($email, $nombreUser) {
         $mail -> isSMTP();
         $mail -> Host='in-v3.mailjet.com';
         $mail -> SMTPAuth = true;
-        $mail -> Username = '833b051aa3ca5aa16b55cca33f85975d';
-        $mail -> Password = '2ba4dd4b58b87667e5bd22a653c9b344';
+        $mail -> Username = 'aa61a22295cce6a4220bf161a398908f';
+        $mail -> Password = 'b1407c4cab5bc2b5cea5da05d357f43d';
         $mail -> SMTPSecure = 'tls';
         $mail -> Port = 587;
         //Usuario
@@ -155,6 +155,7 @@ function registro($email,$nombreUser){
         $dec -> close();
   
         if($resultado == 1) {
+            
             echo'Datos insertados exitosamente';
             $_SESSION['unidadAcademica'] = $unidadAcademica;
 
@@ -189,12 +190,13 @@ function registro($email,$nombreUser){
             UPDATE administrativo SET fechaActivacion=CURRENT_TIMESTAMP WHERE idUser=6 AND idPeticion=$idPeticion";
         
             if ($con->multi_query($sql3) === TRUE) {
+                phpMailer($email, $nombreUser);
                 header('Location: tracking.php');
             } else {
                 echo "Error, no se pudieron insertar datos o redireccionar";
             } 
 
-            phpMailer($email, $nombreUser);
+           
 
         } else {
             echo $con -> error; 
@@ -220,6 +222,7 @@ function registro($email,$nombreUser){
             'target_file='.$target_file.'<br>';
             echo implode(', ', $_POST['apoyoEvento']);
         }
+       
         $con -> close(); 
     return $errores;
 }
