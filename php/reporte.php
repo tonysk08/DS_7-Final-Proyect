@@ -4,6 +4,27 @@
     require_once('../funciones/funciones.php');
     /* ControlAcceso($titulo); */
     require('../bd/conexion.php');
+
+    if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['ficha']) && validarFicha ($_POST['ficha'])){
+      //Validar si la informacion es enviada por un robot
+      if(!empty($_POST['robot'])) {
+        return header('Location: error.php');
+      }
+      $campos = [
+        'objetivoParticipacion' => 'El objetivo de la participacion', 
+        'resultadosParticipacion' => 'Los resultados de la participacion',
+        'impactoCortoPlazo' => 'El impacto a corto plazo',
+        'impactoMedioPlazo' => 'El impacto a mediano plazo', 
+        'impactoLargoPlazo' => 'El impacto a largo plazo'
+      ];
+      $errores = validarCampos($campos);
+  
+      if(isset($_SESSION['idUser'])){
+        if(empty($errores)) {
+          $errores = registroReportes($_SESSION['idUser']);
+        }
+      }
+    };
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +68,7 @@
             <h5 class="col-12 purple-text font-weight-bold mb-n2">Información Sustantiva</h5>
             <div class="md-form md-outline col-lg-9 col-sm-12">
             <i class="fas fa-tasks prefix"></i>
-              <textarea id="objetivosEvento" class="md-textarea form-control noresize" rows="4" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
+              <textarea id="objetivosEvento" class="md-textarea form-control noresize" rows="4" name="objetivoParticipacion" value="<?php echo $_POST['objetivoParticipacion'] ?? '' ?>"></textarea>
               <label class="ml-5" for="objetivosEvento">Objetivo de la participación</label>
               <small id="objetivosEventoHelp" class="form-text text-muted">Redacte las razones por las que realizó el viaje.</small>
             </div>
@@ -55,7 +76,7 @@
           <div class="row mt-n4" id="FilaInformacionSustantiva2" >
             <div class="md-form md-outline col-lg-9 col-sm-12">
             <i class="fas fa-chart-bar prefix"></i>
-              <textarea id="resultadosEvento" class="md-textarea form-control noresize" rows="4" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
+              <textarea id="resultadosEvento" class="md-textarea form-control noresize" rows="4" name="resultadosParticipacion" value="<?php echo $_POST['resultadosParticipacion'] ?? '' ?>"></textarea>
               <label class="ml-5" for="resultadosEvento">Resultados (valor agregado en el desempeño de su cargo)</label>
               <small id="resultadosEventoHelp" class="form-text text-muted">Redacte los logros del viaje.</small>
             </div>
@@ -64,17 +85,17 @@
             <h6 class="col-12 purple-text font-weight-bolder mb-n2">El impacto en las funciones bajo su responsabilidad será:</h6>
             <div class="md-form md-outline col-lg-3 col-sm-12">
             <i class="fas fa-dice-one prefix"></i>
-              <textarea id="impactoCortoPlazo" class="md-textarea form-control noresize" rows="3" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
+              <textarea id="impactoCortoPlazo" class="md-textarea form-control noresize" rows="3" name="impactoCortoPlazo" value="<?php echo $_POST['impactoCortoPlazo'] ?? '' ?>"></textarea>
               <label class="ml-5" for="impactoCortoPlazo">Corto Plazo</label>
             </div>
             <div class="md-form md-outline col-lg-3 col-sm-12">
             <i class="fas fa-dice-two prefix"></i>
-              <textarea id="impactoMedioPlazo" class="md-textarea form-control noresize" rows="3" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
+              <textarea id="impactoMedioPlazo" class="md-textarea form-control noresize" rows="3" name="impactoMedioPlazo" value="<?php echo $_POST['impactoMedioPlazo'] ?? '' ?>"></textarea>
               <label class="ml-5" for="impactoMedioPlazo">Medio Plazo</label>
             </div>
             <div class="md-form md-outline col-lg-3 col-sm-12">
             <i class="fas fa-dice-three prefix"></i>
-              <textarea id="impactoLargoPlazo" class="md-textarea form-control noresize" rows="3" name="descripcion" value="<?php echo $_POST['descripcion'] ?? '' ?>"></textarea>
+              <textarea id="impactoLargoPlazo" class="md-textarea form-control noresize" rows="3" name="impactoLargoPlazo" value="<?php echo $_POST['impactoLargoPlazo'] ?? '' ?>"></textarea>
               <label class="ml-5" for="impactoLargoPlazo">Largo Plazo</label>
             </div>
             <small id="descripcionEventoHelp" class="form-text text-muted col-md-12 mt-n4 ml-4">Redacte los logros del viaje.Redacte los logros del viaje.Redacte los logros del viaje.Redacte los logros del viaje.</small>
