@@ -18,6 +18,8 @@
     <script src="../js/jquery.min.js"></script>
     <script src="../js/raphael-min.js"></script>
     <script src="../js/morris.js"></script>
+    <script src = "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="../js/morris.min.js"></script>
     <script src="../js/prettify.min.js"></script>
 
 
