@@ -1,6 +1,7 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 /**
  * Funcion para enviar correos
  */
@@ -23,7 +24,7 @@ function phpMailer($email, $nombreUser) {
         //Usuario
         $mail -> setFrom('macuervo84@gmail.com', 'Sistema de Solicitud de Apoyo Económico Estudiantil UTP');
         $mail -> addAddress($email, $nombreUser);
-        $mail->addAddress('rafatrik@gmail.com', 'Rafael Perez'); 
+        $mail-> addAddress('rafatrik@gmail.com', 'Rafael Perez'); 
         //Contenido
         $mail -> isHTML(true);
         $mail -> Subject = 'Prueba de SAEE UTP';
@@ -41,6 +42,7 @@ function phpMailer($email, $nombreUser) {
  */
 function registro($email,$nombreUser){
     require('../bd/conexion.php');
+    require('../php/fv4.php');
     
     $errores = [];
   
@@ -149,13 +151,7 @@ function registro($email,$nombreUser){
     
     //Insercion de los datos a la BD
     $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,rutaPDF, estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $dec -> bind_param("ssssssssssiiidddsss", $nombreEvento,
-    $cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,
-    $tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,
-    $apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,
-    $justificacionParticipacion,
-    $target_file, 
-    $estado);
+    $dec -> bind_param("ssssssssssiiidddsss", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$target_file, $estado);
         $dec -> execute();
         $resultado = $dec -> affected_rows;
         $dec -> free_result();
@@ -166,10 +162,11 @@ function registro($email,$nombreUser){
             echo'Datos insertados exitosamente';
             $_SESSION['unidadAcademica'] = $unidadAcademica;
 
-            $consultaRellenarCampos = "SELECT idPeticion FROM peticion ORDER BY idPeticion DESC LIMIT 1";
+            $consultaRellenarCampos = "SELECT idPeticion,fechaInicioSolicitud FROM peticion ORDER BY idPeticion DESC LIMIT 1";
 
             $result = $con->query($consultaRellenarCampos);    
             $row1 = $result->fetch_assoc();
+            $fechaInicioSolicitud=$row1["fechaInicioSolicitud"];
             $idPeticion = $row1["idPeticion"];
 
             $unidadAcademica = ' ';
@@ -203,8 +200,11 @@ function registro($email,$nombreUser){
                 echo "Error, no se pudieron insertar datos o redireccionar";
             } 
 
-           
+            $nombre = $_SESSION['nombre'];
+            $apellido=$_SESSION['apellido'];
 
+           GenerarPDF($idPeticion, $nombre,$apellido,$unidadAcademica,$fechaInicioSolicitud,$nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion);
+           
         } else {
             echo $con -> error; 
             $errores[] = 'Oops!, hubo algun error en el registro, intente de nuevo';   

@@ -33,10 +33,10 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4 box-shado">
-                        <h4 style="text-align: center;">Lorem, ipsum.</h4>
+                        <h4 style="text-align: center;">Tipo de alcance: </h4>
                         <div id="graph"></div>
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text">El alcance se los eventos puede determinar cuanta exposicion podria brindar dicho evento.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">button</button>
@@ -49,10 +49,10 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <h4 style="text-align: center;">Lorem, ipsum.</h4>
+                        <h4 style="text-align: center;">Paises mas seleccionados</h4>
                         <div id="graph2"></div>
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text">Los paises mas seleccionados para los viajes de los estudiantes.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">button</button>
@@ -65,26 +65,10 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <h4 style="text-align: center;">Lorem, ipsum.</h4>
+                        <h4 style="text-align: center;">Tipo de evento.</h4>
                         <div id="graph3"></div>
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">button</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">button</button>
-                                </div>
-                                <small class="text-muted">dd/mm/yy</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="card mb-4 box-shadow">
-                        <h4 style="margin-left: 5%; margin-top: 2%;">Lorem ipsum dolor sit amet.</h4>
-                        <div id="graph4"></div>
-                        <div class="card-body">
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, quas.</p>
+                            <p class="card-text">Tipo de evento mas seleccionado al momento de realizar una peticion a la U.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">button</button>
@@ -106,10 +90,8 @@
         Morris.Donut({
     element: 'graph',
     data: [
-        {value: 70, label: 'foo', formatted: 'at least 70%' },
-        {value: 15, label: 'bar', formatted: 'approx. 15%' },
-        {value: 10, label: 'baz', formatted: 'approx. 10%' },
-        {value: 5, label: 'A really really long label', formatted: 'at most 5%' }
+        {value: 65, label: 'Internacional', formatted: '65% de los estudiantes' },
+        {value: 35, label: 'Nacional', formatted: '35% de los estudiantes' },
     ],
     formatter: function (x, data) { return data.formatted; }
     });
@@ -119,10 +101,10 @@
         Morris.Donut({
     element: 'graph2',
     data: [
-        {value: 50, label: 'lorem', formatted: 'at least 70%' },
-        {value: 35, label: 'ipsum', formatted: 'approx. 15%' },
-        {value: 15, label: 'Lorem, ipsum dolor.', formatted: 'approx. 10%' },
-        {value: 10, label: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', formatted: 'at most 5%' }
+        {value: 25, label: 'Costa Rica', formatted: '25% de los estudiantes' },
+        {value: 45, label: 'Mexico', formatted: '45% de los estudiantes' },
+        {value: 25, label: 'Estados Unidos', formatted: '25% de los estudiantes' },
+        {value: 5, label: 'Paraguay', formatted: '5% de los estudiantes' }
     ],
     formatter: function (x, data) { return data.formatted; }
     });
@@ -132,29 +114,11 @@
         Morris.Donut({
     element: 'graph3',
     data: [
-        {value: 5, label: 'foo', formatted: 'at least 70%' },
-        {value: 60, label: 'bar', formatted: 'approx. 15%' },
-        {value: 35, label: 'baz', formatted: 'approx. 10%' },
-        {value: 10, label: 'A really really long label', formatted: 'at most 5%' }
+        {value: 45, label: 'Deportivo', formatted: '45% de los estudiantes' },
+        {value: 55, label: 'Cultural', formatted: '55% de los estudiantes' },
     ],
     formatter: function (x, data) { return data.formatted; }
     });
-    });
-
-    $(function () {
-        Morris.Area({
-  element: 'graph4',
-  behaveLikeLine: true,
-  data: [
-    {x: '2016 Q1', y: 5, z: 3},
-    {x: '2017 Q2', y: 2, z: 4},
-    {x: '2018 Q3', y: 5, z: 2},
-    {x: '2019 Q4', y: 3, z: 3}
-  ],
-  xkey: 'x',
-  ykeys: ['y', 'z'],
-  labels: ['Y', 'Z']
-});
     });
 </script>
 
