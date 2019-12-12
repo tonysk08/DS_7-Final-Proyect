@@ -98,11 +98,10 @@
                                 <a class="btn btn-warning" href="<?php echo $row['rutaReporte']?>" target="_blank"><i class="fas fa-file-signature mr-1"></i> Ver detalles del reporte de viaje</a>
                                 <a class="btn btn-danger" href="<?php echo $row['rutaAnexoReporte'];?>" target="_blank"><i class="fas fa-file-pdf mr-1"></i> Ver documentos anexados al reporte de viaje</a>
                             </div>
-                            <!-- Modal footer -->
-                            <div class="modal-footer mt-4">
-                                <button type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-info waves-effect" id="submitModal">Enviar <i class="fas fa-check"></i></button>
-                            </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer mt-4">
+                        <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Cerrar</button>
                     </div>
         
                     
