@@ -68,8 +68,7 @@
         <?php 
         require_once("../bd/conexion_PDO.php");
         $stmt = $dbh->prepare("SELECT peticion.idPeticion, CONCAT(usuario.nombre, ' ', usuario.apellido) AS nombreEstudiante, DATE_FORMAT(administrativo.fechaActivacion, '%d/%m/%Y') as fechaActivacion,
-        estudiante.unidadAcademica, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaIncio, 
-        peticion.fechaFin, peticion.lugarEvento, peticion.rutaFormulario, peticion.rutaPDF
+        estudiante.unidadAcademica, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaIncio, peticion.lugarEvento, peticion.rutaFormulario, peticion.rutaPDF
         FROM administrativo 
         INNER JOIN peticion ON administrativo.idPeticion = peticion.idPeticion
         INNER JOIN estudiante ON estudiante.idPeticion = peticion.idPeticion
@@ -95,7 +94,7 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h2 class="heading lead font-weight-bold">Solicitud de apoyo económico para IBM Think 2020</h2>
+                        <h2 class="heading lead font-weight-bold">Solicitud de apoyo económico para <?php echo $row['nombreEvento']; ?></h2>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="white-text">&times;</span>
                         </button>
