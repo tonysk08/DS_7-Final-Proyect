@@ -1,5 +1,6 @@
-<?php
-    $titulo="Sistema de Solicitud de Apoyo Económico Estudiantil UTP";
+<?php 
+  session_start();
+  $titulo="Sistema de Solicitud de Apoyo Económico Estudiantil UTP";
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +41,7 @@
   <!--  -->
   <ul class="navbar-nav ml-auto">
     <li class="nav-item right">
-    <?php if(isset($_SESSION['idUser'])){ ?>
+    <?php if(isset($_SESSION['sw'])==1){ ?>
       <a class="nav-link" href="./php/logout.php">Cerrar Sesión</a>
     <?php } else{ ?>
      <a class="nav-link" href="./php/login.php">Iniciar Sesión</a>

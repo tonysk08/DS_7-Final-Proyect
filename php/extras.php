@@ -19,6 +19,20 @@
 
             return $header;
        }
+       function Head2(){
+           
+        $fp = fopen("../partialsText/header2.txt", "r");
+        $header = null;
+
+        while(!feof($fp)) {
+
+            $header=$header.fgets($fp);  
+
+        }
+        fclose($fp);
+
+        return $header;
+   }
     }
     
 ?>

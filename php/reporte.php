@@ -2,7 +2,7 @@
     session_start();
     $titulo="Reporte de viaje";
     require_once('../funciones/funciones.php');
-    /* ControlAcceso($titulo); */
+    ControlAcceso($titulo);
     require('../bd/conexion.php');
 
     if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['ficha']) && validarFicha ($_POST['ficha'])){
