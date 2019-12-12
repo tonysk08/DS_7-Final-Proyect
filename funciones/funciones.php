@@ -51,6 +51,7 @@ function registro($email,$nombreUser){
     $lugarEvento = limpiar($_POST['lugarEvento']);
     $fechaInicio = limpiar($_POST['fechaInicio']);
     $fechaFin = limpiar($_POST['fechaFin']);
+    $estado = "Pendiente";
 
     if(!isset($_POST['apoyoEvento'])){
         $errores[] = "Seleccione el tipo de apoyo que brinda el evento";
@@ -148,7 +149,13 @@ function registro($email,$nombreUser){
     
     //Insercion de los datos a la BD
     $dec = $con -> prepare("INSERT INTO peticion (nombreEvento,cedulaEncargado,descripcion,proyeccion,alcance,lugarEvento,tipo,fechaIncio,fechaFin,apoyoEvento,inscripcionUTP,gastosViajeUTP,apoyoEconomicoUTP,montoInscripcion,montoGastoViaje,montoApoyoEconomico,justificacionParticipacion,rutaPDF, estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $dec -> bind_param("ssssssssssiiidddsss", $nombreEvento,$cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,$tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,$apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,$justificacionParticipacion,$target_file, "Pendiente");
+    $dec -> bind_param("ssssssssssiiidddsss", $nombreEvento,
+    $cedulaEncargado,$descripcion,$proyeccion,$alcance,$lugarEvento,
+    $tipo,$fechaInicio,$fechaFin,$apoyoEvento,$inscripcionUTP,$gastosViajeUTP,
+    $apoyoEconomicoUTP,$montoInscripcion,$montoGastoViaje,$montoApoyoEconomico,
+    $justificacionParticipacion,
+    $target_file, 
+    $estado);
         $dec -> execute();
         $resultado = $dec -> affected_rows;
         $dec -> free_result();

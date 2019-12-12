@@ -34,7 +34,7 @@
             <th>Número de solicitud</th>
             <th>Cédula del responsable</th>
             <th>Evento</th>
-            <th>Fecha de solicitud</th>
+            <th>Fecha de Inicio de la Solicitud</th>
             <th>Fecha activación de revisión</th>
             <th>País destino</th>
             <th class="fit">Validación</th>
@@ -44,12 +44,13 @@
         <?php 
         require_once "../bd/conexion_PDO.php";
         $stmt = $conPDO->prepare("
-        SELECT peticion.idPeticion, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaInicioSolicitud, peticion.fechaFin, peticion.lugarEvento 
-        FROM administrativo INNER JOIN peticion 
-        ON administrativo.idPeticion = peticion.idPeticion 
-        WHERE administrativo.idUser=10 
-        AND administrativo.fechaFin IS NOT NULL 
-        AND administrativo.estado = 'Si'");
+        SELECT peticion.idPeticion, CONCAT(usuario.nombre, ' ', usuario.apellido) AS nombreEstudiante, 
+        estudiante.unidadAcademica, peticion.cedulaEncargado, peticion.nombreEvento, peticion.fechaIncio, 
+        peticion.fechaFin, peticion.lugarEvento, peticion.rutaFormulario, peticion.rutaPDF 
+        FROM peticion 
+        INNER JOIN estudiante ON estudiante.idPeticion = peticion.idPeticion
+        INNER JOIN usuario ON usuario.idUser = estudiante.idUser
+        WHERE fechaFinSolicitud IS NOT NULL AND estado = 'Aceptado'");
         $stmt->execute();
         for($i=0; $row = $stmt->fetch(); $i++){
         ?>
@@ -61,9 +62,9 @@
                 <td><?php echo $row['fechaFin']; ?></td>
                 <td><?php echo $row['lugarEvento']; ?></td>
                 <td id="Validacion" class="text-center">
-                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal<?php echo $row['idPeticion'];?>">Validar</button></td>
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal<?php echo $row['idPeticion'];?>">Ver detalles</button></td>
             </tr>
-            <div class="modal" id="myModal<?php echo $row['idPeticion'];?>">
+    <div class="modal" id="myModal<?php echo $row['idPeticion'];?>">
         <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
     
