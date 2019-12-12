@@ -24,7 +24,7 @@ function phpMailer($email, $nombreUser) {
         //Usuario
         $mail -> setFrom('macuervo84@gmail.com', 'Sistema de Solicitud de Apoyo Económico Estudiantil UTP');
         $mail -> addAddress($email, $nombreUser);
-        $mail->addAddress('rafatrik@gmail.com', 'Rafael Perez'); 
+        $mail-> addAddress('rafatrik@gmail.com', 'Rafael Perez'); 
         //Contenido
         $mail -> isHTML(true);
         $mail -> Subject = 'Prueba de SAEE UTP';
