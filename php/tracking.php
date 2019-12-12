@@ -47,7 +47,6 @@
     <?php 
     require_once "../bd/conexion_PDO.php";
 
-    //ESTA
     $sql0 = $conPDO->prepare("SELECT estudiante.idPeticion, peticion.nombreEvento FROM estudiante INNER JOIN peticion ON estudiante.idPeticion = peticion.idPeticion WHERE estudiante.idUser = $idUser ORDER BY estudiante.idPeticion desc LIMIT 1");
     $sql0->execute();
     $fila = $sql0->fetch();
