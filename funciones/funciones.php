@@ -273,7 +273,8 @@ function registro($email,$nombreUser){
 
      function registroReportes($idUser){ 
         require('../bd/conexion.php');
-        
+        require('../php/infoViaje.php');
+
          //Obtencion de idPeticion
         $idPeticion = EstudentidPeticion($idUser, $con);   
         
@@ -342,6 +343,23 @@ function registro($email,$nombreUser){
             alert('Su mensaje reporte ha sido enviadio correctamente') 
             window.location= '../index.php'
             </script>";
+
+            $sql0 = $conPDO->prepare("SELECT fechaIncio,cedulaEncargado, fechaFin, lugarEvento, nombreEvento, (montoInscripcion+montoGastoViaje+montoApoyoEconomico) AS MontoFinal from peticion WHERE idPeticion = $idPeticion");
+            $sql0->execute();
+            $fila = $sql0->fetch();
+            $fechaInicio = $fila['fechaIncio'];
+            $fechaFin = $fila['fechaFin'];
+            $lugarEvento = $fila['lugarEvento'];
+            $nombreEvento = $fila['nombreEvento'];
+            $MontoFinal = $fila['MontoFinal'];
+            $cedula = $fila['cedulaEncargado'];
+            
+            
+            $nombre = $_SESSION['nombre'];
+            $apellido=$_SESSION['apellido'];
+
+            PdfViaje($idPeticion,$objetivoParticipacion,$resultado,$impactoCortoPlazo,$impactoMedioPlazo,$impactoLargoPlazo, $nombre,$apellido,$fechaInicio,$fechaFin,$nombreEvento,$lugarEvento,$MontoFinal,$cedula);
+
         }
         $con -> close(); 
 
