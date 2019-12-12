@@ -3,6 +3,7 @@
     {
         require('../fpdf/fpdf.php');
         require('extras.php');
+        require_once("../bd/conexion_PDO.php");
         
         // Clase pensada para incluir partes repetitivas del formulario footer,header, etc
         $defaults = new Extras();
@@ -101,5 +102,10 @@
         //$pdf-> output('formulario'.$nombre.$apellido.'.pdf', 'I');
         //para guardar en el servidor
         $pdf->output('../pdf/RUTP-FV-4/formulario'.$idPeticion.'.pdf','F');
+        $rutaFormulario='/pdf/RUTP-FV-4/formulario'.$idPeticion.'.pdf';
+
+        $stmt = $conPDO->prepare("UPDATE peticion SET rutaFormulario = '$rutaFormulario' WHERE idPeticion = '$idPeticion'");
+        $stmt->execute();
+        $row = $stmt->fetch();
     }
 ?>
