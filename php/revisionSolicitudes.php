@@ -130,40 +130,40 @@
                             <h3 class="h3-responsive blue-text">Respuesta a la petición del estudiante</h3>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <select class="mdb-select modalSelect md-form md-outline colorful-select dropdown-primary" onchange="cambioRelevancia(event)">
+                                    <select class="mdb-select modalSelect md-form md-outline colorful-select dropdown-primary" onchange="document.getElementById('selectRelevancia').value = this.value;">
                                         <option value="" selected disabled>Seleccione una opción</option>
                                         <option value="Alta">Alta</option>
                                         <option value="Media">Media</option>
                                         <option value="Baja">Baja</option>
                                     </select>
                                     <label>Relevancia o nivel del evento</label>
-                                    <input type="hidden" id="selectRelevancia" name="selectRelevancia"></input>
+                                    <input type="text" id="selectRelevancia" name="selectRelevancia"></input>
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="select-outline">
-                                        <select class="mdb-select modalSelect md-form md-outline colorful-select dropdown-primary" onchange="cambioProyeccion(event)">
+                                        <select class="mdb-select modalSelect md-form md-outline colorful-select dropdown-primary" onchange="document.getElementById('selectProyeccion').value = this.value;">
                                             <option value="" selected disabled>Seleccione una opción</option>
                                             <option value="Excelente">Excelente</option>
                                             <option value="Buena">Buena</option>
                                             <option value="No tiene">No tiene</option>
                                         </select>
                                         <label>Proyección de la institución a través del evento</label>
-                                        <input type="hidden" id="selectProyeccion" name="selectProyeccion"></input>
+                                        <input type="text" id="selectProyeccion" name="selectProyeccion"></input>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <select class="mdb-select modalSelect md-form md-outline colorful-select dropdown-primary" onchange="cambioEstado(event)">
+                                    <select class="mdb-select modalSelect md-form md-outline colorful-select dropdown-primary" onchange="document.getElementById('selectEstado').value = this.value;">
                                         <option value="" selected disabled>Seleccione una opción</option>
                                         <option value="Si">Si</option>
                                         <option value="No">No</option>
                                     </select>
                                     <label>¿Procede?</label>
+                                    <input type="text" id="selectEstado" name="selectEstado"></input>
                                 </div>
                             </div>
                             <div class="md-form md-outline mt-2">
                                 <textarea id="comentarioAdministrador" class="md-textarea form-control noresize" rows="4" name="comentarioAdministrador"></textarea>
                                 <label for="comentarioAdministrador">Justificación y beneficios de la participación</label>
-                                <input type="hidden" id="selectEstado" name="selectEstado"></input>
                             </div>
                                     <!-- Modal footer -->
                             <div class="modal-footer">
@@ -234,13 +234,8 @@ $(document).ready(function(){
     url:"respuestaAdmin.php",  
     method:"POST",  
     data:$('#modalForm').serialize(),  
-    beforeSend:function(){
-     $('#submitModal').val("Enviando respuesta...");  
-    },  
     success:function(data){  
      $('.modalAbierto .close').click();
-     $('#submitModal')[0].reset();
-     $('#insert').val("Enviar ");
      location.reload();
     }  
    });  

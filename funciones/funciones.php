@@ -546,7 +546,16 @@ function mostrarErrores($errores){
                 $_SESSION['correo'] = $linea['correo'];
                 $_SESSION['idUser'] = $linea['idUser'];
                 $_SESSION['sw'] = 1;
-                header('Location: formulario.php');
+                
+                
+                if ($_SESSION['idUser']!=6 && $_SESSION['idUser']!=7 && $_SESSION['idUser']!=8 && $_SESSION['idUser']!=9 && $_SESSION['idUser']!=10){     
+                    header('Location: formulario.php');
+                }
+        
+                elseif ($_SESSION['idUser']==6 || $_SESSION['idUser']==7 ||$_SESSION['idUser']==8 || $_SESSION['idUser']==9 || $_SESSION['idUser']==10){ 
+                    header('Location: revisionSolicitudes.php');
+                }
+                
             }
         } else {
             $errores[] = 'El Nombre de Usuario, Cedula o la contraseña no son validos.';       
@@ -573,7 +582,7 @@ function mostrarErrores($errores){
         $conPDO2 = new PDO($dsn, $dbuser, $dbpass);
 
         //Consulta para comprobar si el usuario tiene que reportar su viaje. Si la fecha del evento es menor a la fecha actual le dice al estudiante que debe hacer el reporte.
-        $consulta1 = $conPDO2->prepare("SELECT estudiante.idPeticion, peticion.estado, peticion.fechaFin
+        $consulta1 = $conPDO2->prepare("SELECT estudiante.idPeticion, peticion.estado, peticion.fechaFinSolicitud
         FROM estudiante 
         INNER JOIN peticion ON estudiante.idPeticion = peticion.idPeticion 
         WHERE estudiante.idUser = $idUser
@@ -583,7 +592,7 @@ function mostrarErrores($errores){
         $consulta1->execute();
         $fila1 = $consulta1->fetch(); 
         $estado = $fila1['estado'];
-        $fechaFin = strtotime($fila1['fechaFin']);
+        $fechaFin = strtotime($fila1['fechaFinSolicitud']);
 
         $fechaActual = strtotime(date("Y-m-d", time()));
 
@@ -595,25 +604,24 @@ function mostrarErrores($errores){
 
        elseif ($_SESSION['idUser']!=6 && $_SESSION['idUser']!=7 && $_SESSION['idUser']!=8 && $_SESSION['idUser']!=9 && $_SESSION['idUser']!=10){     
         
-            if (($titulo == "Formulario" || $titulo== "Seguimiento de la Solicitud") && $estado == 'Aceptado' && $fechaFin<$fechaActual){
+            if (($titulo == "Formulario" || $titulo== "Seguimiento de la Solicitud") && $estado == 'Aprobado'){
                 echo "<script>
                 alert('ERROR: Su evento ha finalizado. Debe hacer el reporte de viaje') 
                 window.location= './reporte.php'
                 </script>";
             }
-            elseif ($titulo == "Formulario" && ($estado=='Rechazado' || $estado=='Pendiente' || $estado='Aceptado')){
+            elseif ($titulo == "Formulario" && ($estado=='Denegado' || $estado=='Pendiente' || $estado=='Aprobado')){
                 echo "<script>
-                alert('ERROR: Ya tiene una petición pendiente.') 
                 window.location= './tracking.php'
                 </script>";
             }
-            elseif($titulo == "Reporte de viaje" && ($estado=='Rechazado' || $estado=='Pendiente' || $estado='Aceptado')){
+            elseif($titulo == "Reporte de viaje" && ($estado=='Denegado' || $estado=='Pendiente')){
                 echo "<script>
                 alert('ERROR: Aun no debe hacer el reporte de viaje.') 
                 window.location= './tracking.php'
                 </script>";
             }
-            elseif(($titulo == "Reporte de viaje" || $titulo== "Seguimiento de la Solicitud") && $estado!=='Rechazado' && $estado!=='Pendiente' && $estado!=='Aceptado'){
+            elseif(($titulo == "Reporte de viaje" || $titulo== "Seguimiento de la Solicitud") && $estado!=='Denegado' && $estado!=='Pendiente' && $estado!=='Aprobado'){
                 echo "<script>
                 alert('ERROR: Por favor proceda a completar el formulario.') 
                 window.location= './formulario.php'
@@ -621,18 +629,18 @@ function mostrarErrores($errores){
             }
             elseif ($titulo !== "Formulario" && $titulo !== "Seguimiento de la Solicitud" && $titulo !== "Reporte de viaje"){
 
-                if($estado=='Rechazado' || $estado=='Pendiente' || $estado='Aceptado'){
+                if($estado=='Denegado' || $estado=='Pendiente' || $estado='Aprobado'){
                     echo "<script>
                     alert('ERROR: Acceso denegado.') 
                     window.location= './tracking.php'
                     </script>"; 
-                }elseif($estado == 'Aceptado' && $fechaFin<$fechaActual){
+                }elseif($estado == 'Aprobado' && ($fechaFin<=$fechaActual)){
                     echo "<script>
                     alert('ERROR: Acceso denegado.') 
                     window.location= './reporte.php'
                     </script>";
                 }
-                elseif($estado!=='Rechazado' && $estado!=='Pendiente' && $estado!=='Aceptado'){
+                elseif($estado!=='Denegado' && $estado!=='Pendiente' && $estado!=='Aprobado'){
                     echo "<script>
                     alert('ERROR: Acceso denegado.') 
                     window.location= './formulario.php'

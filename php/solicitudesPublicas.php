@@ -49,7 +49,7 @@
         FROM peticion 
         INNER JOIN estudiante ON estudiante.idPeticion = peticion.idPeticion
         INNER JOIN usuario ON usuario.idUser = estudiante.idUser
-        WHERE fechaFinSolicitud IS NOT NULL AND estado = 'Aceptado'");
+        WHERE fechaFinSolicitud IS NOT NULL AND estado = 'Aprobado' OR estado = 'Aceptado'");
         $stmt->execute();
         for($i=0; $row = $stmt->fetch(); $i++){
         ?>
