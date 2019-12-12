@@ -102,7 +102,7 @@
         //$pdf-> output('formulario'.$nombre.$apellido.'.pdf', 'I');
         //para guardar en el servidor
         $pdf->output('../pdf/RUTP-FV-4/formulario'.$idPeticion.'.pdf','F');
-        $rutaFormulario='/pdf/RUTP-FV-4/formulario'.$idPeticion.'.pdf';
+        $rutaFormulario='../pdf/RUTP-FV-4/formulario'.$idPeticion.'.pdf';
 
         $stmt = $conPDO->prepare("UPDATE peticion SET rutaFormulario = '$rutaFormulario' WHERE idPeticion = '$idPeticion'");
         $stmt->execute();
