@@ -3,31 +3,6 @@
     {
         require('../fpdf/fpdf.php');
         require('extras.php');
-
-        /* //variables para manejar los datos del formulario
-        $idPeticion="1231"; 
-        $nombre="n/a";
-        $apellido="n/a";
-        $unidadAcademica="n/a";
-        $fechaInicioSolicitud="2019-12-10 05:12:48";
-        $nombreEvento="n/a";
-        $cedulaEncargado="n/a";
-        $descripcion="n/a";
-        $proyeccion="n/a";
-        $alcance="n/a";
-        $lugarEvento="n/a";
-        $tipo="n/a";
-        $fechaInicio="n/a";
-        $fechaFin="n/a";
-        $apoyoEvento="n/a";
-        $inscripcionUTP="n/a";
-        $gastosViajeUTP;
-        $apoyoEconomicoUTP="n/a";
-        $montoInscripcion="n/a";
-        $montoGastoViaje="n/a";
-        $montoApoyoEconomico="n/a";
-        $justificacionParticipacion="n/a"; */
-        
         
         // Clase pensada para incluir partes repetitivas del formulario footer,header, etc
         $defaults = new Extras();
@@ -68,7 +43,7 @@
         $pdf->Cell(0,0,utf8_decode('INFORMACIÓN DE LOS ESTUDIANTES: '),0,0,'C');
         $pdf->SetFont('Times','',12);
         $pdf->Ln(10);
-        //falta agregar la opccion para mostrar multiples estudiantes afiliados a la solicitud
+       
         //Informaciond del o los estudiantes que recibiran la ayuda con su NOMBRE , CEDULA Y UNIDAD ACADEMICA
         $pdf->Cell(0,0,utf8_decode('NOMBRE:'.$nombre.$apellido.'     CÉDULA:'.$cedulaEncargado.'     UNIDAD ACADÉMICA:'.$unidadAcademica),0,0,'L');
         $pdf->Ln(5);
@@ -128,4 +103,3 @@
         $pdf->output('../pdf/RUTP-FV-4/formulario'.$idPeticion.'.pdf','F');
     }
 ?>
-.$idPeticion.'-'.$fechaInicioSolicitud
